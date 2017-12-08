@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nazarii_moshenskyi.thirdtask.MainActivity">
+    tools:context="com.example.nazarii_moshenskyi.thirdtask.show_cities.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:layout_width="368dp"
-        android:layout_height="495dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -19,7 +19,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
-
-
 
 </android.support.constraint.ConstraintLayout>
