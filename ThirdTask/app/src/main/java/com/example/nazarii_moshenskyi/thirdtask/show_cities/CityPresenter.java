@@ -5,19 +5,21 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.nazarii_moshenskyi.thirdtask.BasePresenter;
 import com.example.nazarii_moshenskyi.thirdtask.R;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class CityPresenter implements BasePresenter {
+public class CityPresenter implements ICityPresenter {
     private final Context context;
     private RecyclerView cityList;
 
-    public CityPresenter(Context context, RecyclerView cityList) {
-        this.cityList = cityList;
+    public CityPresenter(Context context) {
         this.context = context;
+    }
+
+    public void setList(RecyclerView cityList) {
+        this.cityList = cityList;
     }
 
     @Override

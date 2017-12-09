@@ -1,31 +1,33 @@
 package com.example.nazarii_moshenskyi.thirdtask.show_cities;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 
-import com.example.nazarii_moshenskyi.thirdtask.BasePresenter;
 import com.example.nazarii_moshenskyi.thirdtask.R;
 
-public class MainActivity extends AppCompatActivity {
-    private BasePresenter presenter;
+public class MainActivity extends AppCompatActivity implements CityFragment.OnFragmentInteractionListener {
+    private ICityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView list = findViewById(R.id.recycler_view);
+        presenter = new CityPresenter(getApplicationContext());
 
-        presenter = new CityPresenter(getApplicationContext(), list);
+        CityFragment cityFragment = CityFragment.newInstance(presenter);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.city_name_container, cityFragment)
+                .commit();
+
+
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.start();
+    public void onFragmentInteraction(Uri uri) {
+
     }
-
-
-
 }

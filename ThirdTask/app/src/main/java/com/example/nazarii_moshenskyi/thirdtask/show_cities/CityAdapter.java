@@ -11,10 +11,14 @@ import com.example.nazarii_moshenskyi.thirdtask.R;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
+
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
     private List<String> cities;
     private LayoutInflater inflater;
+    private final PublishSubject<String> onClicksubject = PublishSubject.create();
 
     public CityAdapter(Context context, List<String> cities) {
         this.cities = cities;
@@ -29,8 +33,18 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(CityAdapter.ViewHolder holder, int position) {
-        String city = cities.get(position);
+        final String city = cities.get(position);
         holder.cityName.setText(city);
+        holder.cityName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClicksubject.onNext(city);
+            }
+        });
+    }
+
+    public Observable<String> getClickedItem() {
+        return onClicksubject.hide();
     }
 
     @Override
