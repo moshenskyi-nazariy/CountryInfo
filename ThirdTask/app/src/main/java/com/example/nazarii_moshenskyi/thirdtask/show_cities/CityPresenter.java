@@ -10,9 +10,12 @@ import com.example.nazarii_moshenskyi.thirdtask.R;
 import java.util.Arrays;
 import java.util.List;
 
+import io.reactivex.Observable;
+
 public class CityPresenter implements ICityPresenter {
     private final Context context;
     private RecyclerView cityList;
+    private CityAdapter adapter;
 
     public CityPresenter(Context context) {
         this.context = context;
@@ -23,12 +26,21 @@ public class CityPresenter implements ICityPresenter {
     }
 
     @Override
+    public Observable<String> getOnItemClickListner() {
+        return adapter.getOnClickListener();
+    }
+
+    @Override
     public void start() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
         List<String> data = Arrays.asList(context.getResources().getStringArray(R.array.cities));
 
+        adapter = new CityAdapter(context, data);
+
         cityList.setLayoutManager(layoutManager);
-        cityList.setAdapter(new CityAdapter(context, data));
+        cityList.setAdapter(adapter);
         cityList.setItemAnimator(new DefaultItemAnimator());
     }
+
+
 }

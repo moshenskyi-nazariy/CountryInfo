@@ -43,7 +43,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
         });
     }
 
-    public Observable<String> getClickedItem() {
+    public Observable<String> getOnClickListener() {
         return onClicksubject.hide();
     }
 

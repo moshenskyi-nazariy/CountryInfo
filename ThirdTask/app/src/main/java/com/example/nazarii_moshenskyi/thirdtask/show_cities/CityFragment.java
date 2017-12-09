@@ -8,14 +8,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.nazarii_moshenskyi.thirdtask.R;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class CityFragment extends Fragment {
 
     private OnFragmentInteractionListener listener;
     private ICityPresenter presenter;
-    private RecyclerView list;
+    private Observer<String> choosenItem;
+
 
     public CityFragment() {
         // Required empty public constructor
@@ -31,13 +37,34 @@ public class CityFragment extends Fragment {
         this.presenter = presenter;
     }
 
-    private void setList(RecyclerView list) {
-        this.list = list;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    private void initObserver(final Context context) {
+         choosenItem = new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                System.out.println(s);
+                Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
     }
 
     @Override
@@ -45,9 +72,12 @@ public class CityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_city, container, false);
 
-        list = view.findViewById(R.id.recycler_view);
+        RecyclerView list = view.findViewById(R.id.recycler_view);
         presenter.setList(list);
         presenter.start();
+        initObserver(view.getContext());
+
+        subscribe(presenter.getOnItemClickListner());
 
         return view;
     }
@@ -73,6 +103,10 @@ public class CityFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         listener = null;
+    }
+
+    private void subscribe(Observable<String> item) {
+        item.subscribe(choosenItem);
     }
 
     public interface OnFragmentInteractionListener {
