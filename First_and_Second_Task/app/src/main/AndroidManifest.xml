@@ -4,8 +4,8 @@
 
     <permission
         android:name="com.example.nazarii_moshenskyi.helloapp.MY_PERMISSION"
-        android:description="@string/perm_description_MainActivity"
-        android:label="@string/perm_label_MainActivity"
+        android:description="@string/perm_description_activity_main"
+        android:label="@string/perm_label_activity_main"
         android:protectionLevel="normal" />
 
     <application
