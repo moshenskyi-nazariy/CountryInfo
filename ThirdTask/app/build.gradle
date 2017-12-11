@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.example.nazarii_moshenskyi.thirdtask"
+        applicationId "com.example.nazarii_moshenskyi.cityinfo"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
@@ -29,6 +29,11 @@ dependencies {
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'com.google.code.gson:gson:2.8.2'
+
 
     implementation 'com.android.support:recyclerview-v7:26.1.0'
 }

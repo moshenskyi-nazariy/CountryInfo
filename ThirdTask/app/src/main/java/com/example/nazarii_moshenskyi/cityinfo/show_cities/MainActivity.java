@@ -1,10 +1,10 @@
-package com.example.nazarii_moshenskyi.thirdtask.show_cities;
+package com.example.nazarii_moshenskyi.cityinfo.show_cities;
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.nazarii_moshenskyi.thirdtask.R;
+import com.example.nazarii_moshenskyi.cityinfo.R;
 
 public class MainActivity extends AppCompatActivity implements CityFragment.OnFragmentInteractionListener {
     private ICityPresenter presenter;

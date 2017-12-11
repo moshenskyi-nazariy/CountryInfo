@@ -1,4 +1,4 @@
-package com.example.nazarii_moshenskyi.thirdtask.show_cities;
+package com.example.nazarii_moshenskyi.cityinfo.show_cities;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.nazarii_moshenskyi.thirdtask.R;
+import com.example.nazarii_moshenskyi.cityinfo.R;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 
 import java.util.List;
 
@@ -16,12 +17,12 @@ import io.reactivex.subjects.PublishSubject;
 
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
-    private List<String> cities;
+    private List<Country> countries;
     private LayoutInflater inflater;
     private final PublishSubject<String> onClicksubject = PublishSubject.create();
 
-    public CityAdapter(Context context, List<String> cities) {
-        this.cities = cities;
+    public CityAdapter(Context context, List<Country> countries) {
+        this.countries = countries;
         inflater = LayoutInflater.from(context);
     }
 
@@ -33,12 +34,12 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(CityAdapter.ViewHolder holder, int position) {
-        final String city = cities.get(position);
-        holder.cityName.setText(city);
-        holder.cityName.setOnClickListener(new View.OnClickListener() {
+        final String countryName = countries.get(position).getName();
+        holder.countryName.setText(countryName);
+        holder.countryName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClicksubject.onNext(city);
+                onClicksubject.onNext(countryName);
             }
         });
     }
@@ -49,15 +50,15 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return cities.size();
+        return countries.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView cityName;
+        private TextView countryName;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            cityName = itemView.findViewById(R.id.list_item);
+            countryName = itemView.findViewById(R.id.list_item);
         }
     }
 }

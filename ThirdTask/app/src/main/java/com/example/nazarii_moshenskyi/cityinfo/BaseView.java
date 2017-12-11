@@ -1,4 +1,4 @@
-package com.example.nazarii_moshenskyi.thirdtask;
+package com.example.nazarii_moshenskyi.cityinfo;
 
 public interface BaseView {
 

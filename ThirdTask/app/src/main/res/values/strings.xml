@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ThirdTask</string>
+    <string name="app_name">CityInfo</string>
 
     <string-array name="cities">
         <item>London</item>

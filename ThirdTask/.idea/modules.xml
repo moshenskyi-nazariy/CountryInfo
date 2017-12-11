@@ -3,11 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ThirdTask.iml" filepath="$PROJECT_DIR$/ThirdTask.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ThirdTask.iml" filepath="$PROJECT_DIR$/ThirdTask.iml" />
       <module fileurl="file://D:\android-preprod\ThirdTask\ThirdTask.iml" filepath="D:\android-preprod\ThirdTask\ThirdTask.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://D:\android-preprod\ThirdTask\app\app.iml" filepath="D:\android-preprod\ThirdTask\app\app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>

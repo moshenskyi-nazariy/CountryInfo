@@ -1,8 +1,8 @@
-package com.example.nazarii_moshenskyi.thirdtask.show_cities;
+package com.example.nazarii_moshenskyi.cityinfo.show_cities;
 
 import android.support.v7.widget.RecyclerView;
 
-import com.example.nazarii_moshenskyi.thirdtask.BasePresenter;
+import com.example.nazarii_moshenskyi.cityinfo.BasePresenter;
 
 import io.reactivex.Observable;
 

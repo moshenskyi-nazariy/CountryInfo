@@ -1,4 +1,4 @@
-package com.example.nazarii_moshenskyi.thirdtask.show_cities;
+package com.example.nazarii_moshenskyi.cityinfo.show_cities;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.nazarii_moshenskyi.thirdtask.R;
+import com.example.nazarii_moshenskyi.cityinfo.R;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
