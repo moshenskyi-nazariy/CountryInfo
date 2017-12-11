@@ -5,13 +5,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.nazarii_moshenskyi.cityinfo.data.NetworkRepository;
 import com.example.nazarii_moshenskyi.cityinfo.data.IRepository;
-import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
-import com.example.nazarii_moshenskyi.cityinfo.data.remote.CityService;
-import com.example.nazarii_moshenskyi.cityinfo.data.remote.ServiceFactory;
-
-import java.util.List;
+import com.example.nazarii_moshenskyi.cityinfo.data.LocalGsonRepository;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryList;
 
 import io.reactivex.Observable;
 
@@ -19,7 +15,7 @@ public class CityPresenter implements ICityPresenter {
     private final Context context;
     private RecyclerView cityList;
     private CityAdapter adapter;
-    private List<Country> countries;
+    private CountryList countries;
 
     private IRepository repository;
 
@@ -42,7 +38,7 @@ public class CityPresenter implements ICityPresenter {
         //List<String> data = Arrays.asList(context.getResources().getStringArray(R.array.cities));
 
         getData();
-        adapter = new CityAdapter(countries);
+        adapter = new CityAdapter(countries.getCountries());
 
         cityList.setLayoutManager(layoutManager);
         cityList.setAdapter(adapter);
@@ -50,10 +46,10 @@ public class CityPresenter implements ICityPresenter {
     }
 
     private void getData() {
-        CityService service = ServiceFactory.getService();
-        repository = new NetworkRepository(service);
+        //CityService service = ServiceFactory.getService();
+        repository = new LocalGsonRepository(context);
 
-        countries = repository.getCountries();
+        countries = (CountryList) repository.getCountries();
     }
 
     public void setRepository(IRepository repository) {
