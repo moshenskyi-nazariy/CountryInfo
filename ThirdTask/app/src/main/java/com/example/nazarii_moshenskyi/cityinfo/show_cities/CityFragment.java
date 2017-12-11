@@ -10,13 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.nazarii_moshenskyi.cityinfo.BaseView;
 import com.example.nazarii_moshenskyi.cityinfo.R;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class CityFragment extends Fragment {
+public class CityFragment extends Fragment implements BaseView<ICityPresenter> {
 
     private OnFragmentInteractionListener listener;
     private ICityPresenter presenter;

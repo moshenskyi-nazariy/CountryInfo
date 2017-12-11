@@ -1,7 +1,7 @@
 package com.example.nazarii_moshenskyi.cityinfo;
 
-public interface BaseView {
+public interface BaseView<T extends BasePresenter> {
 
-    void showData();
+    void setPresenter(T presenter);
 
 }

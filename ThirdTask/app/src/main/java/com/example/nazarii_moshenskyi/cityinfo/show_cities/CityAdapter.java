@@ -17,7 +17,7 @@ import io.reactivex.subjects.PublishSubject;
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
     private List<Country> countries;
-    private final PublishSubject<String> onClicksubject = PublishSubject.create();
+    private static final PublishSubject<String> onClicksubject = PublishSubject.create();
 
     CityAdapter(List<Country> countries) {
         this.countries = countries;
@@ -34,12 +34,6 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
     public void onBindViewHolder(CityAdapter.ViewHolder holder, int position) {
         final String countryName = countries.get(position).getName();
         holder.countryName.setText(countryName);
-        holder.countryName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClicksubject.onNext(countryName);
-            }
-        });
     }
 
     Observable<String> getOnClickListener() {
@@ -57,6 +51,13 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
         ViewHolder(View itemView) {
             super(itemView);
             countryName = itemView.findViewById(R.id.list_item);
+
+            countryName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClicksubject.onNext(countryName.getText().toString());
+                }
+            });
         }
     }
 }
