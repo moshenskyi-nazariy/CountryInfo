@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">HelloApp</string>
+    <string name="perm_label_activity_main">MainActivity</string>
+    <string name="perm_description_activity_main">This is Main Activity permission</string>
+    <string name="greeting">This is Main Activity permission</string>
+    <string name="greeting_text">Hello World!</string>
+</resources>
