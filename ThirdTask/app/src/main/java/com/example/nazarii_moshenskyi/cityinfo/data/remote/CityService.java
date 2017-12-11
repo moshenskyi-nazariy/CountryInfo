@@ -9,7 +9,7 @@ import retrofit2.http.GET;
 
 public interface CityService {
 
-    @GET("/")
+    @GET("/all/")
     Call<List<Country>> getCountries();
 
 }

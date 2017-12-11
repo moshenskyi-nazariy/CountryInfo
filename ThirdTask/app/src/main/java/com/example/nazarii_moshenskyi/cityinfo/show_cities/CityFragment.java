@@ -77,7 +77,7 @@ public class CityFragment extends Fragment {
         presenter.start();
         initObserver(view.getContext());
 
-        subscribe(presenter.getOnItemClickListner());
+        subscribe(presenter.getOnItemClickListener());
 
         return view;
     }

@@ -1,10 +1,13 @@
-package com.example.nazarii_moshenskyi.cityinfo.show_cities;
+package com.example.nazarii_moshenskyi.cityinfo;
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.nazarii_moshenskyi.cityinfo.R;
+import com.example.nazarii_moshenskyi.cityinfo.show_cities.CityFragment;
+import com.example.nazarii_moshenskyi.cityinfo.show_cities.CityPresenter;
+import com.example.nazarii_moshenskyi.cityinfo.show_cities.ICityPresenter;
 
 public class MainActivity extends AppCompatActivity implements CityFragment.OnFragmentInteractionListener {
     private ICityPresenter presenter;

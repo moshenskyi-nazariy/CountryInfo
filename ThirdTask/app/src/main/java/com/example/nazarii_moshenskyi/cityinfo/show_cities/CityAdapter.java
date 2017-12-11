@@ -1,6 +1,5 @@
 package com.example.nazarii_moshenskyi.cityinfo.show_cities;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,16 +17,15 @@ import io.reactivex.subjects.PublishSubject;
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
     private List<Country> countries;
-    private LayoutInflater inflater;
     private final PublishSubject<String> onClicksubject = PublishSubject.create();
 
-    public CityAdapter(Context context, List<Country> countries) {
+    CityAdapter(List<Country> countries) {
         this.countries = countries;
-        inflater = LayoutInflater.from(context);
     }
 
     @Override
     public CityAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_view, parent, false);
         return new ViewHolder(view);
     }
@@ -44,7 +42,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
         });
     }
 
-    public Observable<String> getOnClickListener() {
+    Observable<String> getOnClickListener() {
         return onClicksubject.hide();
     }
 
@@ -53,10 +51,10 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
         return countries.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView countryName;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             countryName = itemView.findViewById(R.id.list_item);
         }
