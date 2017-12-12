@@ -9,19 +9,17 @@ import com.example.nazarii_moshenskyi.cityinfo.show_cities.CityPresenter;
 import com.example.nazarii_moshenskyi.cityinfo.show_cities.ICityPresenter;
 
 public class MainActivity extends AppCompatActivity {
-    private ICityPresenter presenter;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
-        presenter = new CityPresenter(getApplicationContext());
+        ICityPresenter presenter = new CityPresenter(getApplicationContext());
         presenter.setList(recyclerView);
-
         presenter.setRepository(new LocalGsonRepository(getApplicationContext()));
         presenter.start();
-    }
 
+    }
 }
