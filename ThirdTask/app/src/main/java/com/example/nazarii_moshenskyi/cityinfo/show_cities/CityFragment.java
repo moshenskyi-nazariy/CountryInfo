@@ -23,7 +23,6 @@ public class CityFragment extends Fragment implements BaseView<ICityPresenter> {
     private ICityPresenter presenter;
     private Observer<String> choosenItem;
 
-
     public CityFragment() {
         // Required empty public constructor
     }
