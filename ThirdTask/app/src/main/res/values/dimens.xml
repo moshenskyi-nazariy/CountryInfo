@@ -3,4 +3,5 @@
     <dimen name="margins">8dp</dimen>
     <dimen name="country_name_size">40sp</dimen>
     <dimen name="city_count_size">16sp</dimen>
+    <dimen name="margin_city_count">4dp</dimen>
 </resources>
