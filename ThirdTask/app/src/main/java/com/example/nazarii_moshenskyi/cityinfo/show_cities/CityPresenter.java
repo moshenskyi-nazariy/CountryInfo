@@ -2,6 +2,7 @@ package com.example.nazarii_moshenskyi.cityinfo.show_cities;
 
 import android.content.Context;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -42,6 +43,7 @@ public class CityPresenter implements ICityPresenter {
         cityList.setLayoutManager(layoutManager);
         cityList.setAdapter(adapter);
         cityList.setItemAnimator(new DefaultItemAnimator());
+        cityList.addItemDecoration(new CityItemDecorator(16));
     }
 
     private void getData() {

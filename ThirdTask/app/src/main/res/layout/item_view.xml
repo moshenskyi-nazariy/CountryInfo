@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:id="@+id/item_view">
+    android:id="@+id/item_view"
+    android:background="@drawable/item_layout_shape">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/item_image"
         android:scaleType="fitXY"
+        android:layout_marginStart="@dimen/margins"
         android:layout_marginTop="@dimen/margins"
         android:src="@drawable/ic_list_icon"/>
 
@@ -29,7 +31,7 @@
         android:layout_marginEnd="@dimen/margins"
         android:textSize="@dimen/city_count_size"
         android:layout_weight="1"
-        android:textColor="@color/colorSecondaryText"
+        android:textColor="@color/colorAccent"
         android:id="@+id/city_count"/>
 
 </LinearLayout>
