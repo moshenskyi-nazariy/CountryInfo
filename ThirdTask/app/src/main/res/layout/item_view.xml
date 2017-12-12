@@ -18,7 +18,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="@dimen/country_name_size"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryText"
         android:layout_marginStart="@dimen/margins"
         android:layout_weight="5"
         android:id="@+id/country_name"/>
@@ -29,7 +29,7 @@
         android:layout_marginEnd="@dimen/margins"
         android:textSize="@dimen/city_count_size"
         android:layout_weight="1"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorSecondaryText"
         android:id="@+id/city_count"/>
 
 </LinearLayout>
