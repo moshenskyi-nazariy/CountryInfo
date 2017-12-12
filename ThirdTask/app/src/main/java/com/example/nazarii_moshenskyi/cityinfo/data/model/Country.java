@@ -25,4 +25,8 @@ public class Country {
         city.setName(cityName);
         cities.add(city);
     }
+
+    public List<City> getCities() {
+        return cities;
+    }
 }

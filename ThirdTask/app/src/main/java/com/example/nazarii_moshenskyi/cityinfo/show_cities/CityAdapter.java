@@ -32,8 +32,11 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(CityAdapter.ViewHolder holder, int position) {
-        final String countryName = countries.get(position).getName();
+        Country country = countries.get(position);
+        String countryName = country.getName();
+        int cityCount = country.getCities().size();
         holder.countryName.setText(countryName);
+        holder.cityCount.setText(String.valueOf(cityCount));
     }
 
     Observable<String> getOnClickListener() {
@@ -47,10 +50,12 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView countryName;
+        private TextView cityCount;
 
         ViewHolder(View itemView) {
             super(itemView);
-            countryName = itemView.findViewById(R.id.list_item);
+            countryName = itemView.findViewById(R.id.country_name);
+            cityCount = itemView.findViewById(R.id.city_count);
 
             countryName.setOnClickListener(new View.OnClickListener() {
                 @Override

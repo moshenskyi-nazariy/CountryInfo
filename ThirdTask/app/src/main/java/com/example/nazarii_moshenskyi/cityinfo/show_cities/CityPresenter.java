@@ -35,7 +35,6 @@ public class CityPresenter implements ICityPresenter {
     @Override
     public void start() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
-        //List<String> data = Arrays.asList(context.getResources().getStringArray(R.array.cities));
 
         getData();
         adapter = new CityAdapter(countries.getCountries());
@@ -46,7 +45,6 @@ public class CityPresenter implements ICityPresenter {
     }
 
     private void getData() {
-        //CityService service = ServiceFactory.getService();
         repository = new LocalGsonRepository(context);
 
         countries = (CountryList) repository.getCountries();
