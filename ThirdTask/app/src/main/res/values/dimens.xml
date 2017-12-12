@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="country_name_size">40sp</dimen>
+    <dimen name="city_count_size">16sp</dimen>
+    <dimen name="margins">8dp</dimen>
+</resources>

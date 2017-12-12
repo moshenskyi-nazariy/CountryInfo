@@ -4,20 +4,35 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:id="@+id/item_view">
+    android:id="@+id/item_view"
+    android:background="@drawable/item_layout_shape">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/item_image"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/list_icon"/>
+        android:scaleType="fitXY"
+        android:layout_marginStart="@dimen/margins"
+        android:layout_marginTop="@dimen/margins"
+        android:src="@drawable/ic_list_icon"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="32sp"
-        android:layout_marginStart="8dp"
-        android:id="@+id/list_item"/>
+        android:textSize="@dimen/country_name_size"
+        android:textColor="@color/colorPrimaryText"
+        android:layout_marginStart="@dimen/margins"
+        android:layout_weight="5"
+        android:id="@+id/country_name"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margins"
+        android:textSize="@dimen/city_count_size"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:textColor="@color/colorAccent"
+        android:id="@+id/city_count"/>
 
 </LinearLayout>
