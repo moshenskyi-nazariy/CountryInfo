@@ -10,7 +10,11 @@ public class Country {
     private String name;
 
     @SerializedName("cities")
-    private List<City> cities = new ArrayList<>();
+    private List<City> cities;
+
+    public Country() {
+        cities = new ArrayList<>();
+    }
 
     public String getName() {
         return name;
@@ -20,9 +24,7 @@ public class Country {
         this.name = name;
     }
 
-    public void addCity(String cityName) {
-        City city = new City();
-        city.setName(cityName);
+    public void addCity(City city) {
         cities.add(city);
     }
 

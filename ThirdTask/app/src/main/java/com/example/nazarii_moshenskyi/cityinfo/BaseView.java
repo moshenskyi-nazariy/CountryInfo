@@ -1,7 +1,9 @@
 package com.example.nazarii_moshenskyi.cityinfo;
 
-public interface BaseView<T extends BasePresenter> {
+import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryList;
 
-    void setPresenter(T presenter);
+public interface BaseView {
+
+    void onLoad(CountryList countries);
 
 }

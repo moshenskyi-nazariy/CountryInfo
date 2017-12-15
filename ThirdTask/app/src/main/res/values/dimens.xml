@@ -4,4 +4,9 @@
     <dimen name="city_count_size">16sp</dimen>
     <dimen name="margins">8dp</dimen>
     <dimen name="margin_bottom_city_count">4dp</dimen>
+    <dimen name="shape_radius">4dp</dimen>
+    <dimen name="shape_margin_right">4dp</dimen>
+    <dimen name="shadow_margin_bottom">4dp</dimen>
+    <dimen name="shape_margin_left">0dp</dimen>
+    <dimen name="shape_margin_top">0dp</dimen>
 </resources>

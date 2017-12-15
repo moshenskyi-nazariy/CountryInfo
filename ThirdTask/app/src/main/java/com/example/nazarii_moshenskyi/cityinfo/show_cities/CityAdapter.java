@@ -11,15 +11,10 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.subjects.PublishSubject;
-
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
-
     private List<Country> countries;
-    private static final PublishSubject<String> onClicksubject = PublishSubject.create();
 
-    CityAdapter(List<Country> countries) {
+    public CityAdapter(List<Country> countries) {
         this.countries = countries;
     }
 
@@ -34,13 +29,11 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
     public void onBindViewHolder(CityAdapter.ViewHolder holder, int position) {
         Country country = countries.get(position);
         String countryName = country.getName();
+
         int cityCount = country.getCities().size();
+
         holder.countryName.setText(countryName);
         holder.cityCount.setText(String.valueOf(cityCount));
-    }
-
-    Observable<String> getOnClickListener() {
-        return onClicksubject.hide();
     }
 
     @Override
@@ -56,13 +49,6 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
             super(itemView);
             countryName = itemView.findViewById(R.id.country_name);
             cityCount = itemView.findViewById(R.id.city_count);
-
-            countryName.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onClicksubject.onNext(countryName.getText().toString());
-                }
-            });
         }
     }
 }

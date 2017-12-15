@@ -12,12 +12,7 @@ public class CityItemDecorator extends RecyclerView.ItemDecoration {
     private static final int VERTICAL = 1;
 
     public CityItemDecorator(int spacing) {
-        this(spacing, -1);
-    }
-
-    public CityItemDecorator(int spacing, int displayMode) {
         this.spacing = spacing;
-        this.displayMode = displayMode;
     }
 
     @Override
@@ -33,25 +28,19 @@ public class CityItemDecorator extends RecyclerView.ItemDecoration {
                                         int position,
                                         int itemCount) {
 
-        if (displayMode == -1) {
-            displayMode = resolveDisplayMode(layoutManager);
-        }
-
-        switch (displayMode) {
-            case HORIZONTAL:
-                outRect.left = spacing;
-                outRect.right = position == itemCount - 1 ? spacing : 0;
-                outRect.top = spacing;
-                outRect.bottom = spacing;
-                break;
-            case VERTICAL:
-                outRect.left = spacing;
-                outRect.right = spacing;
-                outRect.top = spacing;
-                outRect.bottom = position == itemCount - 1 ? spacing : 0;
-                break;
+        if (layoutManager.canScrollHorizontally()) {
+            outRect.left = spacing;
+            outRect.right = position == itemCount - 1 ? spacing : 0;
+            outRect.top = spacing;
+            outRect.bottom = spacing;
+        } else {
+            outRect.left = spacing;
+            outRect.right = spacing;
+            outRect.top = spacing;
+            outRect.bottom = position == itemCount - 1 ? spacing : 0;
         }
     }
+
 
     private int resolveDisplayMode(RecyclerView.LayoutManager layoutManager) {
         if (layoutManager.canScrollHorizontally()) return HORIZONTAL;
