@@ -1,19 +1,26 @@
 package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Country {
+
+    @SerializedName("alpha2Code")
+    @Expose
+    private String alpha2Code;
     @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("nameSanitized")
+    @Expose
+    private String nameSanitized;
 
-    @SerializedName("cities")
-    private List<City> cities;
+    public String getAlpha2Code() {
+        return alpha2Code;
+    }
 
-    public Country() {
-        cities = new ArrayList<>();
+    public void setAlpha2Code(String alpha2Code) {
+        this.alpha2Code = alpha2Code;
     }
 
     public String getName() {
@@ -24,11 +31,11 @@ public class Country {
         this.name = name;
     }
 
-    public void addCity(City city) {
-        cities.add(city);
+    public String getNameSanitized() {
+        return nameSanitized;
     }
 
-    public List<City> getCities() {
-        return cities;
+    public void setNameSanitized(String nameSanitized) {
+        this.nameSanitized = nameSanitized;
     }
 }

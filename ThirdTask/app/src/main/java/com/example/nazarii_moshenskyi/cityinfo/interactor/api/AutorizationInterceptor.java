@@ -13,7 +13,7 @@ public class AutorizationInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request originalRequest = chain.request();
         Request.Builder requestBuilder = originalRequest.newBuilder()
-                .header("x-api-key", BuildConfig.API_KEY);
+                .addHeader("x-api-key", BuildConfig.API_KEY);
 
         Request requestWithKey = requestBuilder.build();
 

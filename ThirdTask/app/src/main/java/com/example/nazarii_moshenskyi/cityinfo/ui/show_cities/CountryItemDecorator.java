@@ -1,17 +1,16 @@
-package com.example.nazarii_moshenskyi.cityinfo.show_cities;
+package com.example.nazarii_moshenskyi.cityinfo.ui.show_cities;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-public class CityItemDecorator extends RecyclerView.ItemDecoration {
+public class CountryItemDecorator extends RecyclerView.ItemDecoration {
+    private static final int HORIZONTAL = 0;
+    private static final int VERTICAL = 1;
     private final int spacing;
     private int displayMode;
 
-    private static final int HORIZONTAL = 0;
-    private static final int VERTICAL = 1;
-
-    public CityItemDecorator(int spacing) {
+    public CountryItemDecorator(int spacing) {
         this.spacing = spacing;
     }
 
