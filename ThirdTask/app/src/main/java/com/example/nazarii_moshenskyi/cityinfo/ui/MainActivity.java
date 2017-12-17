@@ -1,5 +1,6 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,13 +15,17 @@ import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryRepo
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_cities.CountryAdapter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_cities.CountryItemDecorator;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_cities.CountryPresenter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.CountryInfoActivity;
 
 import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
-public class MainActivity extends AppCompatActivity implements BaseView {
+import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_EXTRA;
+
+public class MainActivity extends AppCompatActivity implements BaseView<List<Country>>,
+        RecyclerViewOnClickListener {
     private static final String TAG = "MainActivity";
     private CountryPresenter presenter;
     private RecyclerView recyclerView;
@@ -60,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements BaseView {
 
     @Override
     public void onClick(Country country) {
+        Intent intent = new Intent(getApplicationContext(), CountryInfoActivity.class);
+        intent.putExtra(COUNTRY_EXTRA, country.getName());
+        startActivity(intent);
     }
 
     private void display(List<Country> countries) {

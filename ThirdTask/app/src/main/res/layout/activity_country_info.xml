@@ -6,6 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.nazarii_moshenskyi.cityinfo.ui.show_cities.CountryInfoActivity">
+    tools:context="com.example.nazarii_moshenskyi.cityinfo.ui.show_info.CountryInfoActivity">
 
 </LinearLayout>

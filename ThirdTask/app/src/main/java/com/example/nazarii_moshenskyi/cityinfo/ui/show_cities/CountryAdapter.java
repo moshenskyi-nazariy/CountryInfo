@@ -8,17 +8,17 @@ import android.widget.TextView;
 
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
-import com.example.nazarii_moshenskyi.cityinfo.ui.BaseView;
+import com.example.nazarii_moshenskyi.cityinfo.ui.RecyclerViewOnClickListener;
 
 import java.util.List;
 
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
-    private final BaseView view;
+    private final RecyclerViewOnClickListener listener;
     private List<Country> countries;
 
-    public CountryAdapter(List<Country> countries, BaseView view) {
+    public CountryAdapter(List<Country> countries, RecyclerViewOnClickListener listener) {
         this.countries = countries;
-        this.view = view;
+        this.listener = listener;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         holder.countryName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                view.onClick(country);
+                listener.onClick(country);
             }
         });
     }
