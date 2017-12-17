@@ -58,8 +58,12 @@ public class MainActivity extends AppCompatActivity implements BaseView {
 
     }
 
+    @Override
+    public void onClick(Country country) {
+    }
+
     private void display(List<Country> countries) {
-        adapter = new CountryAdapter(countries);
+        adapter = new CountryAdapter(countries, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
     }

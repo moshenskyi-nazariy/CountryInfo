@@ -10,4 +10,6 @@ public interface BaseView {
 
     void onLoad(Observable<List<Country>> countries);
 
+    void onClick(Country country);
+
 }
