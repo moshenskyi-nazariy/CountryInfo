@@ -31,7 +31,7 @@ public class CountryInfo {
     private Water water;
     @SerializedName("vaccinations")
     @Expose
-    private List<Object> vaccinations = null;
+    private List<Vaccine> vaccinations = null;
     @SerializedName("currency")
     @Expose
     private Currency currency;
@@ -101,11 +101,11 @@ public class CountryInfo {
         this.water = water;
     }
 
-    public List<Object> getVaccinations() {
+    public List<Vaccine> getVaccinations() {
         return vaccinations;
     }
 
-    public void setVaccinations(List<Object> vaccinations) {
+    public void setVaccinations(List<Vaccine> vaccinations) {
         this.vaccinations = vaccinations;
     }
 

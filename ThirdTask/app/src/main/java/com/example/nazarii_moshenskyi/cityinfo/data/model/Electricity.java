@@ -1,9 +1,10 @@
 
 package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class Electricity {
 
