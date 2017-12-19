@@ -5,6 +5,8 @@ import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryInfo
 import com.example.nazarii_moshenskyi.cityinfo.ui.BaseView;
 
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class CountryInfoPresenter {
     private BaseView<CountryInfo> view;
@@ -16,7 +18,8 @@ public class CountryInfoPresenter {
     }
 
     public void getInfo() {
-        Observable<CountryInfo> countries = repository.getInfo();
+        Observable<CountryInfo> countries = repository.getInfo().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
         view.onLoad(countries);
     }
 }
