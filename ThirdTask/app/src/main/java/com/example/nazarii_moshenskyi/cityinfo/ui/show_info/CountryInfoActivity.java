@@ -90,10 +90,7 @@ public class CountryInfoActivity extends AppCompatActivity implements BaseView<C
     private void getAdvises(CountryInfo countryInfo, StringBuilder builder) {
         builder.setLength(0);
         Advise adviseList = countryInfo.getAdvise();
-        builder.append("*UA: \n\t").append(adviseList.getUA().getUrl()).append(" \n\t")
-                .append(adviseList.getUA().getAdvise()).append("\n")
-                .append("*CA: \n\t").append(adviseList.getCA().getUrl()).append(" \n\t")
-                .append(adviseList.getCA().getAdvise()).append("\n");
+        builder.append(adviseList.getUA().getAdvise()).append("\n");
     }
 
     private void getVaccinations(CountryInfo countryInfo, StringBuilder builder) {
