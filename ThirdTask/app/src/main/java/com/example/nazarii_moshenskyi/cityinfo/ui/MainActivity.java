@@ -19,9 +19,6 @@ import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.CountryInfoActivity;
 
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
-
 import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_EXTRA;
 
 public class MainActivity extends AppCompatActivity implements BaseView<List<Country>>,
@@ -53,13 +50,10 @@ public class MainActivity extends AppCompatActivity implements BaseView<List<Cou
     }
 
     @Override
-    public void onLoad(Observable<List<Country>> countries) {
-        countries.subscribe(new Consumer<List<Country>>() {
-            @Override
-            public void accept(List<Country> countries) throws Exception {
-                display(countries);
-            }
-        });
+    public void onLoad(List<Country> countries) {
+        adapter = new CountryAdapter(countries, this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(layoutManager);
 
     }
 
@@ -68,12 +62,6 @@ public class MainActivity extends AppCompatActivity implements BaseView<List<Cou
         Intent intent = new Intent(getApplicationContext(), CountryInfoActivity.class);
         intent.putExtra(COUNTRY_EXTRA, country.getName());
         startActivity(intent);
-    }
-
-    private void display(List<Country> countries) {
-        adapter = new CountryAdapter(countries, this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(layoutManager);
     }
 
 }

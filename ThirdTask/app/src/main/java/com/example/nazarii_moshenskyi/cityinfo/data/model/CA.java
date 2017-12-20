@@ -28,5 +28,4 @@ public class CA {
     public void setUrl(String url) {
         this.url = url;
     }
-
 }

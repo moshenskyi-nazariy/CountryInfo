@@ -5,7 +5,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class UA {
-
     @SerializedName("advise")
     @Expose
     private String advise;
@@ -28,5 +27,4 @@ public class UA {
     public void setUrl(String url) {
         this.url = url;
     }
-
 }

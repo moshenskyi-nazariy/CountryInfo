@@ -74,16 +74,16 @@ public class Month {
 
     public interface MonthContract {
 
-        public  String TMIN = "tMin";
+        public String TMIN = "tMin";
 
-        public  String TMAX = "tMax";
+        public String TMAX = "tMax";
 
-        public  String TAVG = "tAvg";
+        public String TAVG = "tAvg";
 
-        public  String PMIN = "pMin";
+        public String PMIN = "pMin";
 
-        public  String PMAX = "pMax";
+        public String PMAX = "pMax";
 
-        public  String PAVG = "pAvg";
+        public String PAVG = "pAvg";
     }
 }

@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Currency {
-
     @SerializedName("name")
     @Expose
     private String name;
@@ -63,5 +62,4 @@ public class Currency {
     public void setCompare(List<Compare> compare) {
         this.compare = compare;
     }
-
 }

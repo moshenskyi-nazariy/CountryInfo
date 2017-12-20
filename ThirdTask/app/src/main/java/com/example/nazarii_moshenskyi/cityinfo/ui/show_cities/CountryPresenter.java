@@ -8,6 +8,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class CountryPresenter {
@@ -22,6 +23,11 @@ public class CountryPresenter {
     public void getCountries() {
         Observable<List<Country>> countries = repository.getCountries().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-        view.onLoad(countries);
+        countries.subscribe(new Consumer<List<Country>>() {
+            @Override
+            public void accept(List<Country> countries) throws Exception {
+                view.onLoad(countries);
+            }
+        });
     }
 }
