@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.nazarii_moshenskyi.cityinfo.R;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
+
+import java.util.List;
 
 
 public class CountryFragment extends Fragment {
@@ -18,20 +21,20 @@ public class CountryFragment extends Fragment {
     private static final String ARG_PARAM1 = "cityList";
 
     private OnFragmentInteractionListener mListener;
-    private RecyclerView recyclerView;
+    private RecyclerView countryList;
     private CountryAdapter countryAdapter;
 
     public CountryFragment() {
         // Required empty public constructor
     }
 
-   /* public static CountryFragment newInstance(CountryList countries) {
+    public static CountryFragment newInstance(List<Country> countries) {
         CountryFragment fragment = new CountryFragment();
         Bundle args = new Bundle();
-        args.putParcelable(ARG_PARAM1, countries);
+        //args.putParcelable(ARG_PARAM1, countries);
         fragment.setArguments(args);
         return fragment;
-    }*/
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,15 +49,15 @@ public class CountryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_country, container, false);
-        recyclerView = view.findViewById(R.id.country_list);
+        countryList = view.findViewById(R.id.country_list);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
 
         //countryAdapter = new CountryAdapter(countries.getCountries());
-        recyclerView.setAdapter(countryAdapter);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new CountryItemDecorator((int) view.getResources().getDimension(R.dimen.margins)));
+        countryList.setAdapter(countryAdapter);
+        countryList.setLayoutManager(layoutManager);
+        countryList.setItemAnimator(new DefaultItemAnimator());
+        countryList.addItemDecoration(new CountryItemDecorator((int) view.getResources().getDimension(R.dimen.margins)));
 
         return view;
     }
