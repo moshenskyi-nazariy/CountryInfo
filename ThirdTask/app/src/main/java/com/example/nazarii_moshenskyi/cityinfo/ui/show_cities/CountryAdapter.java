@@ -10,15 +10,16 @@ import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 import com.example.nazarii_moshenskyi.cityinfo.ui.RecyclerViewOnClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
     private final RecyclerViewOnClickListener listener;
     private List<Country> countries;
 
-    public CountryAdapter(List<Country> countries, RecyclerViewOnClickListener listener) {
-        this.countries = countries;
+    public CountryAdapter(RecyclerViewOnClickListener listener) {
         this.listener = listener;
+        countries = new ArrayList<>(0);
     }
 
     @Override
@@ -26,6 +27,13 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_view, parent, false);
         return new ViewHolder(view);
+    }
+
+    public void update(List<Country> countries) {
+        if(countries != null) {
+            this.countries = countries;
+            notifyDataSetChanged();
+        }
     }
 
     @Override

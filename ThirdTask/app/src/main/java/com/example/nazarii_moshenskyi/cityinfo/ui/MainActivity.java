@@ -47,17 +47,15 @@ public class MainActivity extends AppCompatActivity implements BaseView<List<Cou
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new CountryItemDecorator((int) getResources().
                 getDimension(R.dimen.margins)));
+
+        adapter = new CountryAdapter(this);
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
     }
 
     @Override
     public void onLoad(List<Country> countries) {
-        if (adapter == null) {
-            adapter = new CountryAdapter(countries, this);
-            recyclerView.setAdapter(adapter);
-        } else {
-            adapter.notifyDataSetChanged();
-        }
+        adapter.update(countries);
     }
 
     @Override
