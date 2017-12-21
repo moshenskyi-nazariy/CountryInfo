@@ -1,7 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="margins">8dp</dimen>
     <dimen name="country_name_size">40sp</dimen>
     <dimen name="city_count_size">16sp</dimen>
-    <dimen name="margin_city_count">4dp</dimen>
+    <dimen name="margins">8dp</dimen>
+    <dimen name="margin_bottom_city_count">4dp</dimen>
+    <dimen name="shape_radius">4dp</dimen>
+    <dimen name="shape_margin_right">4dp</dimen>
+    <dimen name="shadow_margin_bottom">4dp</dimen>
+    <dimen name="shape_margin_left">0dp</dimen>
+    <dimen name="shape_margin_top">0dp</dimen>
+    <dimen name="info_item_text">24sp</dimen>
+    <dimen name="info_layout_margin">4dp</dimen>
+    <dimen name="name_item_text">34sp</dimen>
+    <dimen name="advises__top_begin">72dp</dimen>
+    <dimen name="guidline3_end">192dp</dimen>
+    <dimen name="vaccinations_title_text_width">156dp</dimen>
+    <dimen name="languages_title_text_width">156dp</dimen>
+    <dimen name="languages_title_text_height">39dp</dimen>
+    <dimen name="guidline9_begin">242dp</dimen>
+    <dimen name="guidline10_end">17dp</dimen>
+    <dimen name="guidline12_end">96dp</dimen>
+    <dimen name="image_view_item_size">0dp</dimen>
+    <dimen name="vaccinations_image_height">25dp</dimen>
+    <dimen name="guidline2_begin">20dp</dimen>
+    <dimen name="currency_title_text_width">156dp</dimen>
+    <dimen name="currency_title_text_height">35dp</dimen>
+    <dimen name="sockets_title_text_width">156dp</dimen>
+    <dimen name="sockets_title_text_height">36dp</dimen>
+    <dimen name="guidline22_begin">494dp</dimen>
+    <dimen name="currency_item_width">0dp</dimen>
+    <dimen name="currency_item_geight">28dp</dimen>
+    <dimen name="list_languages_width">0dp</dimen>
+    <dimen name="list_vaccinations_width">0dp</dimen>
+    <dimen name="list_vaccinations_height">109dp</dimen>
+    <dimen name="advises_item_width">316dp</dimen>
+    <dimen name="advises_item_height">28dp</dimen>
+    <dimen name="vaccines_item_text_size">16sp</dimen>
 </resources>

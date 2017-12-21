@@ -1,10 +1,9 @@
-//noinspection GradleCompatible
 apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.example.nazarii_moshenskyi.cityinfo"
+        applicationId "com.example.nazarii_moshenskyi.thirdtask"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
@@ -12,12 +11,24 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "API_KEY", "\"fe1c208287e058f593929802e1712657c7a2ca5d4ff294589bec8de1c6c7\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.thebasetrip.com/v2/\"")
+            buildConfigField("String", "INFO_BASE_URL", "\"https://travelbriefing.org/\"")
+
+
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
+
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -31,9 +42,10 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
 
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-    compile 'com.github.markomilos:paginate:0.5.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.android.support:cardview-v7:26.1.0'
 }
