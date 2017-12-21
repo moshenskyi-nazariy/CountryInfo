@@ -1,4 +1,4 @@
-package com.example.nazarii_moshenskyi.cityinfo.ui.show_cities;
+package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 
 import android.content.Context;
 import android.os.Bundle;

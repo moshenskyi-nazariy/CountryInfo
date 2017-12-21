@@ -1,4 +1,4 @@
-package com.example.nazarii_moshenskyi.cityinfo.ui.show_cities;
+package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

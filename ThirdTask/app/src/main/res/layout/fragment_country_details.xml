@@ -6,8 +6,7 @@
     tools:context="com.example.nazarii_moshenskyi.test.presentation.view.CountryFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:clipToPadding="true"
-        android:id="@+id/recycler_view"
+        android:id="@+id/recycler_view_city"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
