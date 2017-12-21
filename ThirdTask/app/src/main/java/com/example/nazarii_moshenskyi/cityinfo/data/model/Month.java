@@ -2,6 +2,7 @@ package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
 public class Month {
 
+    @Weather.Months
     private String name;
 
     private String tMin;
