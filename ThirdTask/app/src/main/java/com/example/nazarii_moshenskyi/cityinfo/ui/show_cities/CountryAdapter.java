@@ -8,16 +8,15 @@ import android.widget.TextView;
 
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
-import com.example.nazarii_moshenskyi.cityinfo.ui.RecyclerViewOnClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
-    private final RecyclerViewOnClickListener listener;
+    private final CountryView listener;
     private List<Country> countries;
 
-    public CountryAdapter(RecyclerViewOnClickListener listener) {
+    public CountryAdapter(CountryView listener) {
         this.listener = listener;
         countries = new ArrayList<>(0);
     }

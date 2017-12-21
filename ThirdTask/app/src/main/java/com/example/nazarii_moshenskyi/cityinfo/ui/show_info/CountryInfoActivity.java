@@ -11,15 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nazarii_moshenskyi.cityinfo.R;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.api.ApiFactory;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryService;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryInfoRepository;
-import com.example.nazarii_moshenskyi.cityinfo.ui.BaseView;
 import com.example.nazarii_moshenskyi.cityinfo.ui.model.InfoModel;
 
 import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_EXTRA;
 
-public class CountryInfoActivity extends AppCompatActivity implements BaseView<InfoModel>, View.OnClickListener {
+public class CountryInfoActivity extends AppCompatActivity implements CountryInfoView, View.OnClickListener {
 
     private boolean isOld = false;
     private SparseArray<Object> associatedMap;
@@ -31,8 +27,11 @@ public class CountryInfoActivity extends AppCompatActivity implements BaseView<I
     private RecyclerView languagesItem;
     private TextView currencyItem;
     private TextView socketsItem;
+
     private LinearLayoutManager layoutManagerLanguages;
     private LinearLayoutManager layoutManagerVaccines;
+    private LanguageAdapter languageAdapter;
+    private VaccineAdapter vaccineAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,27 +40,34 @@ public class CountryInfoActivity extends AppCompatActivity implements BaseView<I
         layoutManagerLanguages = new LinearLayoutManager(getApplicationContext());
         layoutManagerVaccines = new LinearLayoutManager(getApplicationContext());
 
+        Intent intent = getIntent();
+        countryName = intent.getStringExtra(COUNTRY_EXTRA);
+        nameItem = findViewById(R.id.name_item);
+        nameItem.setText(countryName);
+
         initImages();
         initDataRepresentation();
         associateIds();
 
-        Intent intent = getIntent();
-        countryName = intent.getStringExtra(COUNTRY_EXTRA);
-
-        CountryService infoService = ApiFactory.getCountryInfoService();
-        CountryInfoRepository repository = new CountryInfoRepository(infoService, countryName);
-        CountryInfoPresenter presenter = new CountryInfoPresenter(this, repository);
+        CountryInfoPresenter presenter = new CountryInfoPresenter(this, countryName);
         presenter.getInfo();
 
     }
 
     private void initDataRepresentation() {
-        nameItem = findViewById(R.id.name_item);
         adviseItem = findViewById(R.id.advises_item);
         socketsItem = findViewById(R.id.sockets_item);
         currencyItem = findViewById(R.id.currency_item);
         vaccinationItem = findViewById(R.id.list_vaccinations);
         languagesItem = findViewById(R.id.list_languages);
+
+        languageAdapter = new LanguageAdapter();
+        languagesItem.setAdapter(languageAdapter);
+        languagesItem.setLayoutManager(layoutManagerLanguages);
+
+        vaccineAdapter = new VaccineAdapter();
+        vaccinationItem.setAdapter(vaccineAdapter);
+        vaccinationItem.setLayoutManager(layoutManagerVaccines);
     }
 
     private void associateIds() {
@@ -89,18 +95,12 @@ public class CountryInfoActivity extends AppCompatActivity implements BaseView<I
 
     @Override
     public void onLoad(InfoModel infoModel) {
-        nameItem.setText(countryName);
-        adviseItem.setText(infoModel.getAdvise().getAdvise());
+        adviseItem.setText(infoModel.getAdvise());
         currencyItem.setText(infoModel.getCurrency());
         socketsItem.setText(infoModel.getSockets());
 
-        LanguageAdapter languageAdapter = new LanguageAdapter(infoModel.getLanguages());
-        languagesItem.setAdapter(languageAdapter);
-        languagesItem.setLayoutManager(layoutManagerLanguages);
-
-        VaccineAdapter vaccineAdapter = new VaccineAdapter(infoModel.getVaccinations());
-        vaccinationItem.setAdapter(vaccineAdapter);
-        vaccinationItem.setLayoutManager(layoutManagerVaccines);
+        languageAdapter.update(infoModel.getLanguages());
+        vaccineAdapter.update(infoModel.getVaccinations());
     }
 
     @Override

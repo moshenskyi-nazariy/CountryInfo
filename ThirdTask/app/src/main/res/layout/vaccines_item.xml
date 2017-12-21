@@ -10,13 +10,13 @@
         android:id="@+id/vaccine_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"/>
+        android:textSize="@dimen/vaccines_item_text_size"/>
 
     <TextView
         android:id="@+id/vaccine_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margins"
-        android:textSize="16sp"/>
+        android:textSize="@dimen/vaccines_item_text_size"/>
 
 </LinearLayout>

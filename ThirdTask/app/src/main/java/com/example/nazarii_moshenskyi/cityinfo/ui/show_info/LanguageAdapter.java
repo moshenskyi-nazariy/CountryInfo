@@ -14,10 +14,6 @@ import java.util.List;
 public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHolder> {
     private List<Language> languages;
 
-    public LanguageAdapter(List<Language> languages) {
-        this.languages = languages;
-    }
-
     @Override
     public LanguageAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -30,6 +26,13 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
         Language language = languages.get(position);
         String languageName = language.getLanguage();
         holder.language.setText(languageName);
+    }
+
+    public void update(List<Language> languages) {
+        if(languages != null) {
+            this.languages = languages;
+            notifyDataSetChanged();
+        }
     }
 
     @Override

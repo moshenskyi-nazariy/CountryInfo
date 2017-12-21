@@ -9,20 +9,17 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.api.ApiFactory;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryService;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryRepository;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_cities.CountryAdapter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_cities.CountryItemDecorator;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_cities.CountryPresenter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_cities.CountryView;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.CountryInfoActivity;
 
 import java.util.List;
 
 import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_EXTRA;
 
-public class MainActivity extends AppCompatActivity implements BaseView<List<Country>>,
-        RecyclerViewOnClickListener {
+public class MainActivity extends AppCompatActivity implements CountryView {
     private static final String TAG = "MainActivity";
     private CountryPresenter presenter;
     private RecyclerView recyclerView;
@@ -36,9 +33,7 @@ public class MainActivity extends AppCompatActivity implements BaseView<List<Cou
 
         initList();
 
-        CountryService service = ApiFactory.getCountryService();
-        CountryRepository repository = new CountryRepository(service);
-        presenter = new CountryPresenter(this, repository);
+        presenter = new CountryPresenter(this);
         presenter.getCountries();
     }
 

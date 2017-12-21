@@ -1,7 +1,6 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.model;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Language;
-import com.example.nazarii_moshenskyi.cityinfo.data.model.UA;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Vaccine;
 
 import java.util.List;
@@ -10,7 +9,7 @@ public class InfoModel {
     private String currency;
     private List<Vaccine> vaccinations;
     private List<Language> languages;
-    private UA advise;
+    private String advise;
     private String sockets;
 
     public String getCurrency() {
@@ -37,11 +36,11 @@ public class InfoModel {
         this.languages = languages;
     }
 
-    public UA getAdvise() {
+    public String getAdvise() {
         return advise;
     }
 
-    public void setAdvise(UA advise) {
+    public void setAdvise(String advise) {
         this.advise = advise;
     }
 

@@ -14,10 +14,6 @@ import java.util.List;
 public class VaccineAdapter extends RecyclerView.Adapter<VaccineAdapter.ViewHolder> {
     private List<Vaccine> vaccines;
 
-    public VaccineAdapter(List<Vaccine> vaccines) {
-        this.vaccines = vaccines;
-    }
-
     @Override
     public VaccineAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -33,6 +29,13 @@ public class VaccineAdapter extends RecyclerView.Adapter<VaccineAdapter.ViewHold
 
         String vaccineMessage = vaccine.getMessage();
         holder.message.setText(vaccineMessage);
+    }
+
+    public void update(List<Vaccine> vaccines) {
+        if(vaccines != null) {
+            this.vaccines = vaccines;
+            notifyDataSetChanged();
+        }
     }
 
     @Override

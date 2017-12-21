@@ -35,4 +35,5 @@
     <dimen name="list_vaccinations_height">109dp</dimen>
     <dimen name="advises_item_width">316dp</dimen>
     <dimen name="advises_item_height">28dp</dimen>
+    <dimen name="vaccines_item_text_size">16sp</dimen>
 </resources>
