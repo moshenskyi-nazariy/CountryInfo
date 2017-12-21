@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements BaseView<List<Cou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         layoutManager = new LinearLayoutManager(getApplicationContext());
+        checkLayout();
 
         initList();
 
@@ -40,6 +41,10 @@ public class MainActivity extends AppCompatActivity implements BaseView<List<Cou
         CountryRepository repository = new CountryRepository(service);
         presenter = new CountryPresenter(this, repository);
         presenter.getCountries();
+    }
+
+    private void checkLayout() {
+
     }
 
     private void initList() {
