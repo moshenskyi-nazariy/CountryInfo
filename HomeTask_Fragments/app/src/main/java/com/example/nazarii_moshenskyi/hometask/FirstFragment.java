@@ -27,6 +27,7 @@ public class FirstFragment extends AbstractFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             color = getArguments().getInt(ARG_COLOR);
+            setRetainInstance(true);
         }
     }
 
@@ -43,5 +44,15 @@ public class FirstFragment extends AbstractFragment {
     public void setColor(int color) {
         super.setColor(color);
         this.color = color;
+    }
+
+    @Override
+    public String getNextTag() {
+        return SECOND_FRAGMENT_TAG;
+    }
+
+    @Override
+    public String getThisTag() {
+        return FIRST_FRAGMENT_TAG;
     }
 }

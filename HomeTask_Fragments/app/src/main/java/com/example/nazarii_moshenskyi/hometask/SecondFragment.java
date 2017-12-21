@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 public class SecondFragment extends AbstractFragment {
 
     private static final String ARG_COLOR = "color";
+    private static final String FIRST_FRAGMENT_TAG = "FIRST_FRAGMENT";
     private int color;
 
     public SecondFragment() {
@@ -27,6 +28,7 @@ public class SecondFragment extends AbstractFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             color = getArguments().getInt(ARG_COLOR);
+            setRetainInstance(true);
         }
     }
 
@@ -34,7 +36,7 @@ public class SecondFragment extends AbstractFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_first, container, false);
+        View root = inflater.inflate(R.layout.fragment_second, container, false);
         root.setBackgroundColor(color);
         return root;
     }
@@ -45,4 +47,13 @@ public class SecondFragment extends AbstractFragment {
         this.color = color;
     }
 
+    @Override
+    public String getNextTag() {
+        return FIRST_FRAGMENT_TAG;
+    }
+
+    @Override
+    public String getThisTag() {
+        return SECOND_FRAGMENT_TAG;
+    }
 }

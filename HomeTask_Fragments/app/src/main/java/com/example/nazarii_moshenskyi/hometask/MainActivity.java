@@ -1,31 +1,40 @@
 package com.example.nazarii_moshenskyi.hometask;
 
-import android.support.v4.app.Fragment;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity implements ColorPickerFragment.OnFragmentInteractionListener {
 
+    private static final String COLOR_EXTRA = "COLOR";
     private FragmentManager manager;
     private AbstractFragment currentFragment;
-    private static final String FIRST_FRAGMENT_TAG = "FIRST_FRAGMENT";
-    private static final String SECOND_FRAGMENT_TAG = "SECOND_FRAGMENT";
     private int defaultColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        defaultColor = getResources().getColor(R.color.colorDefault);
+
+        manager = getSupportFragmentManager();
 
         if (savedInstanceState == null) {
+            defaultColor = getResources().getColor(R.color.colorDefault);
             currentFragment = FirstFragment.newInstance(defaultColor);
-            currentFragment.setNext(SECOND_FRAGMENT_TAG);
-
-            manager = getSupportFragmentManager();
-            manager.beginTransaction().add(R.id.fragment_container, currentFragment, FIRST_FRAGMENT_TAG).addToBackStack(null).commit();
+            manager.beginTransaction().addToBackStack(null)
+                    .add(R.id.fragment_container, currentFragment, currentFragment.getThisTag())
+                    .commit();
+        } else {
+            String tag = savedInstanceState.getString(COLOR_EXTRA);
+            currentFragment = (AbstractFragment) manager.findFragmentByTag(tag);
         }
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(COLOR_EXTRA, currentFragment.getThisTag());
     }
 
     @Override
@@ -35,10 +44,14 @@ public class MainActivity extends AppCompatActivity implements ColorPickerFragme
 
     @Override
     public void onUpdateFragment() {
-        String next = currentFragment.getNext();
-        if (manager.findFragmentByTag(next) == null) {
-
+        String next = currentFragment.getNextTag();
+        currentFragment = (AbstractFragment) manager.findFragmentByTag(next);
+        if (currentFragment == null) {
+            currentFragment = SecondFragment.newInstance(defaultColor);
         }
 
+        manager.beginTransaction().replace(R.id.fragment_container, currentFragment, currentFragment.getThisTag())
+                .addToBackStack(null)
+                .commit();
     }
 }

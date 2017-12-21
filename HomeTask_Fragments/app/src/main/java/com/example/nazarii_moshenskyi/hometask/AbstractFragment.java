@@ -3,9 +3,10 @@ package com.example.nazarii_moshenskyi.hometask;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-public class AbstractFragment extends Fragment {
+public abstract class AbstractFragment extends Fragment {
     private int color;
-    private String tag;
+    protected static final String FIRST_FRAGMENT_TAG = "FIRST_FRAGMENT";
+    protected static final String SECOND_FRAGMENT_TAG = "SECOND_FRAGMENT";
 
     public void setColor(int color) {
         this.color = color;
@@ -19,11 +20,8 @@ public class AbstractFragment extends Fragment {
         return color;
     }
 
-    public void setNext(String tag) {
-        this.tag = tag;
-    }
+    public abstract String getNextTag();
 
-    public String getNext() {
-        return tag;
-    }
+    public abstract String getThisTag();
+
 }
