@@ -18,8 +18,7 @@ public class ColorPickerFragment extends Fragment {
     }
 
     public static ColorPickerFragment newInstance() {
-        ColorPickerFragment fragment = new ColorPickerFragment();
-        return fragment;
+        return new ColorPickerFragment();
     }
 
     @Override
@@ -36,7 +35,7 @@ public class ColorPickerFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                AmbilWarnaDialog colordialog = new AmbilWarnaDialog(getContext(), color, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+                AmbilWarnaDialog colorDialog = new AmbilWarnaDialog(getContext(), color, new AmbilWarnaDialog.OnAmbilWarnaListener() {
                     @Override
                     public void onCancel(AmbilWarnaDialog dialog) {
 
@@ -47,7 +46,7 @@ public class ColorPickerFragment extends Fragment {
                         mListener.onColorChanged(color);
                     }
                 });
-                colordialog.show();
+                colorDialog.show();
             }
         });
 

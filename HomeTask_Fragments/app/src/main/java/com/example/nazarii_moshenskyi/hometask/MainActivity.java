@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity implements ColorPickerFragme
         if (savedInstanceState == null) {
             defaultColor = getResources().getColor(R.color.colorDefault);
             currentFragment = FirstFragment.newInstance(defaultColor);
-            manager.beginTransaction().addToBackStack(null)
+            manager.beginTransaction()
+                    .addToBackStack(null)
                     .add(R.id.fragment_container, currentFragment, currentFragment.getThisTag())
                     .commit();
         } else {
@@ -50,7 +51,8 @@ public class MainActivity extends AppCompatActivity implements ColorPickerFragme
             currentFragment = SecondFragment.newInstance(defaultColor);
         }
 
-        manager.beginTransaction().replace(R.id.fragment_container, currentFragment, currentFragment.getThisTag())
+        manager.beginTransaction()
+                .replace(R.id.fragment_container, currentFragment, currentFragment.getThisTag())
                 .addToBackStack(null)
                 .commit();
     }

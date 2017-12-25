@@ -25,19 +25,25 @@ public class FirstFragment extends AbstractFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (savedInstanceState != null) {
+            color = savedInstanceState.getInt(ARG_COLOR);
+        } else {
             color = getArguments().getInt(ARG_COLOR);
-            setRetainInstance(true);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_first, container, false);
         root.setBackgroundColor(color);
         return root;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(ARG_COLOR, color);
     }
 
     @Override
@@ -55,4 +61,5 @@ public class FirstFragment extends AbstractFragment {
     public String getThisTag() {
         return FIRST_FRAGMENT_TAG;
     }
+
 }
