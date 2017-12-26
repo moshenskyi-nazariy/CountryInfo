@@ -2,8 +2,6 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_info;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Electricity;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.api.ApiFactory;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryService;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryInfoRepository;
 import com.example.nazarii_moshenskyi.cityinfo.ui.model.InfoModel;
 
@@ -14,16 +12,23 @@ import io.reactivex.schedulers.Schedulers;
 public class CountryInfoPresenter {
     private CountryInfoView view;
     private CountryInfoRepository repository;
-    private CountryService infoService;
 
-    public CountryInfoPresenter(CountryInfoView view, String countryName) {
-        this.view = view;
-        infoService = ApiFactory.getCountryInfoService();
-        repository = new CountryInfoRepository(infoService, countryName);
+    public CountryInfoPresenter(CountryInfoRepository repository) {
+        this.repository = repository;
     }
 
-    public void getInfo() {
-        repository.getInfo().subscribeOn(Schedulers.io())
+    public void attachView(CountryInfoView view) {
+        this.view = view;
+    }
+
+    public void detachView() {
+        if (view != null) {
+            view = null;
+        }
+    }
+
+    public void getInfo(String countryName) {
+        repository.getInfo(countryName).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<CountryInfo>() {
                     @Override

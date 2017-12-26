@@ -1,5 +1,6 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -11,15 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.nazarii_moshenskyi.cityinfo.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
-import com.example.nazarii_moshenskyi.cityinfo.di.CountryPresenterModule;
-import com.example.nazarii_moshenskyi.cityinfo.di.DaggerCountryComponent;
 
 import java.util.List;
 
 import javax.inject.Inject;
-
 
 public class CountryFragment extends Fragment implements CountryView {
     private static final String ARG_COUNTRY = "cityList";
@@ -31,7 +30,8 @@ public class CountryFragment extends Fragment implements CountryView {
     private CountryAdapter countryAdapter;
     private LinearLayoutManager layoutManager;
 
-    @Inject CountryPresenter presenter;
+    @Inject
+    public CountryPresenter presenter;
 
     public CountryFragment() {
         // Required empty public constructor
@@ -44,15 +44,18 @@ public class CountryFragment extends Fragment implements CountryView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Application application = getActivity().getApplication();
+        if (application == null) {
+            return;
+        }
+        ((CountryInfoApplication) application).getCountryComponent().inject(this);
+
         if (savedInstanceState != null) {
             countries = savedInstanceState.getParcelable(ARG_COUNTRY);
         }
 
         layoutManager = new LinearLayoutManager(getContext());
-        DaggerCountryComponent.builder()
-                .countryPresenterModule(new CountryPresenterModule(this))
-                .build()
-                .inject(this);
+        presenter.attachView(this);
     }
 
     private void initList(View rootView) {
@@ -96,6 +99,7 @@ public class CountryFragment extends Fragment implements CountryView {
     public void onDetach() {
         super.onDetach();
         listener = null;
+        presenter.detachView();
     }
 
     @Override

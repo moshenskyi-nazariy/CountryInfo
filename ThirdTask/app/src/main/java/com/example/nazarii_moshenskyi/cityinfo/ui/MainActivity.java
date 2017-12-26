@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements CountryFragment.O
         checkLayout();
 
         showCountries();
-
     }
 
     private void showCountries() {

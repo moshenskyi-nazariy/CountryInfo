@@ -1,28 +1,27 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.api.ApiFactory;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryService;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryRepository;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class CountryPresenter {
+    private final CountryRepository repository;
     private CountryView view;
-    private CountryRepository repository;
-    private CountryService service;
+    //private CountryService service;
 
-    @Inject
-    public CountryPresenter(CountryView view) {
+
+    public CountryPresenter(CountryRepository repository) {
+        //service = ApiFactory.getCountryService();
+        this.repository = repository;
+    }
+
+    public void attachView(CountryView view){
         this.view = view;
-        service = ApiFactory.getCountryService();
-        repository = new CountryRepository(service);
     }
 
     public void getCountries() {
@@ -36,5 +35,11 @@ public class CountryPresenter {
                 });
 
 
+    }
+
+    public void detachView() {
+        if (view != null) {
+            view = null;
+        }
     }
 }

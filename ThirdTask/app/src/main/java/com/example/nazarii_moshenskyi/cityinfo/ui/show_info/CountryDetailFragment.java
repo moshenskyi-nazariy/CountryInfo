@@ -1,5 +1,6 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,8 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.nazarii_moshenskyi.cityinfo.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.ui.model.InfoModel;
+
+import javax.inject.Inject;
 
 public class CountryDetailFragment extends Fragment implements CountryInfoView, View.OnClickListener {
 
@@ -20,7 +24,6 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
 
     private boolean isOld = false;
     private SparseArray<Object> associatedMap;
-    private String countryName;
     private TextView nameItem;
     private TextView adviseItem;
     private RecyclerView vaccinationItem;
@@ -32,7 +35,11 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
 
     private LanguageAdapter languageAdapter;
     private VaccineAdapter vaccineAdapter;
-    private CountryInfoPresenter presenter;
+
+    @Inject
+    public CountryInfoPresenter presenter;
+
+    private String countryName;
 
     public CountryDetailFragment() {
         // Required empty public constructor
@@ -49,6 +56,13 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Application application = getActivity().getApplication();
+        if (application == null) {
+            return;
+        }
+        ((CountryInfoApplication) application).getCountryComponent().inject(this);
+
         if (savedInstanceState == null) {
             countryName = getArguments().getString(COUNTRY_NAME);
         } else {
@@ -57,7 +71,8 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
 
         languageAdapter = new LanguageAdapter();
         vaccineAdapter = new VaccineAdapter();
-        presenter = new CountryInfoPresenter(this, countryName);
+
+        presenter.attachView(this);
     }
 
     @Override
@@ -78,9 +93,15 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
         initDataRepresentation(view);
         associateIds();
         nameItem.setText(countryName);
-        presenter.getInfo();
+        presenter.getInfo(countryName);
 
         return view;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        presenter.detachView();
     }
 
     @Override
