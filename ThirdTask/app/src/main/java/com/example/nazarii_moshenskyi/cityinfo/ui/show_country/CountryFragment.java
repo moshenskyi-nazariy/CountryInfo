@@ -13,8 +13,12 @@ import android.view.ViewGroup;
 
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
+import com.example.nazarii_moshenskyi.cityinfo.di.CountryPresenterModule;
+import com.example.nazarii_moshenskyi.cityinfo.di.DaggerCountryComponent;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 
 public class CountryFragment extends Fragment implements CountryView {
@@ -26,7 +30,9 @@ public class CountryFragment extends Fragment implements CountryView {
 
     private CountryAdapter countryAdapter;
     private LinearLayoutManager layoutManager;
-    private CountryPresenter presenter;
+
+    @Inject
+    protected CountryPresenter presenter;
 
     public CountryFragment() {
         // Required empty public constructor
@@ -44,7 +50,10 @@ public class CountryFragment extends Fragment implements CountryView {
         }
 
         layoutManager = new LinearLayoutManager(getContext());
-        presenter = new CountryPresenter(this);
+        DaggerCountryComponent.builder()
+                .countryPresenterModule(new CountryPresenterModule(this))
+                .build();
+
     }
 
     private void initList(View rootView) {

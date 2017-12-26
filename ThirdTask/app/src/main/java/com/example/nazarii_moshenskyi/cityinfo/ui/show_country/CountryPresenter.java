@@ -7,6 +7,8 @@ import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryRepo
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -16,6 +18,7 @@ public class CountryPresenter {
     private CountryRepository repository;
     private CountryService service;
 
+    @Inject
     public CountryPresenter(CountryView view) {
         this.view = view;
         service = ApiFactory.getCountryService();
