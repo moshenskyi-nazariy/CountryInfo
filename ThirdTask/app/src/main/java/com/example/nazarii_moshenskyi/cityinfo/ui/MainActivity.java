@@ -50,16 +50,6 @@ public class MainActivity extends AppCompatActivity implements CountryFragment.O
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (masterFragment != null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .remove(masterFragment)
-                    .commit();
-        }    }
-
-    @Override
     public void onCountryClicked(Country country) {
         if (detailFrame != null) {
             Log.d(TAG, "onClick: name=" + country.getName() + "sending to DetailFragment" );

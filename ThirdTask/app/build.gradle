@@ -17,8 +17,6 @@ android {
             buildConfigField("String", "API_KEY", "\"fe1c208287e058f593929802e1712657c7a2ca5d4ff294589bec8de1c6c7\"")
             buildConfigField("String", "BASE_URL", "\"https://api.thebasetrip.com/v2/\"")
             buildConfigField("String", "INFO_BASE_URL", "\"https://travelbriefing.org/\"")
-
-
         }
 
         release {
@@ -27,10 +25,6 @@ android {
         }
     }
 }
-
-
-
-
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

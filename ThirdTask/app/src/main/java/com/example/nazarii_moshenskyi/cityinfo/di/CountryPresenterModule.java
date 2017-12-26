@@ -18,7 +18,7 @@ public class CountryPresenterModule {
 
     @Provides
     @Singleton
-    CountryView provideView() {
+    public CountryView provideView() {
         return view;
     }
 }

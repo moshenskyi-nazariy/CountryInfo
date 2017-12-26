@@ -31,8 +31,7 @@ public class CountryFragment extends Fragment implements CountryView {
     private CountryAdapter countryAdapter;
     private LinearLayoutManager layoutManager;
 
-    @Inject
-    protected CountryPresenter presenter;
+    @Inject CountryPresenter presenter;
 
     public CountryFragment() {
         // Required empty public constructor
@@ -52,8 +51,8 @@ public class CountryFragment extends Fragment implements CountryView {
         layoutManager = new LinearLayoutManager(getContext());
         DaggerCountryComponent.builder()
                 .countryPresenterModule(new CountryPresenterModule(this))
-                .build();
-
+                .build()
+                .inject(this);
     }
 
     private void initList(View rootView) {
