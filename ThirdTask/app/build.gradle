@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.example.nazarii_moshenskyi.thirdtask"
+        applicationId "com.example.nazarii_moshenskyi.cityinfo"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1

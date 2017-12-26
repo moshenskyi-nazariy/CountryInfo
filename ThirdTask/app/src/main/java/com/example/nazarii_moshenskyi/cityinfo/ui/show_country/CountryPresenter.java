@@ -1,33 +1,37 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.api.ApiFactory;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryService;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryRepository;
-import com.example.nazarii_moshenskyi.cityinfo.ui.BaseView;
 
 import java.util.List;
 
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class CountryPresenter {
-    private BaseView<List<Country>> view;
+    private CountryView view;
     private CountryRepository repository;
+    private CountryService service;
 
-    public CountryPresenter(BaseView<List<Country>> view, CountryRepository repository) {
+    public CountryPresenter(CountryView view) {
         this.view = view;
-        this.repository = repository;
+        service = ApiFactory.getCountryService();
+        repository = new CountryRepository(service);
     }
 
     public void getCountries() {
-        Observable<List<Country>> countries = repository.getCountries().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-        countries.subscribe(new Consumer<List<Country>>() {
-            @Override
-            public void accept(List<Country> countries) throws Exception {
-                view.onLoad(countries);
-            }
-        });
+        repository.getCountries().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<Country>>() {
+                    @Override
+                    public void accept(List<Country> countries) throws Exception {
+                        view.onLoad(countries);
+                    }
+                });
+
+
     }
 }

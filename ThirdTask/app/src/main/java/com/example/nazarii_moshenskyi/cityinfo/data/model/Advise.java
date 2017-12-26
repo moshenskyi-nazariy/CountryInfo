@@ -1,4 +1,3 @@
-
 package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
 import com.google.gson.annotations.Expose;
@@ -6,27 +5,15 @@ import com.google.gson.annotations.SerializedName;
 
 public class Advise {
 
-    @SerializedName("UA")
+    @SerializedName("advise")
     @Expose
-    private UA uA;
-    @SerializedName("CA")
-    @Expose
-    private CA cA;
+    private String advise;
 
-    public UA getUA() {
-        return uA;
+    public String getAdvise() {
+        return advise;
     }
 
-    public void setUA(UA uA) {
-        this.uA = uA;
+    public void setAdvise(String advise) {
+        this.advise = advise;
     }
-
-    public CA getCA() {
-        return cA;
-    }
-
-    public void setCA(CA cA) {
-        this.cA = cA;
-    }
-
 }

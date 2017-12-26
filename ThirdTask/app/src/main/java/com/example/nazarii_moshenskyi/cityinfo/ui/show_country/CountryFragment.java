@@ -2,6 +2,7 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,63 +17,67 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 import java.util.List;
 
 
-public class CountryFragment extends Fragment {
-    private static final String TAG = "CountryFragment";
-    private static final String ARG_PARAM1 = "cityList";
+public class CountryFragment extends Fragment implements CountryView {
+    private static final String ARG_COUNTRY = "cityList";
 
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener listener;
     private RecyclerView countryList;
+    private List<Country> countries;
+
     private CountryAdapter countryAdapter;
+    private LinearLayoutManager layoutManager;
+    private CountryPresenter presenter;
 
     public CountryFragment() {
         // Required empty public constructor
     }
 
-    public static CountryFragment newInstance(List<Country> countries) {
-        CountryFragment fragment = new CountryFragment();
-        Bundle args = new Bundle();
-        //args.putParcelable(ARG_PARAM1, countries);
-        fragment.setArguments(args);
-        return fragment;
+    public static CountryFragment newInstance() {
+        return new CountryFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            //countries = getArguments().getParcelable(ARG_PARAM1);
+        if (savedInstanceState != null) {
+            countries = savedInstanceState.getParcelable(ARG_COUNTRY);
         }
+
+        layoutManager = new LinearLayoutManager(getContext());
+        presenter = new CountryPresenter(this);
+    }
+
+    private void initList(View rootView) {
+        countryList = rootView.findViewById(R.id.country_list);
+        countryList.setItemAnimator(new DefaultItemAnimator());
+        countryList.addItemDecoration(new CountryItemDecorator((int) getResources().
+                getDimension(R.dimen.margins)));
+
+        countryAdapter = new CountryAdapter(this);
+        countryList.setAdapter(countryAdapter);
+        countryList.setLayoutManager(layoutManager);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(ARG_COUNTRY, (Parcelable) countries);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_country, container, false);
-        countryList = view.findViewById(R.id.country_list);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
-
-        //countryAdapter = new CountryAdapter(countries.getCountries());
-        countryList.setAdapter(countryAdapter);
-        countryList.setLayoutManager(layoutManager);
-        countryList.setItemAnimator(new DefaultItemAnimator());
-        countryList.addItemDecoration(new CountryItemDecorator((int) view.getResources().getDimension(R.dimen.margins)));
-
-        return view;
-    }
-
-    public void onItemClicked(int position) {
-        if (mListener != null) {
-            mListener.onCountryClicked(position);
-        }
+        View rootView = inflater.inflate(R.layout.fragment_country, container, false);
+        initList(rootView);
+        presenter.getCountries();
+        return rootView;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+            listener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -82,10 +87,22 @@ public class CountryFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        listener = null;
+    }
+
+    @Override
+    public void onLoad(List<Country> items) {
+        countryAdapter.update(items);
+    }
+
+    @Override
+    public void onClick(Country country) {
+        if (listener != null) {
+            listener.onCountryClicked(country);
+        }
     }
 
     public interface OnFragmentInteractionListener {
-        void onCountryClicked(int position);
+        void onCountryClicked(Country country);
     }
 }

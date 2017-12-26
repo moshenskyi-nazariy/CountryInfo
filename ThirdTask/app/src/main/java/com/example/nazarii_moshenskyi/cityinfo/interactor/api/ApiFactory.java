@@ -1,12 +1,14 @@
 package com.example.nazarii_moshenskyi.cityinfo.interactor.api;
 
 import com.example.nazarii_moshenskyi.cityinfo.BuildConfig;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Advise;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Month;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Vaccine;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Weather;
+import com.example.nazarii_moshenskyi.cityinfo.util.AdviseDeserializer;
 import com.example.nazarii_moshenskyi.cityinfo.util.MonthDeserializer;
 import com.example.nazarii_moshenskyi.cityinfo.util.VaccineDeserializer;
 import com.example.nazarii_moshenskyi.cityinfo.util.WeatherDeserializer;
-import com.example.nazarii_moshenskyi.cityinfo.data.model.Month;
-import com.example.nazarii_moshenskyi.cityinfo.data.model.Weather;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -42,7 +44,8 @@ public class ApiFactory {
     }
 
     private static Gson getGson() {
-        return new GsonBuilder().registerTypeAdapter(Weather.class, new WeatherDeserializer())
+        return new GsonBuilder().registerTypeAdapter(Advise.class, new AdviseDeserializer())
+                .registerTypeAdapter(Weather.class, new WeatherDeserializer())
                 .registerTypeAdapter(Month.class, new MonthDeserializer())
                 .registerTypeAdapter(Vaccine.class, new VaccineDeserializer())
                 .create();
