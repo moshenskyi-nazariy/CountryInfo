@@ -7,6 +7,8 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Electricity;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryInfoRepository;
 import com.example.nazarii_moshenskyi.cityinfo.ui.model.InfoModel;
 
+import java.util.List;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -61,13 +63,13 @@ public class CountryInfoPresenter {
     private String getSockets(CountryInfo countryInfo) {
         StringBuilder socketsData = new StringBuilder();
         Electricity electricityData = countryInfo.getElectricity();
+        List<String> plugs = electricityData.getPlugs();
 
         socketsData.append("Country uses ").append(electricityData.getVoltage())
-                .append(" V and ").append(" Hz with plugs: ");
+                .append(" V and ").append(electricityData.getFrequency())
+                .append(" Hz with plugs: ").append(plugs.get(0))
+                .append(" and ").append(plugs.get(1));
 
-        for (String plug : electricityData.getPlugs()) {
-            socketsData.append(plug).append(" ");
-        }
         return socketsData.toString();
     }
 }
