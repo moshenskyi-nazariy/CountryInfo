@@ -19,6 +19,7 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 public class CountryFragment extends Fragment implements CountryView {
     private static final String ARG_COUNTRY = "cityList";
@@ -31,6 +32,7 @@ public class CountryFragment extends Fragment implements CountryView {
     private LinearLayoutManager layoutManager;
 
     @Inject
+    @Named("CountryService")
     public CountryPresenter presenter;
 
     public CountryFragment() {

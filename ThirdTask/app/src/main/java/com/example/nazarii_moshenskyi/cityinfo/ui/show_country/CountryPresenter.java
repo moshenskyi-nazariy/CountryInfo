@@ -12,11 +12,8 @@ import io.reactivex.schedulers.Schedulers;
 public class CountryPresenter {
     private final CountryRepository repository;
     private CountryView view;
-    //private CountryService service;
-
 
     public CountryPresenter(CountryRepository repository) {
-        //service = ApiFactory.getCountryService();
         this.repository = repository;
     }
 
@@ -33,8 +30,6 @@ public class CountryPresenter {
                         view.onLoad(countries);
                     }
                 });
-
-
     }
 
     public void detachView() {

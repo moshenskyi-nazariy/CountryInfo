@@ -5,6 +5,7 @@ import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryService;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryInfoRepository;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryRepository;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -25,9 +26,19 @@ public class NetModule {
         return new CountryInfoRepository(service);
     }
 
-    @Singleton
     @Provides
-    public CountryService provideService() {
+    @Singleton
+    @Named("InfoService")
+    public CountryService provideInfoService() {
+        return ApiFactory.getCountryInfoService();
+    }
+
+    @Provides
+    @Singleton
+    @Named("CountryService")
+    public CountryService provideCountryService() {
         return ApiFactory.getCountryService();
     }
+
+
 }

@@ -1,5 +1,7 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info;
 
+import android.util.Log;
+
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Electricity;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryInfoRepository;
@@ -11,7 +13,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class CountryInfoPresenter {
     private CountryInfoView view;
-    private CountryInfoRepository repository;
+    private final CountryInfoRepository repository;
+    private static final String TAG = "CountryInfoPresenter";
 
     public CountryInfoPresenter(CountryInfoRepository repository) {
         this.repository = repository;
@@ -35,6 +38,11 @@ public class CountryInfoPresenter {
                     public void accept(CountryInfo countryInfo) throws Exception {
                         InfoModel infoModel = createModel(countryInfo);
                         view.onLoad(infoModel);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d(TAG, "accept: " + throwable);
                     }
                 });
     }

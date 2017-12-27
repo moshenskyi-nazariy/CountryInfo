@@ -17,6 +17,7 @@ import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.ui.model.InfoModel;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 public class CountryDetailFragment extends Fragment implements CountryInfoView, View.OnClickListener {
 
@@ -37,6 +38,7 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
     private VaccineAdapter vaccineAdapter;
 
     @Inject
+    @Named("InfoService")
     public CountryInfoPresenter presenter;
 
     private String countryName;
