@@ -9,4 +9,5 @@
     <string name="advises_title">Advises</string>
     <string name="currency_title">Currency</string>
     <string name="city_fragment_stub">Please, select country.</string>
+    <string name="search_title">Search</string>
 </resources>

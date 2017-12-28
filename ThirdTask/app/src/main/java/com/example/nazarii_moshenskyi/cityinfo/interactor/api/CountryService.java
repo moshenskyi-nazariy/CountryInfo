@@ -11,7 +11,7 @@ import retrofit2.http.Path;
 
 public interface CountryService {
 
-    @GET("countries/")
+    @GET("countries.json")
     Observable<List<Country>> getCountries();
 
     @GET("{country}?format=json")

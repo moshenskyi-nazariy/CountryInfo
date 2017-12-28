@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.example.nazarii_moshenskyi.cityinfo.R;
 
@@ -16,6 +17,8 @@ public class CountryDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_country_detail);
+        Toolbar toolbar = findViewById(R.id.app_toolbar);
+        setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
             Intent intent = getIntent();
@@ -28,6 +31,10 @@ public class CountryDetailActivity extends AppCompatActivity {
                     .add(R.id.details_fragment_container, fragment)
                     .commit();
 
+        }
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(coutryName);
         }
     }
 }

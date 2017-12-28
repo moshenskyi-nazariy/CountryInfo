@@ -8,23 +8,12 @@ import com.google.gson.annotations.SerializedName;
 
 public class Country implements Parcelable {
 
-    @SerializedName("alpha2Code")
-    @Expose
-    private String alpha2Code;
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("nameSanitized")
+    @SerializedName("url")
     @Expose
-    private String nameSanitized;
-
-    public String getAlpha2Code() {
-        return alpha2Code;
-    }
-
-    public void setAlpha2Code(String alpha2Code) {
-        this.alpha2Code = alpha2Code;
-    }
+    private String url;
 
     public String getName() {
         return name;
@@ -34,12 +23,12 @@ public class Country implements Parcelable {
         this.name = name;
     }
 
-    public String getNameSanitized() {
-        return nameSanitized;
+    public String getUrl() {
+        return url;
     }
 
-    public void setNameSanitized(String nameSanitized) {
-        this.nameSanitized = nameSanitized;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override

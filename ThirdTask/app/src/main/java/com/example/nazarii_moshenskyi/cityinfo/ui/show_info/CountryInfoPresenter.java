@@ -1,8 +1,10 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Currency;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Electricity;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryInfoRepository;
 import com.example.nazarii_moshenskyi.cityinfo.ui.model.InfoModel;
@@ -51,7 +53,9 @@ public class CountryInfoPresenter {
 
     private InfoModel createModel(CountryInfo countryInfo) {
         InfoModel infoModel = new InfoModel();
-        infoModel.setCurrency(countryInfo.getCurrency().getCode());
+        Currency currency = countryInfo.getCurrency();
+
+        infoModel.setCurrency(currency.getRate() + " " + currency.getCode()  + " = " + "1 USD");
         infoModel.setVaccinations(countryInfo.getVaccinations());
         infoModel.setAdvise(countryInfo.getAdvise().getAdvise());
         infoModel.setLanguages(countryInfo.getLanguage());
@@ -60,6 +64,7 @@ public class CountryInfoPresenter {
         return infoModel;
     }
 
+    @NonNull
     private String getSockets(CountryInfo countryInfo) {
         StringBuilder socketsData = new StringBuilder();
         Electricity electricityData = countryInfo.getElectricity();

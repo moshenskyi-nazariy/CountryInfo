@@ -15,13 +15,13 @@ public class NetModule {
 
     @Singleton
     @Provides
-    public CountryRepository provideCountryRepository(@Named("CountryService")CountryService service) {
+    CountryRepository provideCountryRepository(@Named("CountryService") CountryService service) {
         return new CountryRepository(service);
     }
 
     @Singleton
     @Provides
-    public CountryInfoRepository provideCountryInfoRepository(@Named("InfoService") CountryService service) {
+    CountryInfoRepository provideCountryInfoRepository(@Named("InfoService") CountryService service) {
         return new CountryInfoRepository(service);
     }
 

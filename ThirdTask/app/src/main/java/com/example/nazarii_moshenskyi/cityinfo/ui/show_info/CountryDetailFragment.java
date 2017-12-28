@@ -24,7 +24,6 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
 
     private boolean isOld = false;
     private SparseArray<Object> associatedMap;
-    private TextView nameItem;
     private TextView adviseItem;
     private RecyclerView vaccinationItem;
     private RecyclerView languagesItem;
@@ -92,7 +91,6 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
         initImages(view);
         initDataRepresentation(view);
         associateIds();
-        nameItem.setText(countryName);
         presenter.getInfo(countryName);
 
         return view;
@@ -115,7 +113,6 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
     }
 
     private void initDataRepresentation(View rootView) {
-        nameItem = rootView.findViewById(R.id.name_item);
         adviseItem = rootView.findViewById(R.id.advises_item);
         socketsItem = rootView.findViewById(R.id.sockets_item);
         currencyItem = rootView.findViewById(R.id.currency_item);

@@ -3,7 +3,9 @@ package com.example.nazarii_moshenskyi.cityinfo.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.widget.FrameLayout;
 
 import com.example.nazarii_moshenskyi.cityinfo.R;
@@ -18,18 +20,20 @@ import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_EXTRA;
 public class MainActivity extends AppCompatActivity implements CountryFragment.OnFragmentInteractionListener {
     private static final String TAG = "MainActivity";
     private FrameLayout detailFrame;
-    private CountryFragment masterFragment;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.include);
+        setSupportActionBar(toolbar);
+
         checkLayout();
 
         showCountries();
     }
 
     private void showCountries() {
-        masterFragment = CountryFragment.newInstance();
+        CountryFragment masterFragment = CountryFragment.newInstance();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.country_name_container, masterFragment)
@@ -63,5 +67,11 @@ public class MainActivity extends AppCompatActivity implements CountryFragment.O
             intent.putExtra(COUNTRY_EXTRA, country.getName());
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 }
