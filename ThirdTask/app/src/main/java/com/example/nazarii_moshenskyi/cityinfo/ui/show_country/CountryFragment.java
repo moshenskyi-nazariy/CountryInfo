@@ -3,7 +3,6 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,7 +24,6 @@ public class CountryFragment extends Fragment implements CountryView {
 
     private OnFragmentInteractionListener listener;
     private RecyclerView countryList;
-    private List<Country> countries;
 
     private CountryAdapter countryAdapter;
     private LinearLayoutManager layoutManager;
@@ -50,10 +48,6 @@ public class CountryFragment extends Fragment implements CountryView {
         }
         ((CountryInfoApplication) application).getCountryComponent().inject(this);
 
-        if (savedInstanceState != null) {
-            countries = savedInstanceState.getParcelable(ARG_COUNTRY);
-        }
-
         layoutManager = new LinearLayoutManager(getContext());
         presenter.attachView(this);
     }
@@ -67,12 +61,6 @@ public class CountryFragment extends Fragment implements CountryView {
         countryAdapter = new CountryAdapter(this);
         countryList.setAdapter(countryAdapter);
         countryList.setLayoutManager(layoutManager);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable(ARG_COUNTRY, (Parcelable) countries);
     }
 
     @Override
