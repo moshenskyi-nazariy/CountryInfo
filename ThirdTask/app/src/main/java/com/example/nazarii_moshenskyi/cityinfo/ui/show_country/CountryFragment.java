@@ -20,8 +20,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class CountryFragment extends Fragment implements CountryView {
-    private static final String ARG_COUNTRY = "cityList";
-
     private OnFragmentInteractionListener listener;
     private RecyclerView countryList;
 
@@ -68,7 +66,7 @@ public class CountryFragment extends Fragment implements CountryView {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_country, container, false);
         initList(rootView);
-        presenter.getCountries();
+        presenter.start();
         return rootView;
     }
 
@@ -97,9 +95,7 @@ public class CountryFragment extends Fragment implements CountryView {
 
     @Override
     public void onClick(Country country) {
-        if (listener != null) {
-            listener.onCountryClicked(country);
-        }
+        presenter.onClick(country, listener);
     }
 
     public interface OnFragmentInteractionListener {

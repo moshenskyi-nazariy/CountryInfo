@@ -22,7 +22,15 @@ public class CountryPresenterImpl implements CountryPresenter {
         this.view = view;
     }
 
-    public void getCountries() {
+    @Override
+    public void detachView() {
+        if (view != null) {
+            view = null;
+        }
+    }
+
+    @Override
+    public void start() {
         repository.getCountries().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Country>>() {
@@ -34,9 +42,9 @@ public class CountryPresenterImpl implements CountryPresenter {
     }
 
     @Override
-    public void detachView() {
-        if (view != null) {
-            view = null;
+    public void onClick(Country country, CountryFragment.OnFragmentInteractionListener listener) {
+        if (listener != null) {
+            listener.onCountryClicked(country);
         }
     }
 }

@@ -3,7 +3,7 @@ package com.example.nazarii_moshenskyi.cityinfo.dependecies;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryInfoRepository;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryRepository;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.CountryPresenterImpl;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.CountryInfoPresenter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.CountryInfoPresenterImpl;
 
 import javax.inject.Singleton;
 
@@ -21,7 +21,7 @@ public class PresentersModule {
 
     @Provides
     @Singleton
-    public CountryInfoPresenter provideCountryInfoPresenter(CountryInfoRepository repository) {
-        return new CountryInfoPresenter(repository);
+    public CountryInfoPresenterImpl provideCountryInfoPresenter(CountryInfoRepository repository) {
+        return new CountryInfoPresenterImpl(repository);
     }
 }

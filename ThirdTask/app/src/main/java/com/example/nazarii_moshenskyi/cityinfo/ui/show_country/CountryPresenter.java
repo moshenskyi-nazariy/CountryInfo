@@ -1,9 +1,10 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 
-public interface CountryPresenter {
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
+import com.example.nazarii_moshenskyi.cityinfo.ui.BasePresenter;
 
-    void attachView(CountryView view);
+public interface CountryPresenter extends BasePresenter<CountryView> {
 
-    void detachView();
+    void onClick(Country country, CountryFragment.OnFragmentInteractionListener listener);
 
 }
