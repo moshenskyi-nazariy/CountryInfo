@@ -31,7 +31,7 @@ public class CountryFragment extends Fragment implements CountryView {
     private LinearLayoutManager layoutManager;
 
     @Inject
-    public CountryPresenter presenter;
+    public CountryPresenterImpl presenter;
 
     public CountryFragment() {
         // Required empty public constructor
