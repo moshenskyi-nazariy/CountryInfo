@@ -15,13 +15,13 @@ public class PresentersModule {
 
     @Provides
     @Singleton
-    CountryPresenter provideCountryPresenter(CountryRepository repository) {
-        return new CountryPresenter(repository);
+    public CountryPresenterImpl provideCountryPresenter(CountryRepository repository) {
+        return new CountryPresenterImpl(repository);
     }
 
     @Provides
     @Singleton
-    CountryInfoPresenter provideCountryInfoPresenter(CountryInfoRepository repository) {
-        return new CountryInfoPresenter(repository);
+    public CountryInfoPresenterImpl provideCountryInfoPresenter(CountryInfoRepository repository) {
+        return new CountryInfoPresenterImpl(repository);
     }
 }

@@ -36,7 +36,7 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
     private VaccineAdapter vaccineAdapter;
 
     @Inject
-    public CountryInfoPresenter presenter;
+    public CountryInfoPresenterImpl presenter;
 
     private String countryName;
 

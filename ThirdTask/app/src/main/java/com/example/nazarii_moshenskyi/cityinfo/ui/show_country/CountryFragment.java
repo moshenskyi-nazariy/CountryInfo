@@ -3,7 +3,6 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,17 +20,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class CountryFragment extends Fragment implements CountryView {
-    private static final String ARG_COUNTRY = "cityList";
-
     private OnFragmentInteractionListener listener;
     private RecyclerView countryList;
-    private List<Country> countries;
 
     private CountryAdapter countryAdapter;
     private LinearLayoutManager layoutManager;
 
     @Inject
-    public CountryPresenter presenter;
+    public CountryPresenterImpl presenter;
 
     public CountryFragment() {
         // Required empty public constructor
@@ -50,10 +46,6 @@ public class CountryFragment extends Fragment implements CountryView {
         }
         ((CountryInfoApplication) application).getCountryComponent().inject(this);
 
-        if (savedInstanceState != null) {
-            countries = savedInstanceState.getParcelable(ARG_COUNTRY);
-        }
-
         layoutManager = new LinearLayoutManager(getContext());
         presenter.attachView(this);
     }
@@ -70,17 +62,11 @@ public class CountryFragment extends Fragment implements CountryView {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable(ARG_COUNTRY, (Parcelable) countries);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_country, container, false);
         initList(rootView);
-        presenter.getCountries();
+        presenter.start();
         return rootView;
     }
 
@@ -109,9 +95,7 @@ public class CountryFragment extends Fragment implements CountryView {
 
     @Override
     public void onClick(Country country) {
-        if (listener != null) {
-            listener.onCountryClicked(country);
-        }
+        presenter.onClick(country, listener);
     }
 
     public interface OnFragmentInteractionListener {
