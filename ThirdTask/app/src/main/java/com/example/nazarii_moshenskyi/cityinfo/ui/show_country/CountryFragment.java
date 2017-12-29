@@ -28,6 +28,7 @@ public class CountryFragment extends Fragment implements CountryView {
 
     @Inject
     public CountryPresenter presenter;
+    private List<Country> items;
 
     public CountryFragment() {
         // Required empty public constructor
@@ -88,9 +89,19 @@ public class CountryFragment extends Fragment implements CountryView {
         presenter.detachView();
     }
 
+    public void onTextChanged(String intput) {
+        presenter.updateItems(intput, countryAdapter);
+    }
+
+    @Override
+    public List<Country> getItems() {
+        return items;
+    }
+
     @Override
     public void onLoad(List<Country> items) {
         countryAdapter.update(items);
+        this.items = items;
     }
 
     @Override

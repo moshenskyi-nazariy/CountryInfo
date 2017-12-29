@@ -25,8 +25,6 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
     private boolean isOld = false;
     private SparseArray<Object> associatedMap;
     private TextView adviseItem;
-    private RecyclerView vaccinationItem;
-    private RecyclerView languagesItem;
     private TextView currencyItem;
     private TextView socketsItem;
     private LinearLayoutManager layoutManagerLanguages;
@@ -116,8 +114,8 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
         adviseItem = rootView.findViewById(R.id.advises_item);
         socketsItem = rootView.findViewById(R.id.sockets_item);
         currencyItem = rootView.findViewById(R.id.currency_item);
-        vaccinationItem = rootView.findViewById(R.id.list_vaccinations);
-        languagesItem = rootView.findViewById(R.id.list_languages);
+        RecyclerView vaccinationItem = rootView.findViewById(R.id.list_vaccinations);
+        RecyclerView languagesItem = rootView.findViewById(R.id.list_languages);
 
         languagesItem.setAdapter(languageAdapter);
         languagesItem.setLayoutManager(layoutManagerLanguages);

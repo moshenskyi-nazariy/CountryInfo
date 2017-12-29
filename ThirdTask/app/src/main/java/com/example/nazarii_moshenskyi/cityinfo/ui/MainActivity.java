@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.nazarii_moshenskyi.cityinfo.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.R;
@@ -23,6 +25,7 @@ import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_EXTRA;
 
 public class MainActivity extends AppCompatActivity implements MainView, CountryFragment.OnFragmentInteractionListener {
     private static final String TAG = "MainActivity";
+    private CountryFragment masterFragment;
 
     @Inject
     MainPresenter presenter;
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements MainView, Country
     }
 
     private void showCountries() {
-        CountryFragment masterFragment = CountryFragment.newInstance();
+        masterFragment = CountryFragment.newInstance();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.country_name_container, masterFragment)
@@ -100,6 +103,22 @@ public class MainActivity extends AppCompatActivity implements MainView, Country
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                masterFragment.onTextChanged(newText);
+                return true;
+            }
+        });
+
         return true;
     }
 }

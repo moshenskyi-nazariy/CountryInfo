@@ -15,7 +15,6 @@ public class MainPresenterImpl implements MainPresenter {
         this.view = view;
     }
 
-
     @Override
     public void detachView() {
         if (view != null) {

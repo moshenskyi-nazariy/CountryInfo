@@ -2,6 +2,7 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryRepository;
+import com.example.nazarii_moshenskyi.cityinfo.util.Filter;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import io.reactivex.schedulers.Schedulers;
 public class CountryPresenterImpl implements CountryPresenter {
     private final CountryRepository repository;
     private CountryView view;
+    private Filter itemFilter;
 
     public CountryPresenterImpl(CountryRepository repository) {
         this.repository = repository;
@@ -46,5 +48,13 @@ public class CountryPresenterImpl implements CountryPresenter {
         if (listener != null) {
             listener.onCountryClicked(country);
         }
+    }
+
+    @Override
+    public void updateItems(String input, CountryAdapter adapter) {
+        if (itemFilter == null) {
+            itemFilter = new Filter(view.getItems());
+        }
+        adapter.update(itemFilter.filter(input));
     }
 }

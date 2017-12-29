@@ -10,4 +10,7 @@ public interface CountryView {
 
     void onClick(Country country);
 
+    void  onTextChanged(String text);
+
+    List<Country> getItems();
 }
