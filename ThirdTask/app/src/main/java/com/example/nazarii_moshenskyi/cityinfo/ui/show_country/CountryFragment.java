@@ -89,8 +89,8 @@ public class CountryFragment extends Fragment implements CountryView {
         presenter.detachView();
     }
 
-    public void onTextChanged(String intput) {
-        presenter.updateItems(intput, countryAdapter);
+    public void onTextChanged(String input) {
+        presenter.updateItems(input, countryAdapter);
     }
 
     @Override
