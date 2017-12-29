@@ -34,10 +34,6 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             this.countries = countries;
             notifyDataSetChanged();
         }
-
-        if (fullList == null) {
-            fullList = new ArrayList<>(countries);
-        }
     }
 
     @Override
