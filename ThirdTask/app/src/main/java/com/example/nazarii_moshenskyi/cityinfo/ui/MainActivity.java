@@ -1,5 +1,6 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui;
 
+import android.app.Application;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -7,8 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.FrameLayout;
 
+import com.example.nazarii_moshenskyi.cityinfo.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.CountryFragment;
@@ -16,17 +17,26 @@ import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.CountryDetailActivit
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.CountryDetailFragment;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.StubFragment;
 
+import javax.inject.Inject;
+
 import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_EXTRA;
 
 public class MainActivity extends AppCompatActivity implements MainView, CountryFragment.OnFragmentInteractionListener {
     private static final String TAG = "MainActivity";
-    private FrameLayout detailFrame;
-    private CountryFragment masterFragment;
-    private MainPresenter presenter;
+
+    @Inject
+    MainPresenter presenter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Application application = getApplication();
+        if (application == null) {
+            return;
+        }
+        ((CountryInfoApplication) application).getCountryComponent().inject(this);
+
         Toolbar toolbar = findViewById(R.id.include);
         setSupportActionBar(toolbar);
 
