@@ -7,9 +7,6 @@ public class MainPresenterImpl implements MainPresenter {
     private MainView view;
     private boolean isTwoPane;
 
-    // Configuration.SIZE_LARGE
-    private static final int TABLET_SIZE = 3;
-
     @Override
     public void attachView(MainView view) {
         this.view = view;
@@ -24,8 +21,8 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void start() {
-        if (view.getSize() >= TABLET_SIZE) {
-            isTwoPane = true;
+        isTwoPane =  view.isLandscape() && view.isTablet();
+        if (isTwoPane) {
             view.setDetailFragment();
         }
     }

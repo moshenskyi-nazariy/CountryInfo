@@ -127,7 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="@dimen/guidline2_begin" />
+            app:layout_constraintGuide_percent="0.05" />
 
         <TextView
             android:id="@+id/currency_title_text"
@@ -154,10 +154,12 @@
             android:layout_width="@dimen/sockets_title_text_width"
             android:layout_height="@dimen/sockets_title_text_height"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="@dimen/margins"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:text="@string/sockets_title"
             android:textSize="@dimen/info_item_text"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/currency_item" />
 

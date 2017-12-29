@@ -22,7 +22,6 @@ public class CountryInfoPresenterImpl implements CountryInfoPresenter {
         this.repository = repository;
     }
 
-
     public void attachView(CountryInfoView view) {
         this.view = view;
     }

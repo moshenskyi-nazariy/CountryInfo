@@ -15,7 +15,6 @@ import java.util.List;
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
     private final CountryView listener;
     private List<Country> countries;
-    private List<Country> fullList;
 
     public CountryAdapter(CountryView listener) {
         this.listener = listener;

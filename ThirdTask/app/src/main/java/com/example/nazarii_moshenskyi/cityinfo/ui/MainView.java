@@ -5,12 +5,14 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 
 public interface MainView {
 
-    int getSize();
+    boolean isTablet();
 
     void setDetailFragment();
 
     void replaceDetailFragment(Country country);
 
     void startDetailActivity(Country country);
+
+    boolean isLandscape();
 
 }

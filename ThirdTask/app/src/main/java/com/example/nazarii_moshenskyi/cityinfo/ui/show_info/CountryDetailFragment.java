@@ -68,8 +68,6 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
 
         languageAdapter = new LanguageAdapter();
         vaccineAdapter = new VaccineAdapter();
-
-        presenter.attachView(this);
     }
 
     @Override
@@ -89,6 +87,7 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
         initImages(view);
         initDataRepresentation(view);
         associateIds();
+        presenter.attachView(this);
         presenter.getInfo(countryName);
 
         return view;
