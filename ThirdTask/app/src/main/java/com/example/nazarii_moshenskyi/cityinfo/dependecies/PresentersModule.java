@@ -1,7 +1,6 @@
 package com.example.nazarii_moshenskyi.cityinfo.dependecies;
 
-import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryInfoRepository;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryRepository;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.WebService;
 import com.example.nazarii_moshenskyi.cityinfo.ui.MainPresenter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.MainPresenterImpl;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.CountryPresenter;
@@ -19,14 +18,14 @@ public class PresentersModule {
 
     @Provides
     @Singleton
-    public CountryPresenter provideCountryPresenter(CountryRepository repository) {
-        return new CountryPresenterImpl(repository);
+    public CountryPresenter provideCountryPresenter(WebService service) {
+        return new CountryPresenterImpl(service);
     }
 
     @Provides
     @Singleton
-    public CountryInfoPresenter provideCountryInfoPresenter(CountryInfoRepository repository) {
-        return new CountryInfoPresenterImpl(repository);
+    public CountryInfoPresenter provideCountryInfoPresenter(WebService service) {
+        return new CountryInfoPresenterImpl(service);
     }
 
     @Provides

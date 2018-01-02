@@ -2,7 +2,7 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model;
 
 import android.support.v7.widget.RecyclerView;
 
-public class TimezoneInfo implements RowType {
+public class TimezoneInfo extends BaseRowType {
 
     private String name;
 
@@ -23,6 +23,6 @@ public class TimezoneInfo implements RowType {
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder) {
         ViewHolderFactory.TextViewHolder textViewHolder = (ViewHolderFactory.TextViewHolder) viewHolder;
         textViewHolder.setTitleText("Timezone");
-        textViewHolder.setDescriprionText(name);
+        textViewHolder.setDescriprionText(checkNotNull(name));
     }
 }

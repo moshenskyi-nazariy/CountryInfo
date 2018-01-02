@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
-public class ElectricityInfo implements RowType {
+public class ElectricityInfo extends BaseRowType {
     private String voltage;
     private String frequency;
     private List<String> plugs = null;
@@ -40,10 +40,6 @@ public class ElectricityInfo implements RowType {
         }
         builder.deleteCharAt(builder.length() - 1);
         data = builder.toString();
-    }
-
-    private String checkNotNull(String toCheck) {
-        return toCheck == null ? "-" : toCheck;
     }
 
     @Override

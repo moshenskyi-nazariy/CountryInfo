@@ -8,4 +8,6 @@ public interface CountryInfoView {
 
     void onLoad(List<RowType> infoModel);
 
+    void setBackground(String flagUrl);
+
 }

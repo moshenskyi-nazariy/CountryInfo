@@ -2,7 +2,7 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model;
 
 import android.support.v7.widget.RecyclerView;
 
-public class WaterInfo implements RowType {
+public class WaterInfo extends BaseRowType {
 
     private String shortInfo;
 
@@ -23,6 +23,6 @@ public class WaterInfo implements RowType {
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder) {
         ViewHolderFactory.TextViewHolder textViewHolder = (ViewHolderFactory.TextViewHolder) viewHolder;
         textViewHolder.setTitleText("Water rate");
-        textViewHolder.setDescriprionText(shortInfo);
+        textViewHolder.setDescriprionText(checkNotNull(shortInfo));
     }
 }

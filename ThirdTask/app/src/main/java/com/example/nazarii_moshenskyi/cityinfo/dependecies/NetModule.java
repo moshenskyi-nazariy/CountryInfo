@@ -1,10 +1,11 @@
 package com.example.nazarii_moshenskyi.cityinfo.dependecies;
 
+import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryAnalyticsService;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryInfoService;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryService;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryInfoRepository;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryRepository;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.WebService;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.WebServiceImpl;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -15,14 +16,11 @@ public class NetModule {
 
     @Singleton
     @Provides
-    CountryRepository provideCountryRepository(@Named("CountryService") CountryService service) {
-        return new CountryRepository(service);
-    }
+    WebService provideWebService(CountryService countryService,
+                                 CountryInfoService countryInfoService,
+                                 CountryAnalyticsService countryAnaliticsService) {
 
-    @Singleton
-    @Provides
-    CountryInfoRepository provideCountryInfoRepository(@Named("InfoService") CountryService service) {
-        return new CountryInfoRepository(service);
+        return new WebServiceImpl(countryInfoService, countryService, countryAnaliticsService);
     }
 
 }

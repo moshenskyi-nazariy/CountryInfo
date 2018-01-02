@@ -7,7 +7,7 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Currency;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Electricity;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Timezone;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Water;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryInfoRepository;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.WebService;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.UiModelMapper;
 
@@ -20,11 +20,11 @@ import io.reactivex.schedulers.Schedulers;
 
 public class CountryInfoPresenterImpl implements CountryInfoPresenter {
     private CountryInfoView view;
-    private final CountryInfoRepository repository;
+    private final WebService repository;
     private List<RowType> infoModel;
     private static final String TAG = "CountryInfoPresenter";
 
-    public CountryInfoPresenterImpl(CountryInfoRepository repository) {
+    public CountryInfoPresenterImpl(WebService repository) {
         this.repository = repository;
         infoModel = new ArrayList<>();
     }
@@ -47,7 +47,8 @@ public class CountryInfoPresenterImpl implements CountryInfoPresenter {
     }
 
     public void getInfo(String countryName) {
-        repository.getInfo(countryName).subscribeOn(Schedulers.io())
+        repository.getInfo(countryName)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<CountryInfo>() {
                     @Override
@@ -62,6 +63,7 @@ public class CountryInfoPresenterImpl implements CountryInfoPresenter {
                         infoModel.add(UiModelMapper.convertWater(water));
                         infoModel.add(UiModelMapper.convertTimezone(timezone));
 
+                        view.setBackground(countryInfo.getAnalytics().get(0).getFlag());
                         view.onLoad(infoModel);
                     }
                 }, new Consumer<Throwable>() {

@@ -1,7 +1,7 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryRepository;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.WebService;
 import com.example.nazarii_moshenskyi.cityinfo.util.Filter;
 
 import java.util.List;
@@ -11,11 +11,11 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class CountryPresenterImpl implements CountryPresenter {
-    private final CountryRepository repository;
+    private final WebService repository;
     private CountryView view;
     private Filter itemFilter;
 
-    public CountryPresenterImpl(CountryRepository repository) {
+    public CountryPresenterImpl(WebService repository) {
         this.repository = repository;
     }
 

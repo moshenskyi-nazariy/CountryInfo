@@ -2,7 +2,7 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model;
 
 import android.support.v7.widget.RecyclerView;
 
-public class CurrencyInfo implements RowType {
+public class CurrencyInfo extends BaseRowType {
     private String name;
     private String rate;
 
@@ -14,7 +14,6 @@ public class CurrencyInfo implements RowType {
         this.name = name;
     }
 
-
     public String getRate() {
         return rate;
     }
@@ -22,7 +21,6 @@ public class CurrencyInfo implements RowType {
     public void setRate(String rate) {
         this.rate = rate;
     }
-
 
     @Override
     public int getItemViewType() {
@@ -32,7 +30,12 @@ public class CurrencyInfo implements RowType {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder) {
         ViewHolderFactory.TextViewHolder textViewHolder = (ViewHolderFactory.TextViewHolder) viewHolder;
-        textViewHolder.setDescriprionText("1 " + name + " = " + rate + " USD");
         textViewHolder.setTitleText("Currency");
+
+        if (name != null && rate != null) {
+            textViewHolder.setDescriprionText("1 USD = " + rate + " " + name);
+        } else {
+            textViewHolder.setDescriprionText("-");
+        }
     }
 }

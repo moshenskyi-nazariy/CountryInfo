@@ -5,6 +5,8 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Advise;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Month;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Vaccine;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Weather;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryAnalyticsService;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryInfoService;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryService;
 import com.example.nazarii_moshenskyi.cityinfo.util.AdviseDeserializer;
 import com.example.nazarii_moshenskyi.cityinfo.util.MonthDeserializer;
@@ -13,7 +15,6 @@ import com.example.nazarii_moshenskyi.cityinfo.util.WeatherDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -27,7 +28,6 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    @Named("CountryService")
     CountryService provideCountryService() {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.INFO_BASE_URL)
@@ -39,13 +39,22 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    @Named("InfoService")
-    CountryService provideInfoService(Gson gson) {
+    CountryInfoService provideInfoService(Gson gson) {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.INFO_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build().create(CountryService.class);
+                .build().create(CountryInfoService.class);
+    }
+
+    @Provides
+    @Singleton
+    CountryAnalyticsService provideAnalyticsService() {
+        return new Retrofit.Builder()
+                .baseUrl(BuildConfig.ANALYTICS_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build().create(CountryAnalyticsService.class);
     }
 
     @Provides

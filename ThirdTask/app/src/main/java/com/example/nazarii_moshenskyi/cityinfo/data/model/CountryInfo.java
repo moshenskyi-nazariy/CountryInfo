@@ -42,7 +42,17 @@ public class CountryInfo {
     private Advise advise;
     @SerializedName("neighbors")
     @Expose
-    private List<Neighbor> neighbors = null;
+    private List<Neighbor> neighbors;
+
+    private transient List<CountryAnalytics> analytics;
+
+    public List<CountryAnalytics> getAnalytics() {
+        return analytics;
+    }
+
+    public void setAnalytics(List<CountryAnalytics> analytics) {
+        this.analytics = analytics;
+    }
 
     public Names getNames() {
         return names;
@@ -139,5 +149,4 @@ public class CountryInfo {
     public void setNeighbors(List<Neighbor> neighbors) {
         this.neighbors = neighbors;
     }
-
 }
