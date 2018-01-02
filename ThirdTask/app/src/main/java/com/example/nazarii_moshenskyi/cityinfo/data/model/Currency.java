@@ -1,12 +1,15 @@
-
 package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
+import android.support.v7.widget.RecyclerView;
+
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.ViewHolderFactory;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Currency {
+public class Currency implements RowType {
     @SerializedName("name")
     @Expose
     private String name;
@@ -61,5 +64,17 @@ public class Currency {
 
     public void setCompare(List<Compare> compare) {
         this.compare = compare;
+    }
+
+    @Override
+    public int getItemViewType() {
+        return TEXT_ROW_TYPE;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder) {
+        ViewHolderFactory.TextViewHolder textViewHolder = (ViewHolderFactory.TextViewHolder) viewHolder;
+        textViewHolder.setDescriprionText("1 " + name + " = " + rate + " USD");
+        textViewHolder.setTitleText("Currency");
     }
 }

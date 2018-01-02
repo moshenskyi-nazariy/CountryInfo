@@ -10,4 +10,7 @@
     <string name="currency_title">Currency</string>
     <string name="city_fragment_stub">Please, select country.</string>
     <string name="search_title">Search</string>
+    <string name="population">Population</string>
+    <string name="area">Area(sq.m.)</string>
+    <string name="continent">Continent</string>
 </resources>

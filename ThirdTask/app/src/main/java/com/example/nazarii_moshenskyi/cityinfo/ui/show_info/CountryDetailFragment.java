@@ -9,16 +9,18 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nazarii_moshenskyi.cityinfo.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.R;
-import com.example.nazarii_moshenskyi.cityinfo.ui.model.InfoModel;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.InfoAdapter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
-public class CountryDetailFragment extends Fragment implements CountryInfoView, View.OnClickListener {
+public class CountryDetailFragment extends Fragment implements CountryInfoView {
 
     private static final String COUNTRY_NAME = "country";
 
@@ -32,6 +34,10 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
 
     private LanguageAdapter languageAdapter;
     private VaccineAdapter vaccineAdapter;
+
+    private LinearLayoutManager linearLayoutManager;
+    private InfoAdapter infoAdapter;
+    private RecyclerView infoRecyclerView;
 
     @Inject
     public CountryInfoPresenter presenter;
@@ -66,8 +72,9 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
             countryName = savedInstanceState.getString(COUNTRY_NAME);
         }
 
-        languageAdapter = new LanguageAdapter();
-        vaccineAdapter = new VaccineAdapter();
+        infoAdapter = new InfoAdapter();
+        //languageAdapter = new LanguageAdapter();
+        //vaccineAdapter = new VaccineAdapter();
     }
 
     @Override
@@ -79,14 +86,18 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_country_detail, container, false);
+        View view = inflater.inflate(R.layout.try_info, container, false);
 
-        layoutManagerLanguages = new LinearLayoutManager(view.getContext());
-        layoutManagerVaccines = new LinearLayoutManager(view.getContext());
+        linearLayoutManager = new LinearLayoutManager(view.getContext());
+        infoRecyclerView = view.findViewById(R.id.info_recycler_view);
+        infoRecyclerView.setAdapter(infoAdapter);
+        infoRecyclerView.setLayoutManager(linearLayoutManager);
+        //layoutManagerLanguages = new LinearLayoutManager(view.getContext());
+        //layoutManagerVaccines = new LinearLayoutManager(view.getContext());
 
-        initImages(view);
-        initDataRepresentation(view);
-        associateIds();
+        //initImages(view);
+        //initDataRepresentation(view);
+        //associateIds();
         presenter.attachView(this);
         presenter.getInfo(countryName);
 
@@ -100,16 +111,22 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
     }
 
     @Override
-    public void onLoad(InfoModel infoModel) {
-        adviseItem.setText(infoModel.getAdvise());
+    public void onLoad(List<RowType> infoModel) {
+        infoAdapter.update(infoModel);
+    }
+
+    /*@Override
+    public void onLoad(InfoModel infoModel) {*/
+        /*adviseItem.setText(infoModel.getAdvise());
         currencyItem.setText(infoModel.getCurrency());
         socketsItem.setText(infoModel.getSockets());
 
         languageAdapter.update(infoModel.getLanguages());
         vaccineAdapter.update(infoModel.getVaccinations());
-    }
 
-    private void initDataRepresentation(View rootView) {
+    }*/
+
+    /*private void initDataRepresentation(View rootView) {
         adviseItem = rootView.findViewById(R.id.advises_item);
         socketsItem = rootView.findViewById(R.id.sockets_item);
         currencyItem = rootView.findViewById(R.id.currency_item);
@@ -157,5 +174,5 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
             visibleView.setVisibility(View.VISIBLE);
         }
         isOld = !isOld;
-    }
+    }*/
 }

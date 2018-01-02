@@ -6,7 +6,9 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Electricity;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryInfoRepository;
 import com.example.nazarii_moshenskyi.cityinfo.ui.model.InfoModel;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -16,10 +18,12 @@ import io.reactivex.schedulers.Schedulers;
 public class CountryInfoPresenterImpl implements CountryInfoPresenter {
     private CountryInfoView view;
     private final CountryInfoRepository repository;
+    private List<RowType> infoModel;
     private static final String TAG = "CountryInfoPresenter";
 
     public CountryInfoPresenterImpl(CountryInfoRepository repository) {
         this.repository = repository;
+        infoModel = new ArrayList<>();
     }
 
     public void attachView(CountryInfoView view) {
@@ -41,7 +45,12 @@ public class CountryInfoPresenterImpl implements CountryInfoPresenter {
                 .subscribe(new Consumer<CountryInfo>() {
                     @Override
                     public void accept(CountryInfo countryInfo) throws Exception {
-                        InfoModel infoModel = createModel(countryInfo);
+                        //InfoModel infoModel = createModel(countryInfo);
+                        //view.onLoad(infoModel);
+                        infoModel.add(countryInfo.getElectricity());
+                        infoModel.add(countryInfo.getCurrency());
+                        infoModel.add(countryInfo.getTimezone());
+                        infoModel.add(countryInfo.getWater());
                         view.onLoad(infoModel);
                     }
                 }, new Consumer<Throwable>() {

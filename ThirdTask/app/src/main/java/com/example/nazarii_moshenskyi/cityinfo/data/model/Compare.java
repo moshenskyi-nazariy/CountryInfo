@@ -1,4 +1,3 @@
-
 package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
 import com.google.gson.annotations.Expose;
