@@ -2,6 +2,8 @@ package com.example.nazarii_moshenskyi.cityinfo.dependecies;
 
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryInfoRepository;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryRepository;
+import com.example.nazarii_moshenskyi.cityinfo.ui.MainPresenter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.MainPresenterImpl;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.CountryPresenterImpl;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.CountryInfoPresenterImpl;
 
@@ -23,5 +25,11 @@ public class PresentersModule {
     @Singleton
     public CountryInfoPresenterImpl provideCountryInfoPresenter(CountryInfoRepository repository) {
         return new CountryInfoPresenterImpl(repository);
+    }
+
+    @Provides
+    @Singleton
+    public MainPresenter provideMainPresenter() {
+        return new MainPresenterImpl();
     }
 }
