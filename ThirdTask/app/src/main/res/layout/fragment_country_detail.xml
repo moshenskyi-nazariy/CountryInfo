@@ -1,258 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/flag_content_description"
+        app:layout_constraintBottom_toTopOf="@+id/image_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/colorPrimary" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/image_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.32" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.24" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1015625" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/card_bottom"
+        app:layout_constraintEnd_toStartOf="@id/card_end"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/card_start"
+        app:layout_constraintTop_toBottomOf="@id/card_top"
+        app:layout_constraintVertical_bias="1.0">
+
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/opened_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <android.support.constraint.Guideline
+                android:id="@+id/population_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.33" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/advises_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="@dimen/advises__top_begin"/>
+            <TextView
+                android:id="@+id/population_title"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/population"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/card_middle"
+                app:layout_constraintEnd_toEndOf="@id/population_end"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="156dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margins"
-            android:layout_marginStart="@dimen/margins"
-            android:layout_marginTop="8dp"
-            android:text="@string/advises_title"
-            android:textSize="@dimen/info_item_text"
-            app:layout_constraintBottom_toTopOf="@+id/advises_item"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toTopOf="parent"/>
+            <android.support.constraint.Guideline
+                android:id="@+id/card_middle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.5" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/guidline3_end"/>
+            <TextView
+                android:id="@+id/population"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/population_end"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/card_middle"
+                tools:text="33454" />
 
-        <TextView
-            android:id="@+id/vaccinations_title_text"
-            android:layout_width="@dimen/vaccinations_title_text_width"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margins"
-            android:layout_marginStart="@dimen/margins"
-            android:text="@string/vaccinations_title"
-            android:textSize="@dimen/info_item_text"
-            app:layout_constraintBottom_toTopOf="@+id/list_vaccinations"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/advises_item"/>
+            <TextView
+                android:id="@+id/area_title"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/area"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/card_middle"
+                app:layout_constraintEnd_toStartOf="@id/area_end"
+                app:layout_constraintStart_toStartOf="@+id/population_end"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/languages_title_text"
-            android:layout_width="@dimen/languages_title_text_width"
-            android:layout_height="@dimen/languages_title_text_height"
-            android:layout_marginEnd="@dimen/margins"
-            android:layout_marginStart="@dimen/margins"
-            android:text="@string/languages_title"
-            android:textSize="@dimen/info_item_text"
-            app:layout_constraintBottom_toTopOf="@+id/list_languages"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/list_vaccinations"/>
+            <android.support.constraint.Guideline
+                android:id="@+id/area_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.68" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="@dimen/guidline9_begin"/>
+            <TextView
+                android:id="@+id/area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/area_end"
+                app:layout_constraintStart_toStartOf="@+id/population_end"
+                app:layout_constraintTop_toBottomOf="@+id/area_title"
+                tools:text="354454543" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/guidline10_end"/>
+            <TextView
+                android:id="@+id/continent_title"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/continent"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/card_middle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/area_end"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/guidline12_end"/>
+            <TextView
+                android:id="@+id/continent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@id/card_middle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/area_end"
+                app:layout_constraintTop_toBottomOf="parent"
+                tools:text="EU" />
 
-        <ImageView
-            android:id="@+id/advise_arrow_down"
-            android:layout_width="@dimen/image_view_item_size"
-            android:layout_height="@dimen/image_view_item_size"
-            android:layout_marginEnd="@dimen/margins"
-            android:layout_marginStart="@dimen/margins"
-            android:layout_marginTop="@dimen/margins"
-            app:layout_constraintBottom_toBottomOf="@+id/textView3"
-            app:layout_constraintEnd_toStartOf="@+id/guideline10"
-            app:layout_constraintStart_toStartOf="@+id/guideline12"
-            app:layout_constraintTop_toTopOf="@+id/textView3"
-            app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp"/>
+        </android.support.constraint.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/vaccinations_arrow_down"
-            android:layout_width="@dimen/image_view_item_size"
-            android:layout_height="@dimen/vaccinations_image_height"
-            android:layout_margin="@dimen/margins"
-            app:layout_constraintBottom_toBottomOf="@+id/vaccinations_title_text"
-            app:layout_constraintEnd_toStartOf="@+id/guideline10"
-            app:layout_constraintStart_toStartOf="@+id/guideline12"
-            app:layout_constraintTop_toTopOf="@+id/vaccinations_title_text"
-            app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp"/>
+    </android.support.v7.widget.CardView>
 
-        <ImageView
-            android:id="@+id/languages_arrow_down"
-            android:layout_width="@dimen/image_view_item_size"
-            android:layout_height="@dimen/image_view_item_size"
-            android:layout_margin="@dimen/margins"
-            app:layout_constraintBottom_toBottomOf="@+id/languages_title_text"
-            app:layout_constraintEnd_toStartOf="@+id/guideline10"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline12"
-            app:layout_constraintTop_toTopOf="@+id/languages_title_text"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/info_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/recycler_start"
+        app:layout_constraintTop_toTopOf="@+id/image_bottom" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.05"/>
+    <android.support.constraint.Guideline
+        android:id="@+id/recycler_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.16145833" />
 
-        <TextView
-            android:id="@+id/currency_title_text"
-            android:layout_width="@dimen/currency_title_text_width"
-            android:layout_height="@dimen/currency_title_text_height"
-            android:layout_marginEnd="@dimen/margins"
-            android:layout_marginStart="@dimen/margins"
-            android:text="@string/currency_title"
-            android:textSize="@dimen/info_item_text"
-            app:layout_constraintBottom_toTopOf="@+id/currency_item"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/list_languages"/>
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.84" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="@dimen/guidline22_begin"/>
 
-        <TextView
-            android:id="@+id/sockets_title_text"
-            android:layout_width="@dimen/sockets_title_text_width"
-            android:layout_height="@dimen/sockets_title_text_height"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:text="@string/sockets_title"
-            android:textSize="@dimen/info_item_text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/currency_item"/>
-
-        <ImageView
-            android:id="@+id/currency_arrow_down"
-            android:layout_width="@dimen/image_view_item_size"
-            android:layout_height="@dimen/image_view_item_size"
-            android:layout_marginEnd="@dimen/margins"
-            android:layout_marginStart="@dimen/margins"
-            android:layout_marginTop="@dimen/margins"
-            app:layout_constraintBottom_toBottomOf="@+id/currency_title_text"
-            app:layout_constraintEnd_toStartOf="@+id/guideline10"
-            app:layout_constraintStart_toStartOf="@+id/guideline12"
-            app:layout_constraintTop_toTopOf="@+id/currency_title_text"
-            app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp"/>
-
-        <ImageView
-            android:id="@+id/sockets_arrow_down"
-            android:layout_width="@dimen/image_view_item_size"
-            android:layout_height="@dimen/image_view_item_size"
-            android:layout_marginBottom="@dimen/margins"
-            android:layout_marginEnd="@dimen/margins"
-            android:layout_marginStart="@dimen/margins"
-            app:layout_constraintBottom_toBottomOf="@+id/sockets_title_text"
-            app:layout_constraintEnd_toStartOf="@+id/guideline10"
-            app:layout_constraintStart_toStartOf="@+id/guideline12"
-            app:layout_constraintTop_toTopOf="@+id/sockets_title_text"
-            app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp"/>
-
-        <TextView
-            android:id="@+id/currency_item"
-            android:layout_width="@dimen/currency_item_width"
-            android:layout_height="@dimen/currency_item_geight"
-            android:layout_marginEnd="@dimen/margins"
-            android:layout_marginStart="@dimen/margins"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/sockets_title_text"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/currency_title_text"
-            tools:text="UAH"/>
-
-        <TextView
-            android:id="@+id/sockets_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margins"
-            android:layout_marginEnd="@dimen/margins"
-            android:layout_marginStart="@dimen/margins"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/guideline22"
-            app:layout_constraintEnd_toStartOf="@+id/guideline10"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/sockets_title_text"
-            tools:text="Country sockets"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/list_languages"
-            android:layout_width="@dimen/list_languages_width"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margins"
-            android:layout_marginStart="@dimen/margins"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/currency_title_text"
-            app:layout_constraintEnd_toStartOf="@+id/guideline10"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/languages_title_text"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/list_vaccinations"
-            android:layout_width="@dimen/list_vaccinations_width"
-            android:layout_height="@dimen/list_vaccinations_height"
-            android:layout_marginEnd="@dimen/margins"
-            android:layout_marginStart="@dimen/margins"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/languages_title_text"
-            app:layout_constraintEnd_toStartOf="@+id/guideline10"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/vaccinations_title_text"/>
-
-        <TextView
-            android:id="@+id/advises_item"
-            android:layout_width="@dimen/advises_item_width"
-            android:layout_height="@dimen/advises_item_height"
-            android:layout_marginEnd="@dimen/margins"
-            android:layout_marginStart="@dimen/margins"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/vaccinations_title_text"
-            app:layout_constraintEnd_toStartOf="@+id/guideline10"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            tools:text="Advises"/>
-
-    </android.support.constraint.ConstraintLayout>
-</ScrollView>
+</android.support.constraint.ConstraintLayout>

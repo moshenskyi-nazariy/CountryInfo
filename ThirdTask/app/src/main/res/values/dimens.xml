@@ -41,4 +41,5 @@
     <dimen name="toolbar_elevation">4dp</dimen>
     <dimen name="title_item_size">24sp</dimen>
     <dimen name="description_item_size">16sp</dimen>
+    <dimen name="card_text_padding">8dp</dimen>
 </resources>

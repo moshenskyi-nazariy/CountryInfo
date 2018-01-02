@@ -13,4 +13,5 @@
     <string name="population">Population</string>
     <string name="area">Area(sq.m.)</string>
     <string name="continent">Continent</string>
+    <string name="flag_content_description">flag</string>
 </resources>

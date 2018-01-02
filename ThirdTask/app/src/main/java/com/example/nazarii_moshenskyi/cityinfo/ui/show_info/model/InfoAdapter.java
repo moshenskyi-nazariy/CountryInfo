@@ -10,7 +10,7 @@ public class InfoAdapter extends RecyclerView.Adapter {
     private List<RowType> dataSet;
 
     public InfoAdapter() {
-        this.dataSet = new ArrayList<>();
+        this.dataSet = new ArrayList<>(0);
     }
 
     public void update(List<RowType> dataSet) {

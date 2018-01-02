@@ -3,10 +3,13 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_info;
 import android.util.Log;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Currency;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Electricity;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Timezone;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Water;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryInfoRepository;
-import com.example.nazarii_moshenskyi.cityinfo.ui.model.InfoModel;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.UiModelMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,10 @@ public class CountryInfoPresenterImpl implements CountryInfoPresenter {
         if (view != null) {
             view = null;
         }
+
+        if (infoModel != null && infoModel.size() > 0) {
+            infoModel.clear();
+        }
     }
 
     public void start() {
@@ -45,12 +52,16 @@ public class CountryInfoPresenterImpl implements CountryInfoPresenter {
                 .subscribe(new Consumer<CountryInfo>() {
                     @Override
                     public void accept(CountryInfo countryInfo) throws Exception {
-                        //InfoModel infoModel = createModel(countryInfo);
-                        //view.onLoad(infoModel);
-                        infoModel.add(countryInfo.getElectricity());
-                        infoModel.add(countryInfo.getCurrency());
-                        infoModel.add(countryInfo.getTimezone());
-                        infoModel.add(countryInfo.getWater());
+                        Electricity electricity = countryInfo.getElectricity();
+                        Currency currency = countryInfo.getCurrency();
+                        Water water = countryInfo.getWater();
+                        Timezone timezone = countryInfo.getTimezone();
+
+                        infoModel.add(UiModelMapper.convertCurrency(currency));
+                        infoModel.add(UiModelMapper.convertElectricity(electricity));
+                        infoModel.add(UiModelMapper.convertWater(water));
+                        infoModel.add(UiModelMapper.convertTimezone(timezone));
+
                         view.onLoad(infoModel);
                     }
                 }, new Consumer<Throwable>() {
@@ -59,29 +70,5 @@ public class CountryInfoPresenterImpl implements CountryInfoPresenter {
                         Log.d(TAG, "accept: " + throwable);
                     }
                 });
-    }
-
-    private InfoModel createModel(CountryInfo countryInfo) {
-        InfoModel infoModel = new InfoModel();
-        infoModel.setCurrency(countryInfo.getCurrency().getCode());
-        infoModel.setVaccinations(countryInfo.getVaccinations());
-        infoModel.setAdvise(countryInfo.getAdvise().getAdvise());
-        infoModel.setLanguages(countryInfo.getLanguage());
-        infoModel.setSockets(getSockets(countryInfo));
-
-        return infoModel;
-    }
-
-    private String getSockets(CountryInfo countryInfo) {
-        StringBuilder socketsData = new StringBuilder();
-        Electricity electricityData = countryInfo.getElectricity();
-        List<String> plugs = electricityData.getPlugs();
-
-        socketsData.append("Country uses ").append(electricityData.getVoltage())
-                .append(" V and ").append(electricityData.getFrequency())
-                .append(" Hz with plugs: ").append(plugs.get(0))
-                .append(" and ").append(plugs.get(1));
-
-        return socketsData.toString();
     }
 }
