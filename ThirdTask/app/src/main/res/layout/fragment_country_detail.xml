@@ -17,14 +17,14 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Ukraine" />
+        tools:text="Ukraine"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/advises_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/advises__top_begin" />
+        app:layout_constraintGuide_begin="@dimen/advises__top_begin"/>
 
     <TextView
         android:id="@+id/textView3"
@@ -37,14 +37,14 @@
         app:layout_constraintBottom_toTopOf="@+id/advises_item"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/name_item" />
+        app:layout_constraintTop_toBottomOf="@+id/name_item"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/guidline3_end" />
+        app:layout_constraintGuide_end="@dimen/guidline3_end"/>
 
     <TextView
         android:id="@+id/vaccinations_title_text"
@@ -57,7 +57,7 @@
         app:layout_constraintBottom_toTopOf="@+id/list_vaccinations"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/advises_item" />
+        app:layout_constraintTop_toBottomOf="@+id/advises_item"/>
 
     <TextView
         android:id="@+id/languages_title_text"
@@ -70,28 +70,28 @@
         app:layout_constraintBottom_toTopOf="@+id/list_languages"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/list_vaccinations" />
+        app:layout_constraintTop_toBottomOf="@+id/list_vaccinations"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/guidline9_begin" />
+        app:layout_constraintGuide_begin="@dimen/guidline9_begin"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/guidline10_end" />
+        app:layout_constraintGuide_end="@dimen/guidline10_end"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/guidline12_end" />
+        app:layout_constraintGuide_end="@dimen/guidline12_end"/>
 
     <ImageView
         android:id="@+id/advise_arrow_down"
@@ -104,7 +104,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="@+id/textView3"
-        app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp" />
+        app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp"/>
 
     <ImageView
         android:id="@+id/vaccinations_arrow_down"
@@ -115,7 +115,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="@+id/vaccinations_title_text"
-        app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp" />
+        app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp"/>
 
     <ImageView
         android:id="@+id/languages_arrow_down"
@@ -129,14 +129,14 @@
         app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="@+id/languages_title_text"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp" />
+        app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/guidline2_begin" />
+        app:layout_constraintGuide_begin="@dimen/guidline2_begin"/>
 
     <TextView
         android:id="@+id/currency_title_text"
@@ -149,14 +149,14 @@
         app:layout_constraintBottom_toTopOf="@+id/currency_item"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/list_languages" />
+        app:layout_constraintTop_toBottomOf="@+id/list_languages"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/guidline22_begin" />
+        app:layout_constraintGuide_begin="@dimen/guidline22_begin"/>
 
     <TextView
         android:id="@+id/sockets_title_text"
@@ -169,7 +169,7 @@
         app:layout_constraintBottom_toTopOf="@+id/sockets_item"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/currency_item" />
+        app:layout_constraintTop_toBottomOf="@+id/currency_item"/>
 
     <ImageView
         android:id="@+id/currency_arrow_down"
@@ -182,7 +182,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="@+id/currency_title_text"
-        app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp" />
+        app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp"/>
 
     <ImageView
         android:id="@+id/sockets_arrow_down"
@@ -195,7 +195,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="@+id/sockets_title_text"
-        app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp" />
+        app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp"/>
 
     <TextView
         android:id="@+id/currency_item"
@@ -203,12 +203,12 @@
         android:layout_height="@dimen/currency_item_geight"
         android:layout_marginEnd="@dimen/margins"
         android:layout_marginStart="@dimen/margins"
-        tools:text="UAH"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/sockets_title_text"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/currency_title_text" />
+        app:layout_constraintTop_toBottomOf="@+id/currency_title_text"
+        tools:text="UAH"/>
 
     <TextView
         android:id="@+id/sockets_item"
@@ -216,12 +216,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margins"
         android:layout_marginStart="@dimen/margins"
-        tools:text="Country sockets"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/guideline22"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/sockets_title_text" />
+        app:layout_constraintTop_toBottomOf="@+id/sockets_title_text"
+        tools:text="Country sockets"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_languages"
@@ -233,7 +233,7 @@
         app:layout_constraintBottom_toTopOf="@+id/currency_title_text"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/languages_title_text" />
+        app:layout_constraintTop_toBottomOf="@+id/languages_title_text"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_vaccinations"
@@ -245,7 +245,7 @@
         app:layout_constraintBottom_toTopOf="@+id/languages_title_text"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/vaccinations_title_text" />
+        app:layout_constraintTop_toBottomOf="@+id/vaccinations_title_text"/>
 
     <TextView
         android:id="@+id/advises_item"
@@ -254,10 +254,10 @@
         android:layout_marginEnd="@dimen/margins"
         android:layout_marginStart="@dimen/margins"
         android:visibility="gone"
-        tools:text="Advises"
         app:layout_constraintBottom_toTopOf="@+id/vaccinations_title_text"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:text="Advises"/>
 
 </android.support.constraint.ConstraintLayout>
