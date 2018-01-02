@@ -20,10 +20,14 @@ import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_EXTRA;
 
 public class MainActivity extends AppCompatActivity implements MainView, CountryFragment.OnFragmentInteractionListener {
     private static final String TAG = "MainActivity";
-    private CountryFragment masterFragment;
-
+    private static final String MASTER_TAG = "master";
+    private static final String DETAIL_TAG = "detail";
+    private static final String STUB_TAG = "stub";
     @Inject
     MainPresenter presenter;
+    private CountryDetailFragment detailFragment;
+    private StubFragment stubFragment;
+    private CountryFragment masterFragment;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,19 +42,25 @@ public class MainActivity extends AppCompatActivity implements MainView, Country
     }
 
     private void showCountries() {
-        masterFragment = CountryFragment.newInstance();
+        if ((masterFragment = (CountryFragment) getSupportFragmentManager()
+                .findFragmentByTag(MASTER_TAG)) == null) {
+            masterFragment = CountryFragment.newInstance();
+        }
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.country_name_container, masterFragment)
+                .replace(R.id.country_name_container, masterFragment, MASTER_TAG)
                 .commit();
     }
 
     public void setDetailFragment() {
         Log.d(TAG, "setDetailFragment: Mode = tablet");
-        StubFragment fragment = StubFragment.newInstance();
+        if ((stubFragment = (StubFragment) getSupportFragmentManager()
+                .findFragmentByTag(STUB_TAG)) == null) {
+            stubFragment = StubFragment.newInstance();
+        }
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.city_name_container, fragment)
+                .replace(R.id.city_name_container, stubFragment, STUB_TAG)
                 .commit();
     }
 
@@ -61,10 +71,11 @@ public class MainActivity extends AppCompatActivity implements MainView, Country
 
     public void replaceDetailFragment(Country country) {
         Log.d(TAG, "onClick: name=" + country.getName() + "sending to DetailFragment");
-        CountryDetailFragment detailFragment = CountryDetailFragment.newInstance(country.getName());
+
+        detailFragment = CountryDetailFragment.newInstance(country.getName());
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.city_name_container, detailFragment)
+                .replace(R.id.city_name_container, detailFragment, DETAIL_TAG)
                 .commit();
     }
 

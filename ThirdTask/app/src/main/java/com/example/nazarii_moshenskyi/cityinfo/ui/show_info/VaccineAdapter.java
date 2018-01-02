@@ -32,7 +32,7 @@ public class VaccineAdapter extends RecyclerView.Adapter<VaccineAdapter.ViewHold
     }
 
     public void update(List<Vaccine> vaccines) {
-        if(vaccines != null) {
+        if (vaccines != null) {
             this.vaccines = vaccines;
             notifyDataSetChanged();
         }

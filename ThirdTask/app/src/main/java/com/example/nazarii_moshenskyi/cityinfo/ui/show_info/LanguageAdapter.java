@@ -29,7 +29,7 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
     }
 
     public void update(List<Language> languages) {
-        if(languages != null) {
+        if (languages != null) {
             this.languages = languages;
             notifyDataSetChanged();
         }

@@ -21,7 +21,8 @@ import javax.inject.Inject;
 public class CountryDetailFragment extends Fragment implements CountryInfoView, View.OnClickListener {
 
     private static final String COUNTRY_NAME = "country";
-
+    @Inject
+    public CountryInfoPresenterImpl presenter;
     private boolean isOld = false;
     private SparseArray<Object> associatedMap;
     private TextView nameItem;
@@ -32,13 +33,8 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
     private TextView socketsItem;
     private LinearLayoutManager layoutManagerLanguages;
     private LinearLayoutManager layoutManagerVaccines;
-
     private LanguageAdapter languageAdapter;
     private VaccineAdapter vaccineAdapter;
-
-    @Inject
-    public CountryInfoPresenterImpl presenter;
-
     private String countryName;
 
     public CountryDetailFragment() {
@@ -163,5 +159,10 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView, 
             visibleView.setVisibility(View.VISIBLE);
         }
         isOld = !isOld;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+
     }
 }

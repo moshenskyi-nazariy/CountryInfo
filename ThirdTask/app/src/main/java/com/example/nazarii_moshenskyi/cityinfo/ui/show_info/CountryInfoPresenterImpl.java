@@ -14,9 +14,9 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class CountryInfoPresenterImpl implements CountryInfoPresenter {
-    private CountryInfoView view;
-    private final CountryInfoRepository repository;
     private static final String TAG = "CountryInfoPresenter";
+    private final CountryInfoRepository repository;
+    private CountryInfoView view;
 
     public CountryInfoPresenterImpl(CountryInfoRepository repository) {
         this.repository = repository;
