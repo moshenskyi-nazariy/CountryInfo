@@ -11,23 +11,33 @@ import com.example.nazarii_moshenskyi.cityinfo.R;
 public class ViewHolderFactory {
     public static class TextViewHolder extends RecyclerView.ViewHolder {
         private TextView titleText;
-        private TextView descriprionText;
+        private TextView descriptionText;
 
         public TextViewHolder(View itemView) {
             super(itemView);
             titleText = itemView.findViewById(R.id.title_text);
-            descriprionText = itemView.findViewById(R.id.description);
+            descriptionText = itemView.findViewById(R.id.description);
         }
 
-        public void setTitleText(String titleText) {
-            if (titleText != null) {
-                this.titleText.setText(titleText);
+        public void setTitleText(int titleTextId) {
+            this.titleText.setText(titleTextId);
+        }
+
+        public void setDescriptionText(String descriptionText) {
+            if (null == descriptionText || !descriptionText.isEmpty()) {
+                this.descriptionText.setText(descriptionText);
+            } else {
+                this.descriptionText.setText(R.string.no_info_text);
             }
         }
 
-        public void setDescriprionText(String descriprionText) {
-            if (titleText != null) {
-                this.descriprionText.setText(descriprionText);
+        public void setDescriptionText(String mask, String rate, String name) {
+            String description = String.format(mask, rate, name);
+
+            if (!name.isEmpty() || rate.isEmpty()) {
+                this.descriptionText.setText(description);
+            } else {
+                this.descriptionText.setText(R.string.no_info_text);
             }
         }
     }
@@ -45,36 +55,38 @@ public class ViewHolderFactory {
         }
 
         public void setVoltage(String voltage) {
-            if (voltage != null) {
+            if (!voltage.isEmpty()) {
                 this.voltage.setText(voltage);
+            } else {
+                this.voltage.setText(R.string.no_info_text);
             }
         }
 
         public void setFrequency(String frequency) {
-            if (frequency != null) {
+            if (!frequency.isEmpty()) {
                 this.frequency.setText(frequency);
+            } else {
+                this.frequency.setText(R.string.no_info_text);
             }
         }
 
         public void setPlugs(String plugs) {
-            if (plugs != null) {
+            if (!plugs.isEmpty()) {
                 this.plugs.setText(plugs);
+            } else {
+                this.plugs.setText(R.string.no_info_text);
             }
         }
     }
 
-    public static RecyclerView.ViewHolder create(ViewGroup parent, int viewType) {
-        switch (viewType) {
-            case RowType.TEXT_ROW_TYPE:
-                View textTypeView = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_item_text_type, parent, false);
-                return new ViewHolderFactory.TextViewHolder(textTypeView);
-
-            case RowType.ELECTRICITY_ROW_TYPE:
-                View imageTypeView = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_item_electricity_type, parent, false);
-                return new ViewHolderFactory.ElectricityViewHolder(imageTypeView);
-
-            default:
-                return null;
-        }
+    public static RecyclerView.ViewHolder createTextViewHolder(ViewGroup parent) {
+        View textTypeView = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_item_text_type, parent, false);
+        return new ViewHolderFactory.TextViewHolder(textTypeView);
     }
+
+    public static RecyclerView.ViewHolder createElectricityViewHolder(ViewGroup parent) {
+        View electricityTypeView = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_item_electricity_type, parent, false);
+        return new ViewHolderFactory.ElectricityViewHolder(electricityTypeView);
+    }
+
 }

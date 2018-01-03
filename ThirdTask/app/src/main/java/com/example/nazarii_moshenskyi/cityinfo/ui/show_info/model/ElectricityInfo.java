@@ -1,15 +1,13 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model;
 
-import android.support.v7.widget.RecyclerView;
-
 import java.util.List;
 
-public class ElectricityInfo extends BaseRowType {
+public class ElectricityInfo implements RowType {
     private String voltage;
     private String frequency;
     private List<String> plugs = null;
 
-    private String data;
+    public String data;
 
     public String getVoltage() {
         return voltage;
@@ -31,6 +29,14 @@ public class ElectricityInfo extends BaseRowType {
         return plugs;
     }
 
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getData() {
+        return data;
+    }
+
     public void setPlugs(List<String> plugs) {
         this.plugs = plugs;
 
@@ -40,24 +46,6 @@ public class ElectricityInfo extends BaseRowType {
         }
         builder.deleteCharAt(builder.length() - 1);
         data = builder.toString();
-    }
-
-    @Override
-    public int getItemViewType() {
-        return ELECTRICITY_ROW_TYPE;
-    }
-
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder) {
-        ViewHolderFactory.ElectricityViewHolder electricityViewHolder =
-                (ViewHolderFactory.ElectricityViewHolder) viewHolder;
-
-        electricityViewHolder.setVoltage(checkNotNull(voltage));
-
-        electricityViewHolder.setFrequency(checkNotNull(frequency));
-
-        electricityViewHolder.setPlugs(checkNotNull(data));
-
     }
 }
 

@@ -93,7 +93,7 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView {
 
         requestBuilder = Glide.with(this)
                 .as(PictureDrawable.class)
-                .thumbnail(0.3f)
+                .thumbnail(0.5f)
                 .apply(new RequestOptions().override(flagImage.getWidth(), flagImage.getHeight()))
                 .transition(withCrossFade())
                 .listener(new SvgSoftwareLayerSetter());
