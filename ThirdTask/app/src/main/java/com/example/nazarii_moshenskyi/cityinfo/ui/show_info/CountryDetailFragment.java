@@ -4,6 +4,8 @@ import android.app.Application;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -93,7 +95,6 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView {
 
         requestBuilder = Glide.with(this)
                 .as(PictureDrawable.class)
-                .thumbnail(0.5f)
                 .apply(new RequestOptions().override(flagImage.getWidth(), flagImage.getHeight()))
                 .transition(withCrossFade())
                 .listener(new SvgSoftwareLayerSetter());
@@ -120,6 +121,7 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView {
         if (flagUrl != null) {
             requestBuilder.load(flagUrl).into(flagImage);
         }
-
     }
+
+
 }

@@ -19,6 +19,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -29,9 +31,10 @@ public class ApiModule {
     @Provides
     @Singleton
     @Named("InfoRetrofit")
-    Retrofit provideInfoRetrofit(Gson gson) {
+    Retrofit provideInfoRetrofit(Gson gson, OkHttpClient client) {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.INFO_BASE_URL)
+                .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
@@ -39,10 +42,22 @@ public class ApiModule {
 
     @Provides
     @Singleton
+    OkHttpClient providesClient(){
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+
+        return new OkHttpClient.Builder()
+                .addInterceptor(logging)
+                .build();
+    }
+
+    @Provides
+    @Singleton
     @Named("AnalyticsRetrofit")
-    Retrofit provideAnalyticsRetrofit() {
+    Retrofit provideAnalyticsRetrofit(OkHttpClient client) {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.ANALYTICS_BASE_URL)
+                .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
