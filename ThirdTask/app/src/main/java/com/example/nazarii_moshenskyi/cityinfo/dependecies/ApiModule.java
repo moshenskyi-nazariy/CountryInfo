@@ -7,7 +7,6 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Vaccine;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Weather;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryAnalyticsService;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryInfoService;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryService;
 import com.example.nazarii_moshenskyi.cityinfo.util.AdviseDeserializer;
 import com.example.nazarii_moshenskyi.cityinfo.util.MonthDeserializer;
 import com.example.nazarii_moshenskyi.cityinfo.util.VaccineDeserializer;
@@ -15,6 +14,7 @@ import com.example.nazarii_moshenskyi.cityinfo.util.WeatherDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -28,33 +28,36 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    CountryService provideCountryService() {
-        return new Retrofit.Builder()
-                .baseUrl(BuildConfig.INFO_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build().create(CountryService.class);
-    }
-
-
-    @Provides
-    @Singleton
-    CountryInfoService provideInfoService(Gson gson) {
+    @Named("InfoRetrofit")
+    Retrofit provideInfoRetrofit(Gson gson) {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.INFO_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build().create(CountryInfoService.class);
+                .build();
     }
 
     @Provides
     @Singleton
-    CountryAnalyticsService provideAnalyticsService() {
+    @Named("AnalyticsRetrofit")
+    Retrofit provideAnalyticsRetrofit() {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.ANALYTICS_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build().create(CountryAnalyticsService.class);
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    CountryInfoService provideInfoService(@Named("InfoRetrofit") Retrofit retrofit) {
+        return retrofit.create(CountryInfoService.class);
+    }
+
+    @Provides
+    @Singleton
+    CountryAnalyticsService provideAnalyticsService(@Named("AnalyticsRetrofit") Retrofit retrofit) {
+        return retrofit.create(CountryAnalyticsService.class);
     }
 
     @Provides

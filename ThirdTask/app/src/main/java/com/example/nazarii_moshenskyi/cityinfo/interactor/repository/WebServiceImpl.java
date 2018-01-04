@@ -5,7 +5,6 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryAnalyticsService;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryInfoService;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryService;
 
 import java.util.List;
 
@@ -17,14 +16,11 @@ import io.reactivex.functions.Function;
 public class WebServiceImpl implements WebService {
     private static final String TAG = "WebServiceImpl";
     private CountryInfoService countryInfoService;
-    private CountryService countryService;
     private CountryAnalyticsService countryAnalyticsService;
 
     public WebServiceImpl(CountryInfoService countryInfoService,
-                          CountryService countryService,
                           CountryAnalyticsService countryAnalyticsService) {
         this.countryInfoService = countryInfoService;
-        this.countryService = countryService;
         this.countryAnalyticsService = countryAnalyticsService;
     }
 
@@ -47,7 +43,7 @@ public class WebServiceImpl implements WebService {
 
     @Override
     public Observable<List<Country>> getCountries() {
-        return countryService.getCountries();
+        return countryInfoService.getCountries();
     }
 
 }

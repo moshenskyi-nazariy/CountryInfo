@@ -13,7 +13,7 @@ public class ViewHolderFactory {
         private TextView titleText;
         private TextView descriptionText;
 
-        public TextViewHolder(View itemView) {
+        TextViewHolder(View itemView) {
             super(itemView);
             titleText = itemView.findViewById(R.id.title_text);
             descriptionText = itemView.findViewById(R.id.description);
@@ -24,10 +24,10 @@ public class ViewHolderFactory {
         }
 
         public void setDescriptionText(String descriptionText) {
-            if (null == descriptionText || !descriptionText.isEmpty()) {
-                this.descriptionText.setText(descriptionText);
-            } else {
+            if (descriptionText == null || descriptionText.isEmpty()) {
                 this.descriptionText.setText(R.string.no_info_text);
+            } else {
+                this.descriptionText.setText(descriptionText);
             }
         }
 
@@ -47,7 +47,7 @@ public class ViewHolderFactory {
         private TextView frequency;
         private TextView plugs;
 
-        public ElectricityViewHolder(View itemView) {
+        ElectricityViewHolder(View itemView) {
             super(itemView);
             voltage = itemView.findViewById(R.id.voltage);
             frequency = itemView.findViewById(R.id.frequency);
