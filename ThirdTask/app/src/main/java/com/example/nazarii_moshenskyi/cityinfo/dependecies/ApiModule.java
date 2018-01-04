@@ -30,13 +30,20 @@ public class ApiModule {
     @Provides
     @Singleton
     @Named("CountryService")
-    CountryService provideCountryService(OkHttpClient client) {
+    CountryService provideCountryService(@Named("CountryRetrofit") Retrofit retrofit) {
+        return retrofit.create(CountryService.class);
+    }
+
+    @Provides
+    @Singleton
+    @Named("CountryRetrofit")
+    Retrofit provideRetrofitService(OkHttpClient client) {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build().create(CountryService.class);
+                .build();
     }
 
     @Provides
@@ -49,18 +56,25 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    @Named("InfoService")
-    public CountryService provideInfoService(Gson gson) {
+    @Named("InfoServiceRetrofit")
+    Retrofit provideRetrofitInfoService(Gson gson) {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.INFO_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build().create(CountryService.class);
+                .build();
     }
 
     @Provides
     @Singleton
-    public Gson provideGson() {
+    @Named("InfoService")
+    CountryService provideInfoService(@Named("InfoServiceRetrofit") Retrofit retrofit) {
+        return retrofit.create(CountryService.class);
+    }
+
+    @Provides
+    @Singleton
+    Gson provideGson() {
         return new GsonBuilder().registerTypeAdapter(Advise.class, new AdviseDeserializer())
                 .registerTypeAdapter(Weather.class, new WeatherDeserializer())
                 .registerTypeAdapter(Month.class, new MonthDeserializer())

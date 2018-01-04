@@ -15,7 +15,7 @@ public class NetModule {
 
     @Singleton
     @Provides
-    public CountryRepository provideCountryRepository(@Named("CountryService")CountryService service) {
+    public CountryRepository provideCountryRepository(@Named("CountryService") CountryService service) {
         return new CountryRepository(service);
     }
 
