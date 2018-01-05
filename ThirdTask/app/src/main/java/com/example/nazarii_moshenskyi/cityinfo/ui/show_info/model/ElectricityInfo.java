@@ -40,12 +40,14 @@ public class ElectricityInfo implements RowType {
     public void setPlugs(List<String> plugs) {
         this.plugs = plugs;
 
-        StringBuilder builder = new StringBuilder();
-        for (String plug : plugs) {
-            builder.append(plug).append(",");
+        if (plugs != null && !plugs.isEmpty()) {
+            StringBuilder builder = new StringBuilder();
+            for (String plug : plugs) {
+                builder.append(plug).append(",");
+            }
+            builder.deleteCharAt(builder.length() - 1);
+            data = builder.toString();
         }
-        builder.deleteCharAt(builder.length() - 1);
-        data = builder.toString();
     }
 }
 

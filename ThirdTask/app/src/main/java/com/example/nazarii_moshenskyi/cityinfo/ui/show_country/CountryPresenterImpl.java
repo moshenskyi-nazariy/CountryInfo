@@ -1,6 +1,7 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.DataManager;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.WebService;
 import com.example.nazarii_moshenskyi.cityinfo.util.Filter;
 
@@ -11,12 +12,13 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class CountryPresenterImpl implements CountryPresenter {
-    private final WebService repository;
+
+    private final DataManager manager;
     private CountryView view;
     private Filter itemFilter;
 
-    public CountryPresenterImpl(WebService repository) {
-        this.repository = repository;
+    public CountryPresenterImpl(DataManager manager) {
+        this.manager = manager;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class CountryPresenterImpl implements CountryPresenter {
 
     @Override
     public void start() {
-        repository.getCountries().subscribeOn(Schedulers.io())
+        manager.getCountries().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Country>>() {
                     @Override
@@ -41,13 +43,6 @@ public class CountryPresenterImpl implements CountryPresenter {
                         view.onLoad(countries);
                     }
                 });
-    }
-
-    @Override
-    public void onClick(Country country, CountryFragment.OnFragmentInteractionListener listener) {
-        if (listener != null) {
-            listener.onCountryClicked(country);
-        }
     }
 
     @Override

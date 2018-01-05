@@ -5,8 +5,10 @@ import android.util.Log;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Currency;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Electricity;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.InfoModel;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Timezone;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Water;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.DataManager;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.WebService;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.UiModelMapper;
@@ -16,17 +18,18 @@ import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 public class CountryInfoPresenterImpl implements CountryInfoPresenter {
+    private final DataManager manager;
     private CountryInfoView view;
-    private final WebService repository;
-    private List<RowType> infoModel;
+    private List<RowType> model;
     private static final String TAG = "CountryInfoPresenter";
 
-    public CountryInfoPresenterImpl(WebService repository) {
-        this.repository = repository;
-        infoModel = new ArrayList<>();
+    public CountryInfoPresenterImpl(DataManager manager) {
+        this.manager = manager;
+        model = new ArrayList<>();
     }
 
     public void attachView(CountryInfoView view) {
@@ -38,8 +41,8 @@ public class CountryInfoPresenterImpl implements CountryInfoPresenter {
             view = null;
         }
 
-        if (infoModel != null && infoModel.size() > 0) {
-            infoModel.clear();
+        if (model != null && model.size() > 0) {
+            model.clear();
         }
     }
 
@@ -47,29 +50,26 @@ public class CountryInfoPresenterImpl implements CountryInfoPresenter {
     }
 
     public void getInfo(String countryName) {
-        repository.getInfo(countryName)
+        manager.getInfo(countryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<CountryInfo>() {
+                .subscribe(new Consumer<InfoModel>() {
                     @Override
-                    public void accept(CountryInfo countryInfo) throws Exception {
+                    public void accept(InfoModel infoModel) throws Exception {
+                        CountryInfo countryInfo = infoModel.getCountryInfo();
                         Electricity electricity = countryInfo.getElectricity();
                         Currency currency = countryInfo.getCurrency();
                         Water water = countryInfo.getWater();
                         Timezone timezone = countryInfo.getTimezone();
 
-                        infoModel.add(UiModelMapper.convertCurrency(currency));
-                        infoModel.add(UiModelMapper.convertElectricity(electricity));
-                        infoModel.add(UiModelMapper.convertWater(water));
-                        infoModel.add(UiModelMapper.convertTimezone(timezone));
+                        model.add(UiModelMapper.convertCurrency(currency));
+                        model.add(UiModelMapper.convertElectricity(electricity));
+                        model.add(UiModelMapper.convertWater(water));
+                        model.add(UiModelMapper.convertTimezone(timezone));
 
-                        view.setBackground(countryInfo.getAnalytics().get(0).getFlag());
-                        view.onLoad(infoModel);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.d(TAG, "accept: " + throwable);
+                        //TODO: items may be null
+                        view.setBackground(infoModel.getAnalytics().get(0).getFlag());
+                        view.onLoad(model);
                     }
                 });
     }

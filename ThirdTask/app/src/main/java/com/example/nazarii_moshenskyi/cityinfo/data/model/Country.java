@@ -1,5 +1,8 @@
 package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -11,6 +14,11 @@ public class Country {
     @SerializedName("url")
     @Expose
     private String url;
+
+    protected Country(Parcel in) {
+        name = in.readString();
+        url = in.readString();
+    }
 
     public String getName() {
         return name;

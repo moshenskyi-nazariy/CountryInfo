@@ -55,7 +55,7 @@ public class ViewHolderFactory {
         }
 
         public void setVoltage(String voltage) {
-            if (!voltage.isEmpty()) {
+            if (voltage != null && !voltage.isEmpty()) {
                 this.voltage.setText(voltage);
             } else {
                 this.voltage.setText(R.string.no_info_text);
@@ -63,7 +63,7 @@ public class ViewHolderFactory {
         }
 
         public void setFrequency(String frequency) {
-            if (!frequency.isEmpty()) {
+            if (frequency != null && !frequency.isEmpty()) {
                 this.frequency.setText(frequency);
             } else {
                 this.frequency.setText(R.string.no_info_text);
@@ -71,7 +71,7 @@ public class ViewHolderFactory {
         }
 
         public void setPlugs(String plugs) {
-            if (!plugs.isEmpty()) {
+            if (plugs != null && !plugs.isEmpty()) {
                 this.plugs.setText(plugs);
             } else {
                 this.plugs.setText(R.string.no_info_text);

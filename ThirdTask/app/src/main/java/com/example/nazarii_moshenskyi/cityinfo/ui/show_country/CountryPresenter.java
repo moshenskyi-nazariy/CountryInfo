@@ -5,7 +5,5 @@ import com.example.nazarii_moshenskyi.cityinfo.ui.BasePresenter;
 
 public interface CountryPresenter extends BasePresenter<CountryView> {
 
-    void onClick(Country country, CountryFragment.OnFragmentInteractionListener listener);
-
     void updateItems(String input, CountryAdapter adapter);
 }

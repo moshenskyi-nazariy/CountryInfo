@@ -1,12 +1,13 @@
 package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 public class CountryInfo {
-
     @SerializedName("names")
     @Expose
     private Names names;
@@ -43,16 +44,6 @@ public class CountryInfo {
     @SerializedName("neighbors")
     @Expose
     private List<Neighbor> neighbors;
-
-    private transient List<CountryAnalytics> analytics;
-
-    public List<CountryAnalytics> getAnalytics() {
-        return analytics;
-    }
-
-    public void setAnalytics(List<CountryAnalytics> analytics) {
-        this.analytics = analytics;
-    }
 
     public Names getNames() {
         return names;

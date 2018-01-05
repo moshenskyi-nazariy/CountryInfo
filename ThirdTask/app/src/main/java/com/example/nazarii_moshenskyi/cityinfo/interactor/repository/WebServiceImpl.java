@@ -6,6 +6,8 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryAnalyticsService;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryInfoService;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -25,18 +27,21 @@ public class WebServiceImpl implements WebService {
     }
 
     @Override
-    public Observable<CountryInfo> getInfo(final String countryName) {
-        //return countryInfoService.getInfo(countryName);
-        return  countryInfoService.getInfo(countryName).flatMap(new Function<CountryInfo, ObservableSource<List<CountryAnalytics>>>() {
+    public Observable<CountryInfo> getInfo(String countryName) {
+        return countryInfoService.getInfo(countryName).onErrorReturn(new Function<Throwable, CountryInfo>() {
+
             @Override
-            public ObservableSource<List<CountryAnalytics>> apply(CountryInfo countryInfo) throws Exception {
-                return countryAnalyticsService.getAnalytics(countryName);
+            public CountryInfo apply(Throwable throwable) throws Exception {
+                return new CountryInfo();
             }
-        }, new BiFunction<CountryInfo, List<CountryAnalytics>, CountryInfo>() {
+        });
+    }
+
+    public Observable<List<CountryAnalytics>> getAnalytics(String countryName) {
+        return countryAnalyticsService.getAnalytics(countryName).onErrorReturn(new Function<Throwable, List<CountryAnalytics>>() {
             @Override
-            public CountryInfo apply(CountryInfo countryInfo, List<CountryAnalytics> o) throws Exception {
-                countryInfo.setAnalytics(o);
-                return countryInfo;
+            public List<CountryAnalytics> apply(Throwable throwable) throws Exception {
+                return Collections.emptyList();
             }
         });
     }

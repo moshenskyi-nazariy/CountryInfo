@@ -4,8 +4,6 @@ import android.app.Application;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,13 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.nazarii_moshenskyi.cityinfo.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.InfoAdapter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
+import com.example.nazarii_moshenskyi.cityinfo.util.glide_svg.GlideApp;
 import com.example.nazarii_moshenskyi.cityinfo.util.glide_svg.SvgSoftwareLayerSetter;
 
 import java.util.List;
@@ -93,7 +91,7 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView {
 
         flagImage = view.findViewById(R.id.flag_placeholder);
 
-        requestBuilder = Glide.with(this)
+        requestBuilder = GlideApp.with(this)
                 .as(PictureDrawable.class)
                 .apply(new RequestOptions().override(flagImage.getWidth(), flagImage.getHeight()))
                 .transition(withCrossFade())

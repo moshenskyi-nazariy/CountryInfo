@@ -10,9 +10,6 @@ import com.bumptech.glide.module.AppGlideModule;
 import com.caverock.androidsvg.SVG;
 import java.io.InputStream;
 
-/**
- * Module for the SVG sample app.
- */
 @GlideModule
 public class SvgModule extends AppGlideModule {
     @Override

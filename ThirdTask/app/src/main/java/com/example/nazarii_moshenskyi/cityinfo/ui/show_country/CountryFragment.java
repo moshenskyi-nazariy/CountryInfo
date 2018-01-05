@@ -100,16 +100,21 @@ public class CountryFragment extends Fragment implements CountryView {
 
     @Override
     public void onLoad(List<Country> items) {
-        countryAdapter.update(items);
         this.items = items;
+        countryAdapter.update(items);
+        listener.onCountriesLoaded(items);
     }
 
     @Override
     public void onClick(Country country) {
-        presenter.onClick(country, listener);
+        listener.onCountryClicked(country);
     }
 
     public interface OnFragmentInteractionListener {
+
         void onCountryClicked(Country country);
+
+        void onCountriesLoaded(List<Country> list);
+
     }
 }

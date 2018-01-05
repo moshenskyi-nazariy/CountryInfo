@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v4.view.PagerAdapter;
@@ -24,8 +25,12 @@ import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.CountryDetailActivit
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.CountryDetailFragment;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.StubFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
+import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNRY_LIST;
 import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_EXTRA;
 
 public class MainActivity extends AppCompatActivity implements MainView, CountryFragment.OnFragmentInteractionListener {
@@ -33,17 +38,16 @@ public class MainActivity extends AppCompatActivity implements MainView, Country
     private CountryFragment masterFragment;
     private ConstraintLayout layout;
 
-    private ViewPager itemPager;
-    private PagerAdapter pagerAdapter;
-
     @Inject
     MainPresenter presenter;
+    private List<String> list;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         layout = findViewById(R.id.main_layout);
+        list = new ArrayList<>(0);
 
         Application application = getApplication();
         if (application == null) {
@@ -103,7 +107,8 @@ public class MainActivity extends AppCompatActivity implements MainView, Country
     public void startDetailActivity(Country country) {
         Log.d(TAG, "onClick: name=" + country.getName() + " sending to DetailActivity");
         Intent intent = new Intent(getApplicationContext(), CountryDetailActivity.class);
-        intent.putExtra(COUNTRY_EXTRA, country.getName());
+        intent.putExtra(COUNTRY_EXTRA, list.indexOf(country.getName()));
+        intent.putStringArrayListExtra(COUNRY_LIST, (ArrayList<String>) list);
         startActivity(intent);
     }
 
@@ -116,6 +121,13 @@ public class MainActivity extends AppCompatActivity implements MainView, Country
     @Override
     public void onCountryClicked(Country country) {
         presenter.onItemClicked(country);
+    }
+
+    @Override
+    public void onCountriesLoaded(List<Country> list) {
+        for (Country country : list) {
+            this.list.add(country.getName());
+        }
     }
 
     @Override

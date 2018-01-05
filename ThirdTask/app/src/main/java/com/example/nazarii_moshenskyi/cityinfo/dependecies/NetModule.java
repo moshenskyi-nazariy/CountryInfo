@@ -2,6 +2,7 @@ package com.example.nazarii_moshenskyi.cityinfo.dependecies;
 
 import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryAnalyticsService;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryInfoService;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.DataManager;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.WebService;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.WebServiceImpl;
 
@@ -15,10 +16,16 @@ public class NetModule {
 
     @Singleton
     @Provides
-    WebService provideWebService(CountryInfoService countryInfoService,
-                                 CountryAnalyticsService countryAnaliticsService) {
+    DataManager provideDataManager(WebService webService) {
+        return new DataManager(webService);
+    }
 
-        return new WebServiceImpl(countryInfoService, countryAnaliticsService);
+    @Singleton
+    @Provides
+    WebService provideWebService(CountryInfoService countryInfoService,
+                                 CountryAnalyticsService countryAnalyticsService) {
+
+        return new WebServiceImpl(countryInfoService, countryAnalyticsService);
     }
 
 }

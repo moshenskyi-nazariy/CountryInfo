@@ -2,30 +2,30 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_info;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 import java.util.List;
 
-public class ItemsPagerAdapter extends FragmentPagerAdapter {
+public class ItemsPagerAdapter extends FragmentStatePagerAdapter {
+    private static final String TAG = "ItemsPagerAdapter";
+    private final List<String> items;
 
-    private List<String> countryNames;
-
-    public ItemsPagerAdapter(FragmentManager fm) {
+    public ItemsPagerAdapter(FragmentManager fm, List<String> items) {
         super(fm);
-    }
-
-    public void update(List<String> items) {
-        countryNames = items;
+        this.items = items;
     }
 
     @Override
     public Fragment getItem(int position) {
-        String name = countryNames.get(position);
-        return CountryDetailFragment.newInstance(name);
+        String countryName = items.get(position);
+        Log.d(TAG, "getItem: " + countryName);
+        return CountryDetailFragment.newInstance(countryName);
     }
 
     @Override
     public int getCount() {
-        return countryNames.size();
+        return items == null? 0 : items.size();
     }
+
 }
