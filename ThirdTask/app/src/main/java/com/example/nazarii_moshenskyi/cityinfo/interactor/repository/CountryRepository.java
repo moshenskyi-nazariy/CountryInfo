@@ -8,6 +8,7 @@ import java.util.List;
 import io.reactivex.Observable;
 
 public class CountryRepository {
+
     private CountryService service;
 
     public CountryRepository(CountryService service) {

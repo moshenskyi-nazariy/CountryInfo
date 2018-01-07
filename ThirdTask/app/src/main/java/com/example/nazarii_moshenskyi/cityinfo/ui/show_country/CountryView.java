@@ -1,4 +1,4 @@
-package com.example.nazarii_moshenskyi.cityinfo.ui.show_cities;
+package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 

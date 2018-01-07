@@ -38,4 +38,5 @@ public class Country {
     public void setNameSanitized(String nameSanitized) {
         this.nameSanitized = nameSanitized;
     }
+
 }

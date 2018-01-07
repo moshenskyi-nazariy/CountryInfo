@@ -15,21 +15,21 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
     private List<Language> languages;
 
     @Override
-    public LanguageAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.languages_item, parent, false);
-        return new LanguageAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(LanguageAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         Language language = languages.get(position);
         String languageName = language.getLanguage();
         holder.language.setText(languageName);
     }
 
     public void update(List<Language> languages) {
-        if(languages != null) {
+        if (languages != null) {
             this.languages = languages;
             notifyDataSetChanged();
         }

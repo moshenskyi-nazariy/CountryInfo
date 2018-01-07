@@ -15,14 +15,14 @@ public class VaccineAdapter extends RecyclerView.Adapter<VaccineAdapter.ViewHold
     private List<Vaccine> vaccines;
 
     @Override
-    public VaccineAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.vaccines_item, parent, false);
-        return new VaccineAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(VaccineAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         Vaccine vaccine = vaccines.get(position);
         String languageName = vaccine.getName();
         holder.name.setText(languageName);
@@ -32,7 +32,7 @@ public class VaccineAdapter extends RecyclerView.Adapter<VaccineAdapter.ViewHold
     }
 
     public void update(List<Vaccine> vaccines) {
-        if(vaccines != null) {
+        if (vaccines != null) {
             this.vaccines = vaccines;
             notifyDataSetChanged();
         }

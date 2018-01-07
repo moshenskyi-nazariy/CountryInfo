@@ -1,8 +1,6 @@
-package com.example.nazarii_moshenskyi.cityinfo.ui.show_cities;
+package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.api.ApiFactory;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryService;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryRepository;
 
 import java.util.List;
@@ -11,18 +9,28 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class CountryPresenter {
+public class CountryPresenterImpl implements CountryPresenter {
+    private final CountryRepository repository;
     private CountryView view;
-    private CountryRepository repository;
-    private CountryService service;
 
-    public CountryPresenter(CountryView view) {
-        this.view = view;
-        service = ApiFactory.getCountryService();
-        repository = new CountryRepository(service);
+    public CountryPresenterImpl(CountryRepository repository) {
+        this.repository = repository;
     }
 
-    public void getCountries() {
+    @Override
+    public void attachView(CountryView view){
+        this.view = view;
+    }
+
+    @Override
+    public void detachView() {
+        if (view != null) {
+            view = null;
+        }
+    }
+
+    @Override
+    public void start() {
         repository.getCountries().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Country>>() {
@@ -31,7 +39,12 @@ public class CountryPresenter {
                         view.onLoad(countries);
                     }
                 });
+    }
 
-
+    @Override
+    public void onClick(Country country, CountryFragment.OnFragmentInteractionListener listener) {
+        if (listener != null) {
+            listener.onCountryClicked(country);
+        }
     }
 }

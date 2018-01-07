@@ -6,15 +6,13 @@ import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryService;
 import io.reactivex.Observable;
 
 public class CountryInfoRepository {
-    private final String countryName;
     private CountryService service;
 
-    public CountryInfoRepository(CountryService service, String countryName) {
+    public CountryInfoRepository(CountryService service) {
         this.service = service;
-        this.countryName = countryName;
     }
 
-    public Observable<CountryInfo> getInfo() {
+    public Observable<CountryInfo> getInfo(String countryName) {
         return service.getInfo(countryName);
     }
 }

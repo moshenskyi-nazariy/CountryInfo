@@ -1,4 +1,4 @@
-package com.example.nazarii_moshenskyi.cityinfo.ui.show_cities;
+package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,7 +22,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     }
 
     @Override
-    public CountryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_view, parent, false);
         return new ViewHolder(view);
@@ -36,7 +36,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(CountryAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         final Country country = countries.get(position);
         String countryName = country.getName();
 
