@@ -208,5 +208,14 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.3580247" />
 
+    <com.example.ratingbar.RatingBar
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        app:danger_level="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>
