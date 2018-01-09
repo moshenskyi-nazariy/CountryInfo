@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
@@ -74,6 +75,16 @@ public class CountryInfoPresenterImpl implements CountryInfoPresenter {
                             view.setBackground(countryAnalytics.get(0).getFlag());
                         }
                         view.onLoad(model);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
+                    }
+                }, new Action() {
+                    @Override
+                    public void run() throws Exception {
+
                     }
                 });
     }
