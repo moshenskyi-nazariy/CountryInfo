@@ -3,11 +3,14 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,6 +28,8 @@ public class CountryFragment extends Fragment implements CountryView {
 
     private CountryAdapter countryAdapter;
     private LinearLayoutManager layoutManager;
+    private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener;
+    private BottomNavigationView bottomNavigationView;
 
     @Inject
     public CountryPresenter presenter;
@@ -48,10 +53,14 @@ public class CountryFragment extends Fragment implements CountryView {
         ((CountryInfoApplication) application).getCountryComponent().inject(this);
 
         layoutManager = new LinearLayoutManager(getContext());
+        onNavigationItemSelectedListener = getOnNavigationItemSelectedListener();
         presenter.attachView(this);
     }
 
     private void initList(View rootView) {
+        bottomNavigationView = rootView.findViewById(R.id.navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
+
         countryList = rootView.findViewById(R.id.country_list);
         countryList.setItemAnimator(new DefaultItemAnimator());
         countryList.addItemDecoration(new CountryItemDecorator((int) getResources().
@@ -116,5 +125,24 @@ public class CountryFragment extends Fragment implements CountryView {
 
         void onCountriesLoaded(List<Country> list);
 
+    }
+
+    @NonNull
+    private BottomNavigationView.OnNavigationItemSelectedListener getOnNavigationItemSelectedListener() {
+        return new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        layoutManager.scrollToPosition(0);
+                        return true;
+                    case R.id.navigation_dashboard:
+                        return true;
+                    case R.id.navigation_notifications:
+                        return true;
+                }
+                return false;
+            }
+        };
     }
 }

@@ -32,9 +32,8 @@ public class ViewHolderFactory {
         }
 
         public void setDescriptionText(String mask, String rate, String name) {
-            String description = String.format(mask, rate, name);
-
-            if (!name.isEmpty() || rate.isEmpty()) {
+            if ((name != null && rate != null) && (!name.isEmpty() && !rate.isEmpty())) {
+                String description = String.format(mask, rate, name);
                 this.descriptionText.setText(description);
             } else {
                 this.descriptionText.setText(R.string.no_info_text);

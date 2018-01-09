@@ -2,6 +2,7 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_info;
 
 import android.util.Log;
 
+import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Currency;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Electricity;
@@ -67,8 +68,11 @@ public class CountryInfoPresenterImpl implements CountryInfoPresenter {
                         model.add(UiModelMapper.convertWater(water));
                         model.add(UiModelMapper.convertTimezone(timezone));
 
-                        //TODO: items may be null
-                        view.setBackground(infoModel.getAnalytics().get(0).getFlag());
+                        //Analytics is an array with only one item
+                        List<CountryAnalytics> countryAnalytics = infoModel.getAnalytics();
+                        if (!countryAnalytics.isEmpty()) {
+                            view.setBackground(countryAnalytics.get(0).getFlag());
+                        }
                         view.onLoad(model);
                     }
                 });

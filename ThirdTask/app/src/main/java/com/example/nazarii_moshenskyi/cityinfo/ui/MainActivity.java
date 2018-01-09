@@ -4,11 +4,10 @@ import android.app.Application;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -40,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements MainView, Country
 
     @Inject
     MainPresenter presenter;
-    private List<String> list;
 
+    private List<String> list;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -157,4 +156,5 @@ public class MainActivity extends AppCompatActivity implements MainView, Country
 
         return true;
     }
+
 }
