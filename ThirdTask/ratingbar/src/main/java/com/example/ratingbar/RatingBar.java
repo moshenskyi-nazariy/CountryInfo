@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -50,7 +52,7 @@ public class RatingBar extends View {
 
     private void init(AttributeSet attrs) {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(Color.GRAY);
+        paint.setShader(new LinearGradient(startX, startY, startX + 2 * radius, startY + 2 * radius, Color.GREEN, Color.RED, Shader.TileMode.REPEAT));
         rect = new RectF();
 
         if (attrs != null) {
