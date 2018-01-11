@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.CurrencyInfoDelegate;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.DangerInfoDelegate;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.ElectricityInfoDelegate;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.TimezoneInfoDelegate;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.WaterInfoDelegate;
@@ -20,10 +21,12 @@ public class InfoAdapter extends RecyclerView.Adapter {
         this.dataSet = new ArrayList<>(0);
 
         delegatesManager = new AdapterDelegatesManager<>();
+
         delegatesManager.addDelegate(new CurrencyInfoDelegate());
         delegatesManager.addDelegate(new ElectricityInfoDelegate());
         delegatesManager.addDelegate(new TimezoneInfoDelegate());
         delegatesManager.addDelegate(new WaterInfoDelegate());
+        delegatesManager.addDelegate(new DangerInfoDelegate());
     }
 
     public void update(List<RowType> dataSet) {

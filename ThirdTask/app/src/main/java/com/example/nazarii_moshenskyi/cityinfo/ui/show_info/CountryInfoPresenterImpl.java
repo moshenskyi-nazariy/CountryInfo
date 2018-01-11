@@ -2,6 +2,7 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_info;
 
 import android.util.Log;
 
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Advise;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Currency;
@@ -63,11 +64,13 @@ public class CountryInfoPresenterImpl implements CountryInfoPresenter {
                         Currency currency = countryInfo.getCurrency();
                         Water water = countryInfo.getWater();
                         Timezone timezone = countryInfo.getTimezone();
+                        Advise advise = countryInfo.getAdvise();
 
                         model.add(UiModelMapper.convertCurrency(currency));
                         model.add(UiModelMapper.convertElectricity(electricity));
                         model.add(UiModelMapper.convertWater(water));
                         model.add(UiModelMapper.convertTimezone(timezone));
+                        model.add(UiModelMapper.convertAdvise(advise));
 
                         //Analytics is an array with only one item
                         List<CountryAnalytics> countryAnalytics = infoModel.getAnalytics();

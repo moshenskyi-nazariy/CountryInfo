@@ -15,19 +15,22 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class RatingBar extends View {
-    private static final int LEVEL_COUNT = 5;
+    private static final int LEVEL_COUNT = 4;
+    private static final float ANGLE = 180F;
+    private static final int DIVIDERS_STOKE_WIDTH = 2;
+    private static final int POINTER_STROKE_WIDTH = 20;
 
-    private int radius = 100;
-    private int startX = 50;
-    private int startY = 50;
-    private int endY = radius + startY;
-    private float center = (float) (startX + radius);
-
-    private Paint paint;
-    private RectF rect;
-    private int level;
+    private int radius;
+    private int middleX;
+    private int middleY;
     private int width;
     private int height;
+    private float angle;
+
+    private Paint paint;
+    private Paint lines;
+    private RectF rect;
+    private int level;
 
     public RatingBar(Context context) {
         super(context);
@@ -52,7 +55,7 @@ public class RatingBar extends View {
 
     private void init(AttributeSet attrs) {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setShader(new LinearGradient(startX, startY, startX + 2 * radius, startY + 2 * radius, Color.GREEN, Color.RED, Shader.TileMode.REPEAT));
+        lines = new Paint(Paint.ANTI_ALIAS_FLAG);
         rect = new RectF();
 
         if (attrs != null) {
@@ -65,33 +68,74 @@ public class RatingBar extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawArc(rect, 180F, 180F, true, paint);
+        drawArc(canvas);
         drawSections(canvas);
+        drawPointer(canvas);
+    }
+
+    private void drawPointer(Canvas canvas) {
+        lines.setStrokeWidth(POINTER_STROKE_WIDTH);
+
+        float sectionMiddle = angle * level - angle / 2;
+        float length = getLength(sectionMiddle, 1);
+        float height = getHeight(length);
+
+        canvas.drawCircle(middleX, middleY, this.height / 20, lines);
+        canvas.drawLine(middleX, middleY, middleX - length, radius - height, lines);
+    }
+
+    private void drawArc(Canvas canvas) {
+        paint.setShader(new LinearGradient(0, 0, getWidth(), 0, Color.GREEN, Color.RED, Shader.TileMode.MIRROR));
+        canvas.drawArc(rect, ANGLE, ANGLE, true, paint);
     }
 
     private void drawSections(Canvas canvas) {
-        float angle = 180 / (LEVEL_COUNT);
-        Paint lines = new Paint(Paint.ANTI_ALIAS_FLAG);
-        lines.setColor(Color.RED);
+        angle = ANGLE / (LEVEL_COUNT);
+
+        lines.setStrokeWidth(DIVIDERS_STOKE_WIDTH);
+        lines.setColor(Color.WHITE);
+
         float length, height;
 
-       for (int i = 1; i < LEVEL_COUNT; i++) {
-            length = (float) (Math.cos(Math.toRadians(angle * (i))) * radius);
-            float gipot = radius * radius;
-            float catet = length * length;
-            float xcatet = gipot - catet;
-            height = (float) Math.sqrt(xcatet);
-            canvas.drawLine(center, endY, center + length, endY - height, lines);
-       }
+        for (int section = 1; section < LEVEL_COUNT; section++) {
+            length = getLength(angle, section);
+            height = getHeight(length);
+            canvas.drawLine(middleX, middleY, middleX + length, radius - height, lines);
+        }
+    }
+
+    private float getLength(float angle, int section) {
+        return (float) (Math.cos(Math.toRadians(angle * (section))) * radius);
+    }
+
+    private float getHeight(float length) {
+        float hypotenuse = middleX * middleX;
+        float xCathetus = length * length;
+        float yCathetus = hypotenuse - xCathetus;
+
+        return (float) Math.sqrt(Math.abs(yCathetus));
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        //width = MeasureSpec.getSize(widthMeasureSpec);
-        //height = MeasureSpec.getSize(heightMeasureSpec);
+        if (getWidth() > getHeight()) {
+            width = height = getHeight();
+        } else {
+            height = width = getWidth();
+        }
 
-        rect.set(startX, startY, startX + 2 * radius, startY + 2 * radius);
+        middleX = width / 2;
+        middleY = height / 2;
+
+        radius = middleX;
+
+        rect.set(0, 0, width, height);
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+        invalidate();
     }
 }

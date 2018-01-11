@@ -1,5 +1,6 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model;
 
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Advise;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Currency;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Electricity;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Timezone;
@@ -35,5 +36,11 @@ public class UiModelMapper {
         timezoneInfo.setName(timezone.getName());
 
         return timezoneInfo;
+    }
+
+    public static DangerInfo convertAdvise(Advise advise) {
+        DangerInfo dangerInfo = new DangerInfo();
+        dangerInfo.setLevel(DangerLevelMapper.convertLevel(advise.getAdvise()));
+        return dangerInfo;
     }
 }

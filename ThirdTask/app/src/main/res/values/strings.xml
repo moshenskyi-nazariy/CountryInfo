@@ -22,4 +22,8 @@
     <string name="title_home">Home</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_history">Recents</string>
+    <string name="plugs_title">Plugs</string>
+    <string name="frequency_title">Frequency</string>
+    <string name="voltage_title">Voltage</string>
+    <string name="danger_level_title">Danger level</string>
 </resources>

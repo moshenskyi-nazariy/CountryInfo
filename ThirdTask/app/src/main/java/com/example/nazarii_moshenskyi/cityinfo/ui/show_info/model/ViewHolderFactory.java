@@ -1,12 +1,14 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.nazarii_moshenskyi.cityinfo.R;
+import com.example.ratingbar.RatingBar;
 
 public class ViewHolderFactory {
     public static class TextViewHolder extends RecyclerView.ViewHolder {
@@ -78,6 +80,19 @@ public class ViewHolderFactory {
         }
     }
 
+    public static class DangerViewHolder extends RecyclerView.ViewHolder {
+        private RatingBar dangerRating;
+
+        DangerViewHolder(View itemView) {
+            super(itemView);
+            dangerRating = itemView.findViewById(R.id.danger_rating);
+        }
+
+        public void setDangerRating(int level) {
+            dangerRating.setLevel(level);
+        }
+    }
+
     public static RecyclerView.ViewHolder createTextViewHolder(ViewGroup parent) {
         View textTypeView = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_item_text_type, parent, false);
         return new ViewHolderFactory.TextViewHolder(textTypeView);
@@ -86,6 +101,11 @@ public class ViewHolderFactory {
     public static RecyclerView.ViewHolder createElectricityViewHolder(ViewGroup parent) {
         View electricityTypeView = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_item_electricity_type, parent, false);
         return new ViewHolderFactory.ElectricityViewHolder(electricityTypeView);
+    }
+
+    public static RecyclerView.ViewHolder createDangerViewHolder(ViewGroup parent) {
+        View dangerTypeView = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_item_advise_type, parent, false);
+        return new ViewHolderFactory.DangerViewHolder(dangerTypeView);
     }
 
 }

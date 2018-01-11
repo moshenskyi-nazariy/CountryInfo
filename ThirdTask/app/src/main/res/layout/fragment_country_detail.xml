@@ -182,6 +182,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/recycler_end"
         app:layout_constraintStart_toStartOf="@+id/recycler_start"
@@ -207,6 +208,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.3580247" />
-
 
 </android.support.constraint.ConstraintLayout>
