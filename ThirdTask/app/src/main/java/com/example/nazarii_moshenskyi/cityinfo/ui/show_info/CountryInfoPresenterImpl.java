@@ -12,6 +12,7 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Timezone;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Water;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.DataManager;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.WebService;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.DangerInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.UiModelMapper;
 
@@ -70,14 +71,15 @@ public class CountryInfoPresenterImpl implements CountryInfoPresenter {
                         model.add(UiModelMapper.convertElectricity(electricity));
                         model.add(UiModelMapper.convertWater(water));
                         model.add(UiModelMapper.convertTimezone(timezone));
-                        model.add(UiModelMapper.convertAdvise(advise));
+
+                        DangerInfo dangerInfo = UiModelMapper.convertAdvise(advise);
 
                         //Analytics is an array with only one item
                         List<CountryAnalytics> countryAnalytics = infoModel.getAnalytics();
                         if (!countryAnalytics.isEmpty()) {
                             view.setBackground(countryAnalytics.get(0).getFlag());
                         }
-                        view.onLoad(model);
+                        view.onLoad(model, dangerInfo);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

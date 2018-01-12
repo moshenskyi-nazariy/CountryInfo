@@ -10,15 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.nazarii_moshenskyi.cityinfo.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.R;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.DangerInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.InfoAdapter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.ViewHolderFactory;
 import com.example.nazarii_moshenskyi.cityinfo.util.glide_svg.GlideApp;
 import com.example.nazarii_moshenskyi.cityinfo.util.glide_svg.SvgSoftwareLayerSetter;
+import com.example.ratingbar.RatingBar;
 
 import java.util.List;
 
@@ -34,6 +38,8 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView {
     private InfoAdapter infoAdapter;
     private RecyclerView infoRecyclerView;
     private ImageView flagImage;
+    private RatingBar dangerRating;
+    private TextView dangerTitle;
 
     @Inject
     public CountryInfoPresenter presenter;
@@ -91,6 +97,9 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView {
 
         flagImage = view.findViewById(R.id.flag_placeholder);
 
+        dangerRating = view.findViewById(R.id.danger_rating);
+        dangerTitle = view.findViewById(R.id.danger_title);
+
         requestBuilder = GlideApp.with(this)
                 .as(PictureDrawable.class)
                 .apply(new RequestOptions().override(flagImage.getWidth(), flagImage.getHeight()))
@@ -110,8 +119,15 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView {
     }
 
     @Override
-    public void onLoad(List<RowType> infoModel) {
+    public void onLoad(List<RowType> infoModel, DangerInfo dangerLevel) {
         infoAdapter.update(infoModel);
+
+        int level = dangerLevel.getLevel();
+        if (level == -1) {
+            dangerTitle.setVisibility(View.INVISIBLE);
+        } else {
+            dangerRating.setLevel(level);
+        }
     }
 
     @Override

@@ -120,10 +120,13 @@ public class RatingBar extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        if (getWidth() > getHeight()) {
-            width = height = getHeight();
+        int heightSize = getHeight();
+        int widthSize = getWidth();
+
+        if (widthSize > heightSize) {
+            width = height = heightSize;
         } else {
-            height = width = getWidth();
+            height = width = widthSize;
         }
 
         middleX = width / 2;
