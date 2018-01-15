@@ -1,5 +1,7 @@
 package com.example.nazarii_moshenskyi.cityinfo.interactor.repository;
 
+import android.util.Log;
+
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
@@ -28,22 +30,11 @@ public class WebServiceImpl implements WebService {
 
     @Override
     public Observable<CountryInfo> getInfo(String countryName) {
-        return countryInfoService.getInfo(countryName).onErrorReturn(new Function<Throwable, CountryInfo>() {
-
-            @Override
-            public CountryInfo apply(Throwable throwable) throws Exception {
-                return new CountryInfo();
-            }
-        });
+        return countryInfoService.getInfo(countryName);
     }
 
     public Observable<List<CountryAnalytics>> getAnalytics(String countryName) {
-        return countryAnalyticsService.getAnalytics(countryName).onErrorReturn(new Function<Throwable, List<CountryAnalytics>>() {
-            @Override
-            public List<CountryAnalytics> apply(Throwable throwable) throws Exception {
-                return Collections.emptyList();
-            }
-        });
+        return countryAnalyticsService.getAnalytics(countryName);
     }
 
     @Override

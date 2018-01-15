@@ -18,13 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Action;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class CountryInfoPresenterImpl extends BasePresenter<CountryInfoMvpView> implements CountryInfoMvpPresenter {
     private final DataManager manager;
     private List<RowType> model;
+    private Disposable countryDisposable;
     private static final String TAG = "CountryInfoMvpPresenter";
 
     public CountryInfoPresenterImpl(DataManager manager) {
@@ -39,10 +40,12 @@ public class CountryInfoPresenterImpl extends BasePresenter<CountryInfoMvpView> 
         if (model != null && model.size() > 0) {
             model.clear();
         }
+
+        countryDisposable.dispose();
     }
 
     public void getInfo(String countryName) {
-        manager.getInfo(countryName)
+        countryDisposable = manager.getInfo(countryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<InfoModel>() {
@@ -73,11 +76,6 @@ public class CountryInfoPresenterImpl extends BasePresenter<CountryInfoMvpView> 
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         handleError(throwable);
-                    }
-                }, new Action() {
-                    @Override
-                    public void run() throws Exception {
-
                     }
                 });
     }

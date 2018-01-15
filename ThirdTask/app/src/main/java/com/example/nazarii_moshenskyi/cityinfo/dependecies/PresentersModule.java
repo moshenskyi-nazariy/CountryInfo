@@ -17,19 +17,16 @@ import dagger.Provides;
 public class PresentersModule {
 
     @Provides
-    @Singleton
     public CountryMvpPresenter provideCountryPresenter(DataManager manager) {
         return new CountryPresenterImpl(manager);
     }
 
     @Provides
-    @Singleton
     public CountryInfoMvpPresenter provideCountryInfoPresenter(DataManager manager) {
         return new CountryInfoPresenterImpl(manager);
     }
 
     @Provides
-    @Singleton
     public MainMvpPresenter provideMainPresenter() {
         return new MainPresenterImpl();
     }

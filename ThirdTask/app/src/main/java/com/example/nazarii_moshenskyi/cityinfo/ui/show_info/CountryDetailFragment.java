@@ -84,6 +84,8 @@ public class CountryDetailFragment extends Fragment implements CountryInfoMvpVie
         outState.putString(COUNTRY_NAME, countryName);
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

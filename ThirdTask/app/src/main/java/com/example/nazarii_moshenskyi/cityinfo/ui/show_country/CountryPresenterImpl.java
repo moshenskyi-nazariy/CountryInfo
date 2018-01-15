@@ -8,11 +8,12 @@ import com.example.nazarii_moshenskyi.cityinfo.util.Filter;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class CountryPresenterImpl extends BasePresenter<CountryMvpView> implements CountryMvpPresenter {
-
+    private Disposable countriesDisposable;
     private final DataManager manager;
     private Filter itemFilter;
 
@@ -20,8 +21,14 @@ public class CountryPresenterImpl extends BasePresenter<CountryMvpView> implemen
         this.manager = manager;
     }
 
+    @Override
+    public void detachView() {
+        super.detachView();
+        countriesDisposable.dispose();
+    }
+
     public void getCountries() {
-        manager.getCountries().subscribeOn(Schedulers.io())
+        countriesDisposable =manager.getCountries().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Country>>() {
                     @Override
