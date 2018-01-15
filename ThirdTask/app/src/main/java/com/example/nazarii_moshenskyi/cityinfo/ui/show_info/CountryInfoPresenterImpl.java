@@ -22,7 +22,7 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class CountryInfoPresenterImpl extends BasePresenter<CountryInfoView> implements CountryInfoMvpPresenter {
+public class CountryInfoPresenterImpl extends BasePresenter<CountryInfoMvpView> implements CountryInfoMvpPresenter {
     private final DataManager manager;
     private List<RowType> model;
     private static final String TAG = "CountryInfoMvpPresenter";
@@ -72,7 +72,7 @@ public class CountryInfoPresenterImpl extends BasePresenter<CountryInfoView> imp
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        handleError(throwable);
                     }
                 }, new Action() {
                     @Override

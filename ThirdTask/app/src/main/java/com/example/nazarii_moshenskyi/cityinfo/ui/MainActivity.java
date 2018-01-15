@@ -27,10 +27,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNRY_LIST;
+import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_LIST;
 import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_EXTRA;
 
-public class MainActivity extends AppCompatActivity implements MainView, CountryFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements MainMvpView, CountryFragment.OnFragmentInteractionListener {
     private static final String TAG = "MainActivity";
     private CountryFragment masterFragment;
     private ConstraintLayout layout;
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements MainView, Country
         Log.d(TAG, "onClick: name=" + country.getName() + " sending to DetailActivity");
         Intent intent = new Intent(getApplicationContext(), CountryDetailActivity.class);
         intent.putExtra(COUNTRY_EXTRA, list.indexOf(country.getName()));
-        intent.putStringArrayListExtra(COUNRY_LIST, (ArrayList<String>) list);
+        intent.putStringArrayListExtra(COUNTRY_LIST, (ArrayList<String>) list);
         startActivity(intent);
     }
 

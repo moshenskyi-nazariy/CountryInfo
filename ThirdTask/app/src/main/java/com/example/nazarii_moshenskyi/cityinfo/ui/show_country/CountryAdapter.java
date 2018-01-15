@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
-    private final CountryView listener;
+    private final CountryMvpView listener;
     private List<Country> countries;
 
-    public CountryAdapter(CountryView listener) {
+    public CountryAdapter(CountryMvpView listener) {
         this.listener = listener;
         countries = new ArrayList<>(0);
     }

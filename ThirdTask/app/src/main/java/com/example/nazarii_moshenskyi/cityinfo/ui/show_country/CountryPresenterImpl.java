@@ -11,7 +11,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class CountryPresenterImpl extends BasePresenter<CountryView> implements CountryMvpPresenter {
+public class CountryPresenterImpl extends BasePresenter<CountryMvpView> implements CountryMvpPresenter {
 
     private final DataManager manager;
     private Filter itemFilter;
@@ -27,6 +27,11 @@ public class CountryPresenterImpl extends BasePresenter<CountryView> implements 
                     @Override
                     public void accept(List<Country> countries) throws Exception {
                         getView().onLoad(countries);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        handleError(throwable);
                     }
                 });
     }

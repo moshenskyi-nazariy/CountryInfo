@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -22,7 +23,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class CountryFragment extends Fragment implements CountryView {
+public class CountryFragment extends Fragment implements CountryMvpView {
     private OnFragmentInteractionListener listener;
     private RecyclerView countryList;
 
@@ -54,7 +55,6 @@ public class CountryFragment extends Fragment implements CountryView {
 
         layoutManager = new LinearLayoutManager(getContext());
         onNavigationItemSelectedListener = getOnNavigationItemSelectedListener();
-        presenter.attachView(this);
     }
 
     private void initList(View rootView) {
@@ -76,8 +76,14 @@ public class CountryFragment extends Fragment implements CountryView {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_country, container, false);
         initList(rootView);
-        presenter.getCountries();
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        presenter.attachView(this);
+        presenter.getCountries();
     }
 
     @Override

@@ -1,11 +1,11 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_country;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
-import com.example.nazarii_moshenskyi.cityinfo.ui.BaseView;
+import com.example.nazarii_moshenskyi.cityinfo.ui.BaseMvpView;
 
 import java.util.List;
 
-public interface CountryView extends BaseView {
+public interface CountryMvpView extends BaseMvpView {
 
     void onLoad(List<Country> items);
 

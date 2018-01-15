@@ -3,6 +3,7 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_info;
 import android.app.Application;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +30,7 @@ import javax.inject.Inject;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
-public class CountryDetailFragment extends Fragment implements CountryInfoView {
+public class CountryDetailFragment extends Fragment implements CountryInfoMvpView {
 
     private static final String COUNTRY_NAME = "country";
 
@@ -105,10 +106,14 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView {
                 .transition(withCrossFade())
                 .listener(new SvgSoftwareLayerSetter());
 
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         presenter.attachView(this);
         presenter.getInfo(countryName);
-
-        return view;
     }
 
     @Override

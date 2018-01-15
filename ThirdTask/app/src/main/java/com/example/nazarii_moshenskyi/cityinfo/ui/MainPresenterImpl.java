@@ -2,11 +2,11 @@ package com.example.nazarii_moshenskyi.cityinfo.ui;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 
-public class MainPresenterImpl extends BasePresenter<MainView> implements MainMvpPresenter {
+public class MainPresenterImpl extends BasePresenter<MainMvpView> implements MainMvpPresenter {
     private boolean isTwoPane;
 
     public void defineLayout() {
-        MainView view = getView();
+        MainMvpView view = getView();
         isTwoPane =  view.isLandscape() && view.isTablet();
         if (isTwoPane) {
             view.setDetailFragment();

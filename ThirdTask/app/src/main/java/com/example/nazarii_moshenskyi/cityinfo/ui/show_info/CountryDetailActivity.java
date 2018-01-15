@@ -11,9 +11,8 @@ import com.example.nazarii_moshenskyi.cityinfo.R;
 
 import java.util.List;
 
-import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNRY_LIST;
 import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_EXTRA;
-
+import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_LIST;
 
 public class CountryDetailActivity extends AppCompatActivity {
     private int countryPosition;
@@ -31,7 +30,7 @@ public class CountryDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         countryPosition = intent.getIntExtra(COUNTRY_EXTRA, 0);
-        countries = intent.getStringArrayListExtra(COUNRY_LIST);
+        countries = intent.getStringArrayListExtra(COUNTRY_LIST);
 
         setToolbar();
 
