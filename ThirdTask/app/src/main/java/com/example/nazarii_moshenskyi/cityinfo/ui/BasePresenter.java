@@ -1,9 +1,22 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui;
 
-public interface BasePresenter<T> {
-    void attachView(T view);
+public abstract class BasePresenter<T extends BaseView> implements BaseMvpPresenter<T> {
+    private T view;
 
-    void detachView();
+    @Override
+    public void attachView(T view) {
+        this.view = view;
+    }
 
-    void start();
+    @Override
+    public void detachView() {
+        if (view != null) {
+            view = null;
+        }
+    }
+
+    protected T getView() {
+        return view;
+    }
+
 }

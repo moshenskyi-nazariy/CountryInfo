@@ -2,25 +2,11 @@ package com.example.nazarii_moshenskyi.cityinfo.ui;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 
-public class MainPresenterImpl implements MainPresenter {
-
-    private MainView view;
+public class MainPresenterImpl extends BasePresenter<MainView> implements MainMvpPresenter {
     private boolean isTwoPane;
 
-    @Override
-    public void attachView(MainView view) {
-        this.view = view;
-    }
-
-    @Override
-    public void detachView() {
-        if (view != null) {
-            view = null;
-        }
-    }
-
-    @Override
-    public void start() {
+    public void defineLayout() {
+        MainView view = getView();
         isTwoPane =  view.isLandscape() && view.isTablet();
         if (isTwoPane) {
             view.setDetailFragment();
@@ -30,9 +16,9 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void onItemClicked(Country country) {
         if (isTwoPane) {
-            view.replaceDetailFragment(country);
+            getView().replaceDetailFragment(country);
         } else {
-            view.startDetailActivity(country);
+            getView().startDetailActivity(country);
         }
     }
 

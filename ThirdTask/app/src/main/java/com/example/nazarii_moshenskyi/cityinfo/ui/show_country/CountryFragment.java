@@ -32,7 +32,7 @@ public class CountryFragment extends Fragment implements CountryView {
     private BottomNavigationView bottomNavigationView;
 
     @Inject
-    public CountryPresenter presenter;
+    public CountryMvpPresenter presenter;
     private List<Country> items;
 
     public CountryFragment() {
@@ -76,7 +76,7 @@ public class CountryFragment extends Fragment implements CountryView {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_country, container, false);
         initList(rootView);
-        presenter.start();
+        presenter.getCountries();
         return rootView;
     }
 

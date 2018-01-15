@@ -1,7 +1,5 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info;
 
-import android.util.Log;
-
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Advise;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
@@ -11,7 +9,7 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.InfoModel;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Timezone;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Water;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.DataManager;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.WebService;
+import com.example.nazarii_moshenskyi.cityinfo.ui.BasePresenter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.DangerInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.UiModelMapper;
@@ -22,35 +20,25 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
-public class CountryInfoPresenterImpl implements CountryInfoPresenter {
+public class CountryInfoPresenterImpl extends BasePresenter<CountryInfoView> implements CountryInfoMvpPresenter {
     private final DataManager manager;
-    private CountryInfoView view;
     private List<RowType> model;
-    private static final String TAG = "CountryInfoPresenter";
+    private static final String TAG = "CountryInfoMvpPresenter";
 
     public CountryInfoPresenterImpl(DataManager manager) {
         this.manager = manager;
         model = new ArrayList<>();
     }
 
-    public void attachView(CountryInfoView view) {
-        this.view = view;
-    }
-
+    @Override
     public void detachView() {
-        if (view != null) {
-            view = null;
-        }
+        super.detachView();
 
         if (model != null && model.size() > 0) {
             model.clear();
         }
-    }
-
-    public void start() {
     }
 
     public void getInfo(String countryName) {
@@ -77,9 +65,9 @@ public class CountryInfoPresenterImpl implements CountryInfoPresenter {
                         //Analytics is an array with only one item
                         List<CountryAnalytics> countryAnalytics = infoModel.getAnalytics();
                         if (!countryAnalytics.isEmpty()) {
-                            view.setBackground(countryAnalytics.get(0).getFlag());
+                            getView().setBackground(countryAnalytics.get(0).getFlag());
                         }
-                        view.onLoad(model, dangerInfo);
+                        getView().onLoad(model, dangerInfo);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

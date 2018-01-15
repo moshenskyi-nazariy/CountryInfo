@@ -4,10 +4,8 @@ import android.app.Application;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -38,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements MainView, Country
     private ConstraintLayout layout;
 
     @Inject
-    MainPresenter presenter;
+    MainMvpPresenter presenter;
 
     private List<String> list;
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements MainView, Country
         presenter = new MainPresenterImpl();
 
         presenter.attachView(this);
-        presenter.start();
+        presenter.defineLayout();
 
         showCountries();
     }

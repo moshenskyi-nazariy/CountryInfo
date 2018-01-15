@@ -19,7 +19,6 @@ import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.DangerInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.InfoAdapter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.ViewHolderFactory;
 import com.example.nazarii_moshenskyi.cityinfo.util.glide_svg.GlideApp;
 import com.example.nazarii_moshenskyi.cityinfo.util.glide_svg.SvgSoftwareLayerSetter;
 import com.example.ratingbar.RatingBar;
@@ -42,7 +41,7 @@ public class CountryDetailFragment extends Fragment implements CountryInfoView {
     private TextView dangerTitle;
 
     @Inject
-    public CountryInfoPresenter presenter;
+    public CountryInfoMvpPresenter presenter;
 
     private String countryName;
     private RequestBuilder<PictureDrawable> requestBuilder;
