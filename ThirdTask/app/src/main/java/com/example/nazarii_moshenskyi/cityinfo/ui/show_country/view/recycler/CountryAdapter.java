@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.AdapterOnClickListener;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.CountryMvpView;
 
 import java.util.ArrayList;
 import java.util.List;

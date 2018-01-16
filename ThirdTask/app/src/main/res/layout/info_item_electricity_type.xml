@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -23,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.33"/>
+            app:layout_constraintGuide_percent="0.33" />
 
         <TextView
             android:id="@+id/voltage_title"
@@ -37,14 +36,14 @@
             app:layout_constraintEnd_toEndOf="@id/population_end"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:textSize="18sp"/>
+            tools:textSize="18sp" />
 
         <android.support.constraint.Guideline
             android:id="@+id/card_middle"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.6"/>
+            app:layout_constraintGuide_percent="0.6" />
 
         <TextView
             android:id="@+id/voltage"
@@ -58,7 +57,7 @@
             app:layout_constraintEnd_toStartOf="@+id/population_end"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/card_middle"
-            tools:text="33454"/>
+            tools:text="33454" />
 
         <TextView
             android:id="@+id/frequency_title"
@@ -72,14 +71,14 @@
             app:layout_constraintBottom_toTopOf="@+id/card_middle"
             app:layout_constraintEnd_toStartOf="@id/area_end"
             app:layout_constraintStart_toStartOf="@+id/population_end"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.Guideline
             android:id="@+id/area_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.68"/>
+            app:layout_constraintGuide_percent="0.68" />
 
         <TextView
             android:id="@+id/frequency"
@@ -93,7 +92,7 @@
             app:layout_constraintEnd_toStartOf="@+id/area_end"
             app:layout_constraintStart_toStartOf="@+id/population_end"
             app:layout_constraintTop_toBottomOf="@+id/frequency_title"
-            tools:text="354454543"/>
+            tools:text="354454543" />
 
         <TextView
             android:id="@+id/plugs_title"
@@ -107,7 +106,7 @@
             app:layout_constraintBottom_toTopOf="@+id/card_middle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/area_end"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/plugs"
@@ -121,7 +120,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/area_end"
             app:layout_constraintTop_toBottomOf="@+id/plugs_title"
-            tools:text="EU"/>
+            tools:text="EU" />
 
     </android.support.constraint.ConstraintLayout>
 

@@ -3,14 +3,11 @@ package com.example.nazarii_moshenskyi.cityinfo.interactor.repository;
 import android.util.Log;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
-import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
-import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.InfoModel;
 
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.BiFunction;
 
 public class DataManager {
     private static final String TAG = "DataManager";

@@ -1,21 +1,15 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_country.presenter;
 
-import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.DataManager;
-import com.example.nazarii_moshenskyi.cityinfo.ui.base.BasePresenter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.base.RxBasePresenter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.CountryMvpView;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.recycler.CountryAdapter;
 import com.example.nazarii_moshenskyi.cityinfo.util.Filter;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class CountryPresenterImpl extends RxBasePresenter<CountryMvpView> implements CountryMvpPresenter {
@@ -32,7 +26,7 @@ public class CountryPresenterImpl extends RxBasePresenter<CountryMvpView> implem
         getCompositeDisposable().add(manager.getCountries().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(countries -> getView().onLoad(countries)
-                , this::handleError));
+                        , this::handleError));
     }
 
     @Override
