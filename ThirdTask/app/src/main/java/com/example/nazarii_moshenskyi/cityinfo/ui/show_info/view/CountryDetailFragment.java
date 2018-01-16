@@ -73,9 +73,6 @@ public class CountryDetailFragment extends Fragment implements CountryInfoMvpVie
         super.onCreate(savedInstanceState);
 
         Application application = getActivity().getApplication();
-        if (application == null) {
-            return;
-        }
         ((CountryInfoApplication) application).getCountryComponent().inject(this);
 
         if (savedInstanceState == null) {

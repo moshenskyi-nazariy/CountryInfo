@@ -51,9 +51,6 @@ public class CountryFragment extends Fragment implements CountryMvpView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Application application = getActivity().getApplication();
-        if (application == null) {
-            return;
-        }
         ((CountryInfoApplication) application).getCountryComponent().inject(this);
 
         layoutManager = new LinearLayoutManager(getContext());
