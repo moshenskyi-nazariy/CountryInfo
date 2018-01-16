@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements MainMvpView, Coun
         masterFragment = CountryFragment.newInstance();
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.country_name_container, masterFragment)
+                .replace(R.id.country_name_container, masterFragment)
                 .commit();
     }
 

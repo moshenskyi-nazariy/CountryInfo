@@ -75,6 +75,7 @@ public class CountryFragment extends Fragment implements CountryMvpView, Adapter
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_country, container, false);
+        presenter.attachView(this);
         initList(rootView);
         return rootView;
     }
@@ -82,7 +83,6 @@ public class CountryFragment extends Fragment implements CountryMvpView, Adapter
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter.attachView(this);
         presenter.getCountries();
     }
 
@@ -101,6 +101,11 @@ public class CountryFragment extends Fragment implements CountryMvpView, Adapter
     public void onDetach() {
         super.onDetach();
         listener = null;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
         presenter.detachView();
     }
 

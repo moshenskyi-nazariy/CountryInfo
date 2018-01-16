@@ -4,12 +4,10 @@ import android.app.Application;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
 import android.support.constraint.Guideline;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,20 +115,19 @@ public class CountryDetailFragment extends Fragment implements CountryInfoMvpVie
                 .apply(new RequestOptions().override(flagImage.getWidth(), flagImage.getHeight()))
                 .transition(withCrossFade())
                 .listener(new SvgSoftwareLayerSetter());
-
+        presenter.attachView(this);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter.attachView(this);
         presenter.getInfo(countryName);
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
+    public void onDestroyView() {
+        super.onDestroyView();
         presenter.detachView();
     }
 

@@ -81,7 +81,7 @@ public class RatingBar extends View {
         float height = getHeight(length);
 
         canvas.drawCircle(middleX, middleY, this.height / 20, lines);
-        canvas.drawLine(middleX, middleY, middleX - length, radius - height, lines);
+        canvas.drawLine(middleX, middleY, middleX - length, middleY - height, lines);
     }
 
     private void drawArc(Canvas canvas) {
@@ -100,12 +100,12 @@ public class RatingBar extends View {
         for (int section = 1; section < LEVEL_COUNT; section++) {
             length = getLength(angle, section);
             height = getHeight(length);
-            canvas.drawLine(middleX, middleY, middleX + length, radius - height, lines);
+            canvas.drawLine(middleX, middleY, middleX + length, middleY - height, lines);
         }
     }
 
     private float getLength(float angle, int section) {
-        return (float) (Math.cos(Math.toRadians(angle * (section))) * radius);
+        return (float) (Math.cos(Math.toRadians(angle * (section))) * middleX);
     }
 
     private float getHeight(float length) {
@@ -132,7 +132,7 @@ public class RatingBar extends View {
         middleX = width / 2;
         middleY = height / 2;
 
-        radius = middleX;
+        radius = middleX / 2;
 
         rect.set(0, 0, width, height);
     }
