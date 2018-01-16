@@ -78,8 +78,6 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         if (savedInstanceState == null) {
             countryName = getArguments().getString(COUNTRY_NAME);
         } else {
@@ -128,7 +126,7 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter.getInfo(countryName);
+        getPresenter().getInfo(countryName);
     }
 
     @Override

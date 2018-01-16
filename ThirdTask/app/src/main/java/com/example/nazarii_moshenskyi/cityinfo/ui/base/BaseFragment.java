@@ -19,12 +19,16 @@ public abstract class BaseFragment<T extends  BaseMvpPresenter<E>, E extends Bas
         if ((presenter = createPresenter()) == null) {
             throw new NullPointerException("Presenter shouldn't be null");
         }
+        presenter.attachView((E) this);
+    }
+
+    public T getPresenter() {
+        return presenter;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        presenter.attachView((E) this);
         return super.onCreateView(inflater, container, savedInstanceState);
 
     }

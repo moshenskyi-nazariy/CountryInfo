@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,7 +18,6 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 import com.example.nazarii_moshenskyi.cityinfo.ui.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.ui.base.BaseActivity;
 import com.example.nazarii_moshenskyi.cityinfo.ui.main.presenter.MainMvpPresenter;
-import com.example.nazarii_moshenskyi.cityinfo.ui.main.presenter.MainPresenterImpl;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.CountryFragment;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.view.CountryDetailActivity;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.view.CountryDetailFragment;
@@ -35,6 +33,7 @@ import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_LIST;
 
 public class MainActivity extends BaseActivity<MainMvpPresenter, MainMvpView> implements MainMvpView, CountryFragment.OnFragmentInteractionListener {
     private static final String TAG = "MainActivity";
+    public static final String COUNTRY_FRAGMENT = "CountryFragment";
     private CountryFragment masterFragment;
     private ConstraintLayout layout;
 
@@ -62,15 +61,19 @@ public class MainActivity extends BaseActivity<MainMvpPresenter, MainMvpView> im
         setSupportActionBar(toolbar);
 
         getPresenter().defineLayout();
-        showCountries();
+        if(savedInstanceState == null){
+            setMasterFragment();
+        }
     }
 
-    private void showCountries() {
+    private void setMasterFragment() {
         masterFragment = CountryFragment.newInstance();
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.country_name_container, masterFragment)
+                .replace(R.id.country_name_container, masterFragment, COUNTRY_FRAGMENT)
+                .addToBackStack(COUNTRY_FRAGMENT)
                 .commit();
+
     }
 
     public void setDetailFragment() {
