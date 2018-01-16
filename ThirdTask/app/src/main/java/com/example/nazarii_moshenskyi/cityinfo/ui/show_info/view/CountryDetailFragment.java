@@ -122,7 +122,6 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
                 .apply(new RequestOptions().override(flagImage.getWidth(), flagImage.getHeight()))
                 .transition(withCrossFade())
                 .listener(new SvgSoftwareLayerSetter());
-        presenter.attachView(this);
         return view;
     }
 
