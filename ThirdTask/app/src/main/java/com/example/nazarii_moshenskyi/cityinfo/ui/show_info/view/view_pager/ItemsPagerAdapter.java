@@ -27,7 +27,7 @@ public class ItemsPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return items == null? 0 : items.size();
+        return items == null ? 0 : items.size();
     }
 
 }

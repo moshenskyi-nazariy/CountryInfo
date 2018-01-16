@@ -11,7 +11,6 @@ import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.ViewHolderFactory;
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class CurrencyInfoDelegate extends AdapterDelegate<List<RowType>> {

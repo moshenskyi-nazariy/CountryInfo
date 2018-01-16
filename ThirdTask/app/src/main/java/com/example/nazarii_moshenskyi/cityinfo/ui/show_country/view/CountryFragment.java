@@ -15,9 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.nazarii_moshenskyi.cityinfo.ui.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
+import com.example.nazarii_moshenskyi.cityinfo.ui.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.presenter.CountryMvpPresenter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.recycler.CountryAdapter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.recycler.CountryItemDecorator;

@@ -3,8 +3,8 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_country.presenter;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.DataManager;
 import com.example.nazarii_moshenskyi.cityinfo.ui.base.BasePresenter;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.recycler.CountryAdapter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.CountryMvpView;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.recycler.CountryAdapter;
 import com.example.nazarii_moshenskyi.cityinfo.util.Filter;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class CountryPresenterImpl extends BasePresenter<CountryMvpView> implemen
     }
 
     public void getCountries() {
-        countriesDisposable =manager.getCountries().subscribeOn(Schedulers.io())
+        countriesDisposable = manager.getCountries().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Country>>() {
                     @Override

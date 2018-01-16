@@ -28,7 +28,7 @@ public class InfoAdapter extends RecyclerView.Adapter {
     }
 
     public void update(List<RowType> dataSet) {
-        if(dataSet != null) {
+        if (dataSet != null) {
             this.dataSet = dataSet;
             notifyDataSetChanged();
         }

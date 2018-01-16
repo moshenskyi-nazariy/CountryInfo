@@ -4,9 +4,12 @@ import android.app.Application;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
+import android.support.constraint.Guideline;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +18,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.nazarii_moshenskyi.cityinfo.ui.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.R;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
+import com.example.nazarii_moshenskyi.cityinfo.ui.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.DangerInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.InfoAdapter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
@@ -41,6 +45,10 @@ public class CountryDetailFragment extends Fragment implements CountryInfoMvpVie
     private ImageView flagImage;
     private RatingBar dangerRating;
     private TextView dangerTitle;
+    private Guideline dangerTitleTop;
+    private TextView population;
+    private TextView area;
+    private TextView continent;
 
     @Inject
     public CountryInfoMvpPresenter presenter;
@@ -86,7 +94,6 @@ public class CountryDetailFragment extends Fragment implements CountryInfoMvpVie
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -102,6 +109,11 @@ public class CountryDetailFragment extends Fragment implements CountryInfoMvpVie
 
         dangerRating = view.findViewById(R.id.danger_rating);
         dangerTitle = view.findViewById(R.id.danger_title);
+        dangerTitleTop = view.findViewById(R.id.title_bottom);
+
+        population = view.findViewById(R.id.population);
+        area = view.findViewById(R.id.area);
+        continent = view.findViewById(R.id.continent);
 
         requestBuilder = GlideApp.with(this)
                 .as(PictureDrawable.class)
@@ -131,7 +143,9 @@ public class CountryDetailFragment extends Fragment implements CountryInfoMvpVie
 
         int level = dangerLevel.getLevel();
         if (level == -1) {
-            dangerTitle.setVisibility(View.INVISIBLE);
+            dangerTitle.setVisibility(View.GONE);
+            dangerTitleTop.setVisibility(View.GONE);
+            dangerRating.setVisibility(View.GONE);
         } else {
             dangerRating.setLevel(level);
         }
@@ -144,5 +158,20 @@ public class CountryDetailFragment extends Fragment implements CountryInfoMvpVie
         }
     }
 
+    public void setTitleInfo(CountryAnalytics analytics, String continent) {
+        Integer analyticsPopulation;
+        if ((analyticsPopulation = analytics.getPopulation()) != null) {
+            population.setText(String.valueOf(analyticsPopulation));
+        }
+
+        Integer analyticsArea;
+        if ((analyticsArea = analytics.getArea()) != null) {
+            area.setText(String.valueOf(analyticsArea));
+        }
+
+        if (continent != null) {
+            this.continent.setText(continent);
+        }
+    }
 
 }

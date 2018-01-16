@@ -1,14 +1,12 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.nazarii_moshenskyi.cityinfo.R;
-import com.example.ratingbar.RatingBar;
 
 public class ViewHolderFactory {
     public static class TextViewHolder extends RecyclerView.ViewHolder {

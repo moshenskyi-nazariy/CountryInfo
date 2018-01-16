@@ -2,9 +2,6 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.base;
 
 import android.util.Log;
 
-import com.example.nazarii_moshenskyi.cityinfo.ui.base.BaseMvpPresenter;
-import com.example.nazarii_moshenskyi.cityinfo.ui.base.BaseMvpView;
-
 import java.io.IOException;
 
 import retrofit2.HttpException;
@@ -32,7 +29,7 @@ public abstract class BasePresenter<T extends BaseMvpView> implements BaseMvpPre
     protected void handleError(Throwable throwable) {
         if (throwable instanceof HttpException) {
             Log.d(TAG, "handleError: Non-2XX exception(" + throwable.getClass() + "):" + throwable.getMessage());
-        } else if (throwable instanceof IOException){
+        } else if (throwable instanceof IOException) {
             Log.d(TAG, "handleError: Network error(" + throwable.getClass() + "):" + throwable.getMessage());
         } else {
             Log.d(TAG, "handleError: " + throwable.getClass() + "):" + throwable.getMessage());

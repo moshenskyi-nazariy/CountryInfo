@@ -1,7 +1,5 @@
 package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
-import android.util.Log;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

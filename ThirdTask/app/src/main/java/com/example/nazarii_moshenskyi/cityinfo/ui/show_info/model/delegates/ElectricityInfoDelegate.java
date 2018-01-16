@@ -25,6 +25,7 @@ public class ElectricityInfoDelegate extends AdapterDelegate<List<RowType>> {
     protected RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
         return electricityViewHolder = (ViewHolderFactory.ElectricityViewHolder) ViewHolderFactory.createElectricityViewHolder(parent);
     }
+
     @Override
     protected void onBindViewHolder(@NonNull List<RowType> items, int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
         ElectricityInfo infoItem = (ElectricityInfo) items.get(position);

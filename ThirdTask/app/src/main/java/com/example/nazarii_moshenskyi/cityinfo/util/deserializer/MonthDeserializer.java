@@ -9,7 +9,12 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 
-import static com.example.nazarii_moshenskyi.cityinfo.data.model.Month.MonthContract.*;
+import static com.example.nazarii_moshenskyi.cityinfo.data.model.Month.MonthContract.PAVG;
+import static com.example.nazarii_moshenskyi.cityinfo.data.model.Month.MonthContract.PMAX;
+import static com.example.nazarii_moshenskyi.cityinfo.data.model.Month.MonthContract.PMIN;
+import static com.example.nazarii_moshenskyi.cityinfo.data.model.Month.MonthContract.TAVG;
+import static com.example.nazarii_moshenskyi.cityinfo.data.model.Month.MonthContract.TMAX;
+import static com.example.nazarii_moshenskyi.cityinfo.data.model.Month.MonthContract.TMIN;
 
 public class MonthDeserializer implements JsonDeserializer<Month> {
     @Override

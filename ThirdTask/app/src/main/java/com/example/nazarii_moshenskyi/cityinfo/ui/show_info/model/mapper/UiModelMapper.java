@@ -1,8 +1,10 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.mapper;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Advise;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Currency;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Electricity;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Names;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Timezone;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Water;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.CurrencyInfo;
@@ -10,7 +12,8 @@ import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.DangerInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.ElectricityInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.TimezoneInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.WaterInfo;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.mapper.DangerLevelMapper;
+
+import java.util.List;
 
 public class UiModelMapper {
     public static CurrencyInfo convertCurrency(Currency currency) {
@@ -48,5 +51,17 @@ public class UiModelMapper {
         DangerInfo dangerInfo = new DangerInfo();
         dangerInfo.setLevel(DangerLevelMapper.convertLevel(advise.getAdvise()));
         return dangerInfo;
+    }
+
+    public static String convertContinent(Names names) {
+        return names.getContinent();
+    }
+
+    public static CountryAnalytics convertCountryAnalytics(List<CountryAnalytics> analytics) {
+        if (!analytics.isEmpty()) {
+            return analytics.get(0);
+        }
+
+        return null;
     }
 }

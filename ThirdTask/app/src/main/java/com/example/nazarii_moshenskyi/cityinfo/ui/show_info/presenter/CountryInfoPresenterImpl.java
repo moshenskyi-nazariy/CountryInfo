@@ -10,10 +10,10 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Timezone;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Water;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.DataManager;
 import com.example.nazarii_moshenskyi.cityinfo.ui.base.BasePresenter;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.view.CountryInfoMvpView;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.DangerInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.mapper.UiModelMapper;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.view.CountryInfoMvpView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,9 +67,10 @@ public class CountryInfoPresenterImpl extends BasePresenter<CountryInfoMvpView> 
                         DangerInfo dangerInfo = UiModelMapper.convertAdvise(advise);
 
                         //Analytics is an array with only one item
-                        List<CountryAnalytics> countryAnalytics = infoModel.getAnalytics();
-                        if (!countryAnalytics.isEmpty()) {
-                            getView().setBackground(countryAnalytics.get(0).getFlag());
+                        CountryAnalytics countryAnalytics = UiModelMapper.convertCountryAnalytics(infoModel.getAnalytics());
+                        if (countryAnalytics != null) {
+                            getView().setBackground(countryAnalytics.getFlag());
+                            getView().setTitleInfo(countryAnalytics, UiModelMapper.convertContinent(countryInfo.getNames()));
                         }
                         getView().onLoad(model, dangerInfo);
                     }

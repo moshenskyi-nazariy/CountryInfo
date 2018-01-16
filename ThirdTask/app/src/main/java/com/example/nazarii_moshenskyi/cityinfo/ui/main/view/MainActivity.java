@@ -14,9 +14,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.nazarii_moshenskyi.cityinfo.ui.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
+import com.example.nazarii_moshenskyi.cityinfo.ui.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.ui.main.presenter.MainMvpPresenter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.main.presenter.MainPresenterImpl;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.CountryFragment;
@@ -29,8 +29,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_LIST;
 import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_EXTRA;
+import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_LIST;
 
 public class MainActivity extends AppCompatActivity implements MainMvpView, CountryFragment.OnFragmentInteractionListener {
     private static final String TAG = "MainActivity";
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements MainMvpView, Coun
     MainMvpPresenter presenter;
 
     private List<String> list;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

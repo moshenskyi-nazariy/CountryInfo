@@ -30,7 +30,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     }
 
     public void update(List<Country> countries) {
-        if(countries != null) {
+        if (countries != null) {
             this.countries = countries;
             notifyDataSetChanged();
         }

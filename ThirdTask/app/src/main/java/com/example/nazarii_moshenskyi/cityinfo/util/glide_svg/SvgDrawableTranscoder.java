@@ -2,6 +2,7 @@ package com.example.nazarii_moshenskyi.cityinfo.util.glide_svg;
 
 import android.graphics.Picture;
 import android.graphics.drawable.PictureDrawable;
+
 import com.bumptech.glide.load.Options;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.resource.SimpleResource;
