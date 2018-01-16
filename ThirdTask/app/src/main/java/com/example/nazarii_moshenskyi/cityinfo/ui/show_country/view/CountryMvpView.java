@@ -9,8 +9,6 @@ public interface CountryMvpView extends BaseMvpView {
 
     void onLoad(List<Country> items);
 
-    void onClick(Country country);
-
     void onTextChanged(String text);
 
     List<Country> getItems();

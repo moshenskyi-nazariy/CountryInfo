@@ -26,7 +26,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class CountryFragment extends Fragment implements CountryMvpView {
+public class CountryFragment extends Fragment implements CountryMvpView, AdapterOnClickListener {
     private OnFragmentInteractionListener listener;
     private RecyclerView countryList;
 
@@ -135,20 +135,17 @@ public class CountryFragment extends Fragment implements CountryMvpView {
 
     @NonNull
     private BottomNavigationView.OnNavigationItemSelectedListener getOnNavigationItemSelectedListener() {
-        return new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        layoutManager.scrollToPosition(0);
-                        return true;
-                    case R.id.navigation_dashboard:
-                        return true;
-                    case R.id.navigation_notifications:
-                        return true;
-                }
-                return false;
+        return item -> {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    layoutManager.scrollToPosition(0);
+                    return true;
+                case R.id.navigation_dashboard:
+                    return true;
+                case R.id.navigation_notifications:
+                    return true;
             }
+            return false;
         };
     }
 }
