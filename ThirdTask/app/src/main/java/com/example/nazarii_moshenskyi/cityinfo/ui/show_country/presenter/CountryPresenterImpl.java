@@ -10,6 +10,8 @@ import com.example.nazarii_moshenskyi.cityinfo.util.Filter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -20,6 +22,7 @@ public class CountryPresenterImpl extends RxBasePresenter<CountryMvpView> implem
     private final DataManager manager;
     private Filter itemFilter;
 
+    @Inject
     public CountryPresenterImpl(DataManager manager, CompositeDisposable disposable) {
         super(disposable);
         this.manager = manager;

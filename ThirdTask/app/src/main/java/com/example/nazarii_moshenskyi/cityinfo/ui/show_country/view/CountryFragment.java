@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 import com.example.nazarii_moshenskyi.cityinfo.ui.CountryInfoApplication;
+import com.example.nazarii_moshenskyi.cityinfo.ui.base.BaseFragment;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.presenter.CountryMvpPresenter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.recycler.CountryAdapter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.recycler.CountryItemDecorator;
@@ -26,7 +27,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class CountryFragment extends Fragment implements CountryMvpView, AdapterOnClickListener {
+public class CountryFragment extends BaseFragment<CountryMvpPresenter> implements CountryMvpView, AdapterOnClickListener {
     private OnFragmentInteractionListener listener;
     private RecyclerView countryList;
 
@@ -101,12 +102,6 @@ public class CountryFragment extends Fragment implements CountryMvpView, Adapter
     public void onDetach() {
         super.onDetach();
         listener = null;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        presenter.detachView();
     }
 
     public void onTextChanged(String input) {

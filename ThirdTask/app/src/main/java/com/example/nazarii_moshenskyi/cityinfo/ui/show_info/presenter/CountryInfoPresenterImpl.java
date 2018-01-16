@@ -19,6 +19,8 @@ import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.view.CountryInfoMvpV
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -29,6 +31,7 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
     private final DataManager manager;
     private List<RowType> model;
 
+    @Inject
     public CountryInfoPresenterImpl(DataManager manager, CompositeDisposable disposable) {
         super(disposable);
         this.manager = manager;

@@ -19,6 +19,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
 import com.example.nazarii_moshenskyi.cityinfo.ui.CountryInfoApplication;
+import com.example.nazarii_moshenskyi.cityinfo.ui.base.BaseFragment;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.DangerInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.InfoAdapter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
@@ -33,7 +34,7 @@ import javax.inject.Inject;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
-public class CountryDetailFragment extends Fragment implements CountryInfoMvpView {
+public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter> implements CountryInfoMvpView {
 
     private static final String COUNTRY_NAME = "country";
 
@@ -123,12 +124,6 @@ public class CountryDetailFragment extends Fragment implements CountryInfoMvpVie
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter.getInfo(countryName);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        presenter.detachView();
     }
 
     @Override
