@@ -5,6 +5,8 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Advise;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Month;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Vaccine;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Weather;
+import com.example.nazarii_moshenskyi.cityinfo.dependecies.scopes.AnalyticsRetrofit;
+import com.example.nazarii_moshenskyi.cityinfo.dependecies.scopes.InfoRetrofit;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryAnalyticsService;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryInfoService;
 import com.example.nazarii_moshenskyi.cityinfo.util.deserializer.AdviseDeserializer;
@@ -30,7 +32,7 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    @Named("InfoRetrofit")
+    @InfoRetrofit
     Retrofit provideInfoRetrofit(Gson gson, OkHttpClient client) {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.INFO_BASE_URL)
@@ -53,7 +55,7 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    @Named("AnalyticsRetrofit")
+    @AnalyticsRetrofit
     Retrofit provideAnalyticsRetrofit(OkHttpClient client) {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.ANALYTICS_BASE_URL)
@@ -65,13 +67,13 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    CountryInfoService provideInfoService(@Named("InfoRetrofit") Retrofit retrofit) {
+    CountryInfoService provideInfoService(@InfoRetrofit Retrofit retrofit) {
         return retrofit.create(CountryInfoService.class);
     }
 
     @Provides
     @Singleton
-    CountryAnalyticsService provideAnalyticsService(@Named("AnalyticsRetrofit") Retrofit retrofit) {
+    CountryAnalyticsService provideAnalyticsService(@AnalyticsRetrofit Retrofit retrofit) {
         return retrofit.create(CountryAnalyticsService.class);
     }
 
