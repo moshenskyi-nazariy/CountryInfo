@@ -25,14 +25,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class CountryFragment extends BaseFragment<CountryMvpPresenter> implements CountryMvpView, AdapterOnClickListener {
+public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMvpView> implements CountryMvpView, AdapterOnClickListener {
     private OnFragmentInteractionListener listener;
-    private RecyclerView countryList;
 
     private CountryAdapter countryAdapter;
     private LinearLayoutManager layoutManager;
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener;
-    private BottomNavigationView bottomNavigationView;
 
     @Inject
     public CountryMvpPresenter presenter;
@@ -47,20 +45,26 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter> implement
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected CountryMvpPresenter createPresenter() {
         Application application = getActivity().getApplication();
         ((CountryInfoApplication) application).getCountryComponent().inject(this);
+
+        return presenter;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         layoutManager = new LinearLayoutManager(getContext());
         onNavigationItemSelectedListener = getOnNavigationItemSelectedListener();
     }
 
     private void initList(View rootView) {
-        bottomNavigationView = rootView.findViewById(R.id.navigation);
+        BottomNavigationView bottomNavigationView = rootView.findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
-        countryList = rootView.findViewById(R.id.country_list);
+        RecyclerView countryList = rootView.findViewById(R.id.country_list);
         countryList.setItemAnimator(new DefaultItemAnimator());
         countryList.addItemDecoration(new CountryItemDecorator((int) getResources().
                 getDimension(R.dimen.margins)));
@@ -73,8 +77,8 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter> implement
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_country, container, false);
-        presenter.attachView(this);
         initList(rootView);
         return rootView;
     }

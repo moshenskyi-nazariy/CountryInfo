@@ -33,7 +33,7 @@ import javax.inject.Inject;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
-public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter> implements CountryInfoMvpView {
+public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter, CountryInfoMvpView> implements CountryInfoMvpView {
 
     private static final String COUNTRY_NAME = "country";
 
@@ -67,11 +67,18 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter>
     }
 
     @Override
+    protected CountryInfoMvpPresenter createPresenter() {
+        Application application = getActivity().getApplication();
+        ((CountryInfoApplication) application).getCountryComponent().inject(this);
+
+        return presenter;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Application application = getActivity().getApplication();
-        ((CountryInfoApplication) application).getCountryComponent().inject(this);
+
 
         if (savedInstanceState == null) {
             countryName = getArguments().getString(COUNTRY_NAME);

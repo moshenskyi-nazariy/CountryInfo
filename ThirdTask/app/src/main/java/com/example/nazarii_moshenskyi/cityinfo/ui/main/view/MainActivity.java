@@ -17,6 +17,7 @@ import android.view.View;
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 import com.example.nazarii_moshenskyi.cityinfo.ui.CountryInfoApplication;
+import com.example.nazarii_moshenskyi.cityinfo.ui.base.BaseActivity;
 import com.example.nazarii_moshenskyi.cityinfo.ui.main.presenter.MainMvpPresenter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.main.presenter.MainPresenterImpl;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.CountryFragment;
@@ -32,7 +33,7 @@ import javax.inject.Inject;
 import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_EXTRA;
 import static com.example.nazarii_moshenskyi.cityinfo.ui.Contract.COUNTRY_LIST;
 
-public class MainActivity extends AppCompatActivity implements MainMvpView, CountryFragment.OnFragmentInteractionListener {
+public class MainActivity extends BaseActivity<MainMvpPresenter, MainMvpView> implements MainMvpView, CountryFragment.OnFragmentInteractionListener {
     private static final String TAG = "MainActivity";
     private CountryFragment masterFragment;
     private ConstraintLayout layout;
@@ -42,6 +43,14 @@ public class MainActivity extends AppCompatActivity implements MainMvpView, Coun
 
     private List<String> list;
 
+    @Override
+    protected MainMvpPresenter createPresenter() {
+        Application application = getApplication();
+        ((CountryInfoApplication) application).getCountryComponent().inject(this);
+
+        return presenter;
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -49,20 +58,10 @@ public class MainActivity extends AppCompatActivity implements MainMvpView, Coun
         layout = findViewById(R.id.main_layout);
         list = new ArrayList<>(0);
 
-        Application application = getApplication();
-        if (application == null) {
-            return;
-        }
-        ((CountryInfoApplication) application).getCountryComponent().inject(this);
-
         Toolbar toolbar = findViewById(R.id.include);
         setSupportActionBar(toolbar);
 
-        presenter = new MainPresenterImpl();
-
-        presenter.attachView(this);
-        presenter.defineLayout();
-
+        getPresenter().defineLayout();
         showCountries();
     }
 
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements MainMvpView, Coun
 
     @Override
     public void onCountryClicked(Country country) {
-        presenter.onItemClicked(country);
+        getPresenter().onItemClicked(country);
     }
 
     @Override
@@ -128,12 +127,6 @@ public class MainActivity extends AppCompatActivity implements MainMvpView, Coun
         for (Country country : list) {
             this.list.add(country.getName());
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.detachView();
     }
 
     @Override
