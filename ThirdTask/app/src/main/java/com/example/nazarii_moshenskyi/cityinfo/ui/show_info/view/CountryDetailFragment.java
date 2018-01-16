@@ -107,8 +107,6 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
 
         flagImage = view.findViewById(R.id.flag_placeholder);
 
-        dangerRating = view.findViewById(R.id.danger_rating);
-        dangerTitle = view.findViewById(R.id.danger_title);
         dangerTitleTop = view.findViewById(R.id.title_bottom);
 
         population = view.findViewById(R.id.population);
@@ -130,9 +128,9 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
     }
 
     @Override
-    public void onLoad(List<RowType> infoModel, DangerInfo dangerLevel) {
+    public void onLoad(List<RowType> infoModel) {
         infoAdapter.update(infoModel);
-
+/*
         int level = dangerLevel.getLevel();
         if (level == -1) {
             dangerTitle.setVisibility(View.GONE);
@@ -140,7 +138,7 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
             dangerRating.setVisibility(View.GONE);
         } else {
             dangerRating.setLevel(level);
-        }
+        }*/
     }
 
     @Override

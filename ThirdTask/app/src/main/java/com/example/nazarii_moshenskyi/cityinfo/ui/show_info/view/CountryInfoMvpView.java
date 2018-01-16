@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CountryInfoMvpView extends BaseMvpView {
 
-    void onLoad(List<RowType> infoModel, DangerInfo rating);
+    void onLoad(List<RowType> infoModel);
 
     void setBackground(String flagUrl);
 

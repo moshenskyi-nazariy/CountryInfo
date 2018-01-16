@@ -60,7 +60,7 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
                     model.add(UiModelMapper.convertWater(water));
                     model.add(UiModelMapper.convertTimezone(timezone));
 
-                    DangerInfo dangerInfo = UiModelMapper.convertAdvise(advise);
+                    model.add(UiModelMapper.convertAdvise(advise));
 
                     //Analytics is an array with only one item
                     CountryAnalytics countryAnalytics = UiModelMapper.convertCountryAnalytics(infoModel.getAnalytics());
@@ -68,7 +68,7 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
                         getView().setBackground(countryAnalytics.getFlag());
                         getView().setTitleInfo(countryAnalytics, UiModelMapper.convertContinent(countryInfo.getNames()));
                     }
-                    getView().onLoad(model, dangerInfo);
+                    //getView().onLoad(model, dangerInfo);
                 }, this::handleError));
     }
 }
