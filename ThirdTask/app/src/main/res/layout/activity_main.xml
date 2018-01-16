@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:fitsSystemWindows="true"
-    tools:context="com.example.nazarii_moshenskyi.cityinfo.ui.MainActivity">
+    tools:context=".ui.main.view.MainActivity">
 
     <include
         android:id="@+id/include"

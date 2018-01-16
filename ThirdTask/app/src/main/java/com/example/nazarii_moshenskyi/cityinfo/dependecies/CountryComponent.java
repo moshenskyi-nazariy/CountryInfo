@@ -1,8 +1,8 @@
 package com.example.nazarii_moshenskyi.cityinfo.dependecies;
 
-import com.example.nazarii_moshenskyi.cityinfo.ui.MainActivity;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.CountryFragment;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.CountryDetailFragment;
+import com.example.nazarii_moshenskyi.cityinfo.ui.main.view.MainActivity;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.CountryFragment;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.view.CountryDetailFragment;
 
 import javax.inject.Singleton;
 

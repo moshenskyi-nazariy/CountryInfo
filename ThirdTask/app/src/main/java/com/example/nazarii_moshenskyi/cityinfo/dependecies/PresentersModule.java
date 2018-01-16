@@ -1,14 +1,12 @@
 package com.example.nazarii_moshenskyi.cityinfo.dependecies;
 
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.DataManager;
-import com.example.nazarii_moshenskyi.cityinfo.ui.MainMvpPresenter;
-import com.example.nazarii_moshenskyi.cityinfo.ui.MainPresenterImpl;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.CountryMvpPresenter;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.CountryPresenterImpl;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.CountryInfoMvpPresenter;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.CountryInfoPresenterImpl;
-
-import javax.inject.Singleton;
+import com.example.nazarii_moshenskyi.cityinfo.ui.main.presenter.MainMvpPresenter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.main.presenter.MainPresenterImpl;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.presenter.CountryMvpPresenter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.presenter.CountryPresenterImpl;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.presenter.CountryInfoMvpPresenter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.presenter.CountryInfoPresenterImpl;
 
 import dagger.Module;
 import dagger.Provides;

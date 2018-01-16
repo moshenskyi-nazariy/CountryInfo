@@ -7,10 +7,10 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Vaccine;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Weather;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryAnalyticsService;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryInfoService;
-import com.example.nazarii_moshenskyi.cityinfo.util.AdviseDeserializer;
-import com.example.nazarii_moshenskyi.cityinfo.util.MonthDeserializer;
-import com.example.nazarii_moshenskyi.cityinfo.util.VaccineDeserializer;
-import com.example.nazarii_moshenskyi.cityinfo.util.WeatherDeserializer;
+import com.example.nazarii_moshenskyi.cityinfo.util.deserializer.AdviseDeserializer;
+import com.example.nazarii_moshenskyi.cityinfo.util.deserializer.MonthDeserializer;
+import com.example.nazarii_moshenskyi.cityinfo.util.deserializer.VaccineDeserializer;
+import com.example.nazarii_moshenskyi.cityinfo.util.deserializer.WeatherDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

@@ -8,7 +8,7 @@
     android:id="@+id/main_layout"
     android:background="@color/colorBackground"
     android:orientation="horizontal"
-    tools:context="com.example.nazarii_moshenskyi.cityinfo.ui.MainActivity">
+    tools:context=".ui.main.view.MainActivity">
 
     <FrameLayout
         android:id="@+id/country_name_container"

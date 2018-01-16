@@ -1,0 +1,13 @@
+package com.example.nazarii_moshenskyi.cityinfo.ui.main.presenter;
+
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
+import com.example.nazarii_moshenskyi.cityinfo.ui.main.view.MainMvpView;
+import com.example.nazarii_moshenskyi.cityinfo.ui.base.BaseMvpPresenter;
+
+public interface MainMvpPresenter extends BaseMvpPresenter<MainMvpView> {
+
+    void onItemClicked(Country country);
+
+    void defineLayout();
+
+}
