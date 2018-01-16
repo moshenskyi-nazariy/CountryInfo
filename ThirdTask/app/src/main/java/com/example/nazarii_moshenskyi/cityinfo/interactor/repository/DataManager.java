@@ -25,19 +25,16 @@ public class DataManager {
 
         return Observable.zip(webService.getInfo(countryName),
                 webService.getAnalytics(countryName),
-                new BiFunction<CountryInfo, List<CountryAnalytics>, InfoModel>() {
-                    @Override
-                    public InfoModel apply(CountryInfo countryInfo, List<CountryAnalytics> analytics) throws Exception {
-                        Log.d(TAG, "apply:" + countryName + " == null is " + (countryInfo == null));
-                        if (analytics != null) {
-                            infoModel.setAnalytics(analytics);
-                        }
-
-                        if (countryInfo != null) {
-                            infoModel.setCountryInfo(countryInfo);
-                        }
-                        return infoModel;
+                (countryInfo, analytics) -> {
+                    Log.d(TAG, "apply:" + countryName + " == null is " + (countryInfo == null));
+                    if (analytics != null) {
+                        infoModel.setAnalytics(analytics);
                     }
+
+                    if (countryInfo != null) {
+                        infoModel.setCountryInfo(countryInfo);
+                    }
+                    return infoModel;
                 });
     }
 

@@ -28,17 +28,8 @@ public class CountryPresenterImpl extends RxBasePresenter<CountryMvpView> implem
     public void getCountries() {
         getCompositeDisposable().add(manager.getCountries().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<Country>>() {
-                    @Override
-                    public void accept(List<Country> countries) throws Exception {
-                        getView().onLoad(countries);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        handleError(throwable);
-                    }
-                }));
+                .subscribe(countries -> getView().onLoad(countries)
+                , this::handleError));
     }
 
     @Override

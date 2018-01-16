@@ -48,36 +48,28 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
         getCompositeDisposable().add(manager.getInfo(countryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<InfoModel>() {
-                    @Override
-                    public void accept(InfoModel infoModel) throws Exception {
-                        CountryInfo countryInfo = infoModel.getCountryInfo();
-                        Electricity electricity = countryInfo.getElectricity();
-                        Currency currency = countryInfo.getCurrency();
-                        Water water = countryInfo.getWater();
-                        Timezone timezone = countryInfo.getTimezone();
-                        Advise advise = countryInfo.getAdvise();
+                .subscribe(infoModel -> {
+                    CountryInfo countryInfo = infoModel.getCountryInfo();
+                    Electricity electricity = countryInfo.getElectricity();
+                    Currency currency = countryInfo.getCurrency();
+                    Water water = countryInfo.getWater();
+                    Timezone timezone = countryInfo.getTimezone();
+                    Advise advise = countryInfo.getAdvise();
 
-                        model.add(UiModelMapper.convertCurrency(currency));
-                        model.add(UiModelMapper.convertElectricity(electricity));
-                        model.add(UiModelMapper.convertWater(water));
-                        model.add(UiModelMapper.convertTimezone(timezone));
+                    model.add(UiModelMapper.convertCurrency(currency));
+                    model.add(UiModelMapper.convertElectricity(electricity));
+                    model.add(UiModelMapper.convertWater(water));
+                    model.add(UiModelMapper.convertTimezone(timezone));
 
-                        DangerInfo dangerInfo = UiModelMapper.convertAdvise(advise);
+                    DangerInfo dangerInfo = UiModelMapper.convertAdvise(advise);
 
-                        //Analytics is an array with only one item
-                        CountryAnalytics countryAnalytics = UiModelMapper.convertCountryAnalytics(infoModel.getAnalytics());
-                        if (countryAnalytics != null) {
-                            getView().setBackground(countryAnalytics.getFlag());
-                            getView().setTitleInfo(countryAnalytics, UiModelMapper.convertContinent(countryInfo.getNames()));
-                        }
-                        getView().onLoad(model, dangerInfo);
+                    //Analytics is an array with only one item
+                    CountryAnalytics countryAnalytics = UiModelMapper.convertCountryAnalytics(infoModel.getAnalytics());
+                    if (countryAnalytics != null) {
+                        getView().setBackground(countryAnalytics.getFlag());
+                        getView().setTitleInfo(countryAnalytics, UiModelMapper.convertContinent(countryInfo.getNames()));
                     }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        handleError(throwable);
-                    }
-                }));
+                    getView().onLoad(model, dangerInfo);
+                }, this::handleError));
     }
 }
