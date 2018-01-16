@@ -10,6 +10,7 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Timezone;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Water;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.DataManager;
 import com.example.nazarii_moshenskyi.cityinfo.ui.base.BasePresenter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.base.RxBasePresenter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.DangerInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.mapper.UiModelMapper;
@@ -19,17 +20,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class CountryInfoPresenterImpl extends BasePresenter<CountryInfoMvpView> implements CountryInfoMvpPresenter {
+public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView> implements CountryInfoMvpPresenter {
     private final DataManager manager;
     private List<RowType> model;
-    private Disposable countryDisposable;
-    private static final String TAG = "CountryInfoMvpPresenter";
 
-    public CountryInfoPresenterImpl(DataManager manager) {
+    public CountryInfoPresenterImpl(DataManager manager, CompositeDisposable disposable) {
+        super(disposable);
         this.manager = manager;
         model = new ArrayList<>();
     }
@@ -41,12 +42,10 @@ public class CountryInfoPresenterImpl extends BasePresenter<CountryInfoMvpView> 
         if (model != null && model.size() > 0) {
             model.clear();
         }
-
-        countryDisposable.dispose();
     }
 
     public void getInfo(String countryName) {
-        countryDisposable = manager.getInfo(countryName)
+        getCompositeDisposable().add(manager.getInfo(countryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<InfoModel>() {
@@ -79,6 +78,6 @@ public class CountryInfoPresenterImpl extends BasePresenter<CountryInfoMvpView> 
                     public void accept(Throwable throwable) throws Exception {
                         handleError(throwable);
                     }
-                });
+                }));
     }
 }

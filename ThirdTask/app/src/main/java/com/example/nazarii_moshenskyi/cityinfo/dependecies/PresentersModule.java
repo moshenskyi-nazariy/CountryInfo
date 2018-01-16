@@ -10,22 +10,24 @@ import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.presenter.CountryInf
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 
 @Module
 public class PresentersModule {
 
     @Provides
-    public CountryMvpPresenter provideCountryPresenter(DataManager manager) {
-        return new CountryPresenterImpl(manager);
+    public CountryMvpPresenter provideCountryPresenter(DataManager manager, CompositeDisposable disposable) {
+        return new CountryPresenterImpl(manager, disposable);
     }
 
     @Provides
-    public CountryInfoMvpPresenter provideCountryInfoPresenter(DataManager manager) {
-        return new CountryInfoPresenterImpl(manager);
+    public CountryInfoMvpPresenter provideCountryInfoPresenter(DataManager manager, CompositeDisposable disposable) {
+        return new CountryInfoPresenterImpl(manager, disposable);
     }
 
     @Provides
     public MainMvpPresenter provideMainPresenter() {
         return new MainPresenterImpl();
     }
+
 }
