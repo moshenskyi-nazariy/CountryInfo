@@ -12,7 +12,6 @@ public abstract class BaseActivity<T extends  BaseMvpPresenter<E>, E extends Bas
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        presenter = (T) getLastCustomNonConfigurationInstance();
         if (presenter == null) {
             if ((presenter = createPresenter()) == null) {
                 throw new NullPointerException("Presenter shouldn't be null");
@@ -23,11 +22,6 @@ public abstract class BaseActivity<T extends  BaseMvpPresenter<E>, E extends Bas
     }
 
     public T getPresenter() {
-        return presenter;
-    }
-
-    @Override
-    public final Object onRetainCustomNonConfigurationInstance() {
         return presenter;
     }
 
