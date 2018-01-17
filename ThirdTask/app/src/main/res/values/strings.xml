@@ -26,4 +26,5 @@
     <string name="frequency_title">Frequency</string>
     <string name="voltage_title">Voltage</string>
     <string name="danger_level_title">Danger level</string>
+    <string name="danger_level">Danger level</string>
 </resources>

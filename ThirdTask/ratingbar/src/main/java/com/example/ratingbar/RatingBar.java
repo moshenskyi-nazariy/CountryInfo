@@ -26,6 +26,7 @@ public class RatingBar extends View {
     private int width;
     private int height;
     private float angle;
+    private int padding;
 
     private Paint paint;
     private Paint lines;
@@ -80,7 +81,7 @@ public class RatingBar extends View {
         float length = getLength(sectionMiddle, 1);
         float height = getHeight(length);
 
-        canvas.drawCircle(middleX, middleY, this.height / 20, lines);
+        canvas.drawCircle(middleX , middleY, this.height / 20, lines);
         canvas.drawLine(middleX, middleY, middleX - length, middleY - height, lines);
     }
 
@@ -105,11 +106,11 @@ public class RatingBar extends View {
     }
 
     private float getLength(float angle, int section) {
-        return (float) (Math.cos(Math.toRadians(angle * (section))) * middleX);
+        return (float) (Math.cos(Math.toRadians(angle * (section))) * radius);
     }
 
     private float getHeight(float length) {
-        float hypotenuse = middleX * middleX;
+        float hypotenuse = radius * radius;
         float xCathetus = length * length;
         float yCathetus = hypotenuse - xCathetus;
 
@@ -120,21 +121,22 @@ public class RatingBar extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        int heightSize = getHeight();
-        int widthSize = getWidth();
+        int heightSize = getMeasuredHeight();
+        int widthSize = getMeasuredWidth();
 
         if (widthSize > heightSize) {
+            padding = widthSize - heightSize;
             width = height = heightSize;
         } else {
             height = width = widthSize;
         }
 
-        middleX = width / 2;
-        middleY = height / 2;
+        middleX = (width + padding) / 2;
+        middleY = (height + padding) / 2;
 
-        radius = middleX / 2;
 
-        rect.set(0, 0, width, height);
+        radius = (width - padding)/2;
+        rect.set(padding,  padding, width, height);
     }
 
     public void setLevel(int level) {

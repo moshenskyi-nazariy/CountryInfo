@@ -107,7 +107,6 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
 
         flagImage = view.findViewById(R.id.flag_placeholder);
 
-        dangerTitleTop = view.findViewById(R.id.title_bottom);
 
         population = view.findViewById(R.id.population);
         area = view.findViewById(R.id.area);
