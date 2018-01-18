@@ -4,6 +4,14 @@ import com.example.nazarii_moshenskyi.multithreadingtask.presentation.base.BaseM
 
 public interface MainMvpView extends BaseMvpView {
 
-    void onError();
+    void writeToFile(String data);
+
+    void noDataFound();
+
+    String getName();
+
+    String getPhone();
+
+    String getAddress();
 
 }

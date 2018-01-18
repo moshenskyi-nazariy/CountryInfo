@@ -5,5 +5,10 @@ import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.MainM
 
 public interface MainMvpPresenter extends BaseMvpPresenter<MainMvpView> {
 
+    void runAsyncTask();
+
+    void runLoader();
+
+    void runHandlerThread();
 
 }

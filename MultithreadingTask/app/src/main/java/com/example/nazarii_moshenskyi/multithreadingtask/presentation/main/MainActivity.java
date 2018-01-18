@@ -2,30 +2,25 @@ package com.example.nazarii_moshenskyi.multithreadingtask.presentation.main;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.nazarii_moshenskyi.multithreadingtask.R;
-import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.listener.OnDataLoadedListener;
-import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.listener.OnDataReadyListener;
 import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.presenter.MainMvpPresenter;
 import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.presenter.MainPresenter;
-import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.threads.AsyncTaskDataLoader;
-import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.threads.ThreadFactory;
-import com.example.nazarii_moshenskyi.multithreadingtask.presentation.util.FileUtils;
+import com.example.nazarii_moshenskyi.multithreadingtask.presentation.services.FileManager;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainMvpView, OnDataLoadedListener, OnDataReadyListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainMvpView, FileManager.OnDataLoadedListener {
     private MainMvpPresenter presenter;
-    private ProgressBar progressBar;
-    private AsyncTaskDataLoader asyncTask;
+    private FileManager manager;
 
     private EditText name;
     private EditText phone;
@@ -38,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        manager = new FileManager(this);
 
         initViews();
 
@@ -49,8 +45,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initViews() {
-        progressBar = findViewById(R.id.progressBar);
-
         name = findViewById(R.id.name);
         phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
@@ -69,17 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.asynctask:
-                asyncTask = ThreadFactory.createAsyncTask(this, this);
-                String[] name;
-                if ((name = getData()).length == 3) {
-                    asyncTask.execute(name);
-                } else {
-                    onError();
-                }
-                break;
-            case R.id.loader:
-                break;
-            case R.id.handler:
+                presenter.runAsyncTask();
                 break;
             case R.id.handler_thread:
                 break;
@@ -88,42 +72,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void noDataFound() {
+        Toast.makeText(this, "Please, fill all the fields.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public String getName() {
+        return String.valueOf(name.getText());
+    }
+
+    @Override
+    public String getPhone() {
+        return String.valueOf(phone.getText());
+    }
+
+    @Override
+    public String getAddress() {
+        return String.valueOf(email.getText());
+    }
+
     @Override
     public Object onRetainCustomNonConfigurationInstance() {
         return presenter;
     }
 
-    private String[] getData() {
-        return new String[]{"name: " + String.valueOf(name.getText()) + "\n"
-                , "phone: " + String.valueOf(phone.getText()) + "\n"
-                , "email:" + String.valueOf(email.getText()) + "\n"};
+    @Override
+    public void onComplete() {
+        Log.d(TAG, "onComplete: Data loaded");
     }
 
     @Override
-    public void showProgressBar() {
-        progressBar.setVisibility(View.VISIBLE);
+    public void onError(String exception) {
+        Log.d(TAG, "onError: " + exception);
     }
 
-    @Override
-    public void hideProgressBar() {
-        progressBar.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void updateProgress(int progress) {
-        progressBar.setProgress(progress);
-    }
-
-    @Override
-    public void onError() {
-        Toast.makeText(this, "No Data found. Please, fill all fields", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void writeToFile(String data) {
         try {
             FileOutputStream outputStream = openFileOutput(FILE_NAME, Context.MODE_APPEND);
-            FileUtils.writeToFile(data, outputStream);
+            manager.writeToFile(data, outputStream);
             outputStream.close();
         } catch (IOException e) {
             Log.d(TAG, "openFile: " + e.getMessage());
