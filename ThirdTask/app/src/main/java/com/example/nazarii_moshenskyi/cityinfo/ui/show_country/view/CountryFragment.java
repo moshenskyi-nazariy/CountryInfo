@@ -30,7 +30,6 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMv
 
     private CountryAdapter countryAdapter;
     private LinearLayoutManager layoutManager;
-    private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener;
 
     @Inject
     public CountryMvpPresenter presenter;
@@ -57,13 +56,9 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMv
         super.onCreate(savedInstanceState);
 
         layoutManager = new LinearLayoutManager(getContext());
-        onNavigationItemSelectedListener = getOnNavigationItemSelectedListener();
     }
 
     private void initList(View rootView) {
-        BottomNavigationView bottomNavigationView = rootView.findViewById(R.id.navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
-
         RecyclerView countryList = rootView.findViewById(R.id.country_list);
         countryList.setItemAnimator(new DefaultItemAnimator());
         countryList.addItemDecoration(new CountryItemDecorator((int) getResources().
@@ -122,6 +117,10 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMv
         listener.onCountriesLoaded(items);
     }
 
+    public void refreshLayout() {
+        layoutManager.scrollToPosition(0);
+    }
+
     @Override
     public void onClick(Country country) {
         listener.onCountryClicked(country);
@@ -133,21 +132,5 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMv
 
         void onCountriesLoaded(List<Country> list);
 
-    }
-
-    @NonNull
-    private BottomNavigationView.OnNavigationItemSelectedListener getOnNavigationItemSelectedListener() {
-        return item -> {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    layoutManager.scrollToPosition(0);
-                    return true;
-                case R.id.navigation_dashboard:
-                    return true;
-                case R.id.navigation_notifications:
-                    return true;
-            }
-            return false;
-        };
     }
 }

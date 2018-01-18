@@ -4,7 +4,6 @@ import android.app.Application;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.constraint.Guideline;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,13 +18,11 @@ import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
 import com.example.nazarii_moshenskyi.cityinfo.ui.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.ui.base.BaseFragment;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.DangerInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.InfoAdapter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.presenter.CountryInfoMvpPresenter;
 import com.example.nazarii_moshenskyi.cityinfo.util.glide_svg.GlideApp;
 import com.example.nazarii_moshenskyi.cityinfo.util.glide_svg.SvgSoftwareLayerSetter;
-import com.example.ratingbar.RatingBar;
 
 import java.util.List;
 
@@ -41,9 +38,6 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
     private InfoAdapter infoAdapter;
     private RecyclerView infoRecyclerView;
     private ImageView flagImage;
-    private RatingBar dangerRating;
-    private TextView dangerTitle;
-    private Guideline dangerTitleTop;
     private TextView population;
     private TextView area;
     private TextView continent;
@@ -107,8 +101,6 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
 
         flagImage = view.findViewById(R.id.flag_placeholder);
 
-        dangerTitleTop = view.findViewById(R.id.title_bottom);
-
         population = view.findViewById(R.id.population);
         area = view.findViewById(R.id.area);
         continent = view.findViewById(R.id.continent);
@@ -130,15 +122,6 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
     @Override
     public void onLoad(List<RowType> infoModel) {
         infoAdapter.update(infoModel);
-/*
-        int level = dangerLevel.getLevel();
-        if (level == -1) {
-            dangerTitle.setVisibility(View.GONE);
-            dangerTitleTop.setVisibility(View.GONE);
-            dangerRating.setVisibility(View.GONE);
-        } else {
-            dangerRating.setLevel(level);
-        }*/
     }
 
     @Override

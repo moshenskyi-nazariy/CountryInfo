@@ -4,8 +4,10 @@ import android.app.Application;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -36,6 +38,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter, MainMvpView> im
     public static final String COUNTRY_FRAGMENT = "CountryFragment";
     private CountryFragment masterFragment;
     private ConstraintLayout layout;
+    private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener;
 
     @Inject
     MainMvpPresenter presenter;
@@ -60,10 +63,15 @@ public class MainActivity extends BaseActivity<MainMvpPresenter, MainMvpView> im
         Toolbar toolbar = findViewById(R.id.include);
         setSupportActionBar(toolbar);
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
+        onNavigationItemSelectedListener = getOnNavigationItemSelectedListener();
+        bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
+
         getPresenter().defineLayout();
         if(savedInstanceState == null){
             setMasterFragment();
         }
+
     }
 
     private void setMasterFragment() {
@@ -150,8 +158,23 @@ public class MainActivity extends BaseActivity<MainMvpPresenter, MainMvpView> im
                 return true;
             }
         });
-
         return true;
+    }
+
+    @NonNull
+    private BottomNavigationView.OnNavigationItemSelectedListener getOnNavigationItemSelectedListener() {
+        return item -> {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    masterFragment.refreshLayout();
+                    return true;
+                case R.id.navigation_dashboard:
+                    return true;
+                case R.id.navigation_notifications:
+                    return true;
+            }
+            return false;
+        };
     }
 
 }

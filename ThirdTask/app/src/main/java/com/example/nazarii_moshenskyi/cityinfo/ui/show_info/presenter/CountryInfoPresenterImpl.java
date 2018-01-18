@@ -68,7 +68,7 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
                         getView().setBackground(countryAnalytics.getFlag());
                         getView().setTitleInfo(countryAnalytics, UiModelMapper.convertContinent(countryInfo.getNames()));
                     }
-                    //getView().onLoad(model, dangerInfo);
+                    getView().onLoad(model);
                 }, this::handleError));
     }
 }
