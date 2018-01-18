@@ -1,26 +1,22 @@
 package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
+import android.os.Parcel;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Country {
 
-    @SerializedName("alpha2Code")
-    @Expose
-    private String alpha2Code;
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("nameSanitized")
+    @SerializedName("url")
     @Expose
-    private String nameSanitized;
+    private String url;
 
-    public String getAlpha2Code() {
-        return alpha2Code;
-    }
-
-    public void setAlpha2Code(String alpha2Code) {
-        this.alpha2Code = alpha2Code;
+    protected Country(Parcel in) {
+        name = in.readString();
+        url = in.readString();
     }
 
     public String getName() {
@@ -31,12 +27,12 @@ public class Country {
         this.name = name;
     }
 
-    public String getNameSanitized() {
-        return nameSanitized;
+    public String getUrl() {
+        return url;
     }
 
-    public void setNameSanitized(String nameSanitized) {
-        this.nameSanitized = nameSanitized;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
 }

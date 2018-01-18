@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
         android:layout_marginStart="@dimen/margins"
         android:layout_marginTop="@dimen/margins"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_list_icon"/>
+        app:srcCompat="@drawable/ic_list_icon" />
 
     <TextView
         android:id="@+id/country_name"
@@ -23,6 +23,6 @@
         android:layout_marginStart="@dimen/margins"
         android:layout_weight="5"
         android:textColor="@color/colorPrimaryText"
-        android:textSize="@dimen/large_item_text_size"/>
+        android:textSize="@dimen/large_item_text_size" />
 
 </LinearLayout>

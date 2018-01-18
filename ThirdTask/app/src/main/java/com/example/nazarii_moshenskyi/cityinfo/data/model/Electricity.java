@@ -1,4 +1,3 @@
-
 package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
 import com.google.gson.annotations.Expose;
@@ -7,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Electricity {
-
     @SerializedName("voltage")
     @Expose
     private String voltage;
@@ -17,6 +15,8 @@ public class Electricity {
     @SerializedName("plugs")
     @Expose
     private List<String> plugs = null;
+
+    private String data;
 
     public String getVoltage() {
         return voltage;
@@ -41,5 +41,4 @@ public class Electricity {
     public void setPlugs(List<String> plugs) {
         this.plugs = plugs;
     }
-
 }

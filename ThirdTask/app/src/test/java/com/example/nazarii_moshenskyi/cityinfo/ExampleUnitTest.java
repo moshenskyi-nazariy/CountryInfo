@@ -2,7 +2,7 @@ package com.example.nazarii_moshenskyi.cityinfo;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

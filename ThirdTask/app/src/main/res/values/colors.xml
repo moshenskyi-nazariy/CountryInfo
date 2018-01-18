@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#607D8B</color>
+    <color name="colorPrimary">#607d8b</color>
     <color name="colorPrimaryDark">#455A64</color>
     <color name="colorPrimaryLight">#CFD8DC</color>
     <color name="colorBackground">#B0BEC5</color>
@@ -10,4 +10,5 @@
     <color name="colorIcons">#FFFFFF</color>
     <color name="colorDivider">#BDBDBD</color>
     <color name="colorShade">#777</color>
+    <color name="colorWhite">#fff</color>
 </resources>

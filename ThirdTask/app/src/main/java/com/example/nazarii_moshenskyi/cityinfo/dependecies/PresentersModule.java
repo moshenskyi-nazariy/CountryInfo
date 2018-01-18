@@ -1,35 +1,33 @@
 package com.example.nazarii_moshenskyi.cityinfo.dependecies;
 
-import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryInfoRepository;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.CountryRepository;
-import com.example.nazarii_moshenskyi.cityinfo.ui.MainPresenter;
-import com.example.nazarii_moshenskyi.cityinfo.ui.MainPresenterImpl;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.CountryPresenterImpl;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.CountryInfoPresenterImpl;
-
-import javax.inject.Singleton;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.DataManager;
+import com.example.nazarii_moshenskyi.cityinfo.ui.main.presenter.MainMvpPresenter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.main.presenter.MainPresenterImpl;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.presenter.CountryMvpPresenter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.presenter.CountryPresenterImpl;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.presenter.CountryInfoMvpPresenter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.presenter.CountryInfoPresenterImpl;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 
 @Module
 public class PresentersModule {
 
     @Provides
-    @Singleton
-    public CountryPresenterImpl provideCountryPresenter(CountryRepository repository) {
-        return new CountryPresenterImpl(repository);
+    public CountryMvpPresenter provideCountryPresenter(DataManager manager, CompositeDisposable disposable) {
+        return new CountryPresenterImpl(manager, disposable);
     }
 
     @Provides
-    @Singleton
-    public CountryInfoPresenterImpl provideCountryInfoPresenter(CountryInfoRepository repository) {
-        return new CountryInfoPresenterImpl(repository);
+    public CountryInfoMvpPresenter provideCountryInfoPresenter(DataManager manager, CompositeDisposable disposable) {
+        return new CountryInfoPresenterImpl(manager, disposable);
     }
 
     @Provides
-    @Singleton
-    public MainPresenter provideMainPresenter() {
+    public MainMvpPresenter provideMainPresenter() {
         return new MainPresenterImpl();
     }
+
 }

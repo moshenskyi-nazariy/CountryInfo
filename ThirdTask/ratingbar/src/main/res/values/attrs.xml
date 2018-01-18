@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RatingBar">
+        <attr name="danger_level" format="enum">
+            <enum name="normal" value="1"/>
+            <enum name="high" value="2"/>
+            <enum name="very_high" value="3"/>
+            <enum name="extreme" value="4"/>
+        </attr>
+    </declare-styleable>
+</resources>

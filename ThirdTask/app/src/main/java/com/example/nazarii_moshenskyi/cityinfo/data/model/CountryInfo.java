@@ -1,4 +1,3 @@
-
 package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
 import com.google.gson.annotations.Expose;
@@ -7,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class CountryInfo {
-
     @SerializedName("names")
     @Expose
     private Names names;
@@ -43,7 +41,7 @@ public class CountryInfo {
     private Advise advise;
     @SerializedName("neighbors")
     @Expose
-    private List<Neighbor> neighbors = null;
+    private List<Neighbor> neighbors;
 
     public Names getNames() {
         return names;
@@ -140,5 +138,4 @@ public class CountryInfo {
     public void setNeighbors(List<Neighbor> neighbors) {
         this.neighbors = neighbors;
     }
-
 }

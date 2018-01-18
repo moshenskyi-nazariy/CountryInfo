@@ -1,4 +1,3 @@
-
 package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
 import com.google.gson.annotations.Expose;
@@ -62,4 +61,5 @@ public class Currency {
     public void setCompare(List<Compare> compare) {
         this.compare = compare;
     }
+
 }

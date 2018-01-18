@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             android:background="@color/colorBackground"
-                                             android:orientation="horizontal"
-                                             tools:context="com.example.nazarii_moshenskyi.cityinfo.ui.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_layout"
+    android:background="@color/colorBackground"
+    android:orientation="horizontal"
+    tools:context=".ui.main.view.MainActivity">
 
     <FrameLayout
         android:id="@+id/country_name_container"
@@ -16,19 +17,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.41"/>
+        app:layout_constraintGuide_percent="1" />
 
     <FrameLayout
         android:id="@+id/city_name_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         android:layout_margin="@dimen/margins"
         android:background="#fff"
         app:layout_constraintBottom_toBottomOf="parent"

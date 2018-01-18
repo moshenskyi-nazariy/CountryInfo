@@ -5,21 +5,23 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Advise;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Month;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Vaccine;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Weather;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.api.AutorizationInterceptor;
-import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryService;
-import com.example.nazarii_moshenskyi.cityinfo.util.AdviseDeserializer;
-import com.example.nazarii_moshenskyi.cityinfo.util.MonthDeserializer;
-import com.example.nazarii_moshenskyi.cityinfo.util.VaccineDeserializer;
-import com.example.nazarii_moshenskyi.cityinfo.util.WeatherDeserializer;
+import com.example.nazarii_moshenskyi.cityinfo.dependecies.scopes.AnalyticsRetrofit;
+import com.example.nazarii_moshenskyi.cityinfo.dependecies.scopes.InfoRetrofit;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryAnalyticsService;
+import com.example.nazarii_moshenskyi.cityinfo.interactor.api.CountryInfoService;
+import com.example.nazarii_moshenskyi.cityinfo.util.deserializer.AdviseDeserializer;
+import com.example.nazarii_moshenskyi.cityinfo.util.deserializer.MonthDeserializer;
+import com.example.nazarii_moshenskyi.cityinfo.util.deserializer.VaccineDeserializer;
+import com.example.nazarii_moshenskyi.cityinfo.util.deserializer.WeatherDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -29,17 +31,33 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    @Named("CountryService")
-    CountryService provideCountryService(@Named("CountryRetrofit") Retrofit retrofit) {
-        return retrofit.create(CountryService.class);
+    @InfoRetrofit
+    Retrofit provideInfoRetrofit(Gson gson, OkHttpClient client) {
+        return new Retrofit.Builder()
+                .baseUrl(BuildConfig.INFO_BASE_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
     }
 
     @Provides
     @Singleton
-    @Named("CountryRetrofit")
-    Retrofit provideRetrofitService(OkHttpClient client) {
+    OkHttpClient providesClient() {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+
+        return new OkHttpClient.Builder()
+                .addInterceptor(logging)
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    @AnalyticsRetrofit
+    Retrofit provideAnalyticsRetrofit(OkHttpClient client) {
         return new Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
+                .baseUrl(BuildConfig.ANALYTICS_BASE_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -48,28 +66,14 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideClient() {
-        return new OkHttpClient.Builder()
-                .addInterceptor(new AutorizationInterceptor())
-                .build();
+    CountryInfoService provideInfoService(@InfoRetrofit Retrofit retrofit) {
+        return retrofit.create(CountryInfoService.class);
     }
 
     @Provides
     @Singleton
-    @Named("InfoServiceRetrofit")
-    Retrofit provideRetrofitInfoService(Gson gson) {
-        return new Retrofit.Builder()
-                .baseUrl(BuildConfig.INFO_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-    }
-
-    @Provides
-    @Singleton
-    @Named("InfoService")
-    CountryService provideInfoService(@Named("InfoServiceRetrofit") Retrofit retrofit) {
-        return retrofit.create(CountryService.class);
+    CountryAnalyticsService provideAnalyticsService(@AnalyticsRetrofit Retrofit retrofit) {
+        return retrofit.create(CountryAnalyticsService.class);
     }
 
     @Provides
