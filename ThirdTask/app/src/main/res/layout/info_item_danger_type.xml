@@ -9,12 +9,12 @@
     app:layout_constraintBottom_toBottomOf="parent"
     tools:layout_editor_absoluteX="8dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/danger_level"
-        android:textSize="@dimen/title_item_size"
-        android:textAlignment="center"/>
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/danger_level"-->
+        <!--android:textSize="@dimen/title_item_size"-->
+        <!--android:textAlignment="center"/>-->
 
     <com.example.ratingbar.RatingBar
         android:layout_width="match_parent"
