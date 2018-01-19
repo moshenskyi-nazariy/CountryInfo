@@ -1,14 +1,12 @@
 package com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.presenter;
 
 import com.example.nazarii_moshenskyi.multithreadingtask.presentation.base.BaseMvpPresenter;
-import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.MainMvpView;
+import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.view.MainMvpView;
 
 public interface MainMvpPresenter extends BaseMvpPresenter<MainMvpView> {
 
-    void runAsyncTask();
+    void runHandlerThread(String[] data);
 
-    void runLoader();
-
-    void runHandlerThread();
+    void runAsyncTask(String[] data);
 
 }

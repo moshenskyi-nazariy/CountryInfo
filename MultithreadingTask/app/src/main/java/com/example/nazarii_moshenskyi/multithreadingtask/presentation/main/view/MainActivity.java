@@ -1,8 +1,8 @@
-package com.example.nazarii_moshenskyi.multithreadingtask.presentation.main;
+package com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +14,7 @@ import com.example.nazarii_moshenskyi.multithreadingtask.R;
 import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.presenter.MainMvpPresenter;
 import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.presenter.MainPresenter;
 import com.example.nazarii_moshenskyi.multithreadingtask.presentation.services.FileManager;
+import com.example.nazarii_moshenskyi.multithreadingtask.presentation.threads.FileHandlerThread;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -49,8 +50,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
 
-        Button asyncTask = findViewById(R.id.asynctask);
-        asyncTask.setOnClickListener(this);
+        Button btnHandlerThread = findViewById(R.id.handler_thread);
+        btnHandlerThread.setOnClickListener(this);
+
+        Button btnAsyncTask = findViewById(R.id.asynctask);
+        btnAsyncTask.setOnClickListener(this);
     }
 
     @Override
@@ -61,33 +65,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.asynctask:
-                presenter.runAsyncTask();
-                break;
-            case R.id.handler_thread:
-                break;
-            default:
-                break;
+        int id = view.getId();
+        if (id == R.id.asynctask) {
+            Log.d(TAG, "onClick: Started AsyncTask");
+            presenter.runAsyncTask(prepareData());
+        } else {
+            Log.d(TAG, "onClick: Started HandlerThread");
+            presenter.runHandlerThread(prepareData());
         }
     }
 
     public void noDataFound() {
+        Log.d(TAG, "noDataFound");
         Toast.makeText(this, "Please, fill all the fields.", Toast.LENGTH_LONG).show();
     }
 
-    @Override
-    public String getName() {
+    private String[] prepareData() {
+        return new String[]{getName()
+                , getPhone()
+                , getAddress()};
+    }
+
+    private String getName() {
         return String.valueOf(name.getText());
     }
 
-    @Override
-    public String getPhone() {
+    private String getPhone() {
         return String.valueOf(phone.getText());
     }
 
-    @Override
-    public String getAddress() {
+    private String getAddress() {
         return String.valueOf(email.getText());
     }
 
@@ -106,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d(TAG, "onError: " + exception);
     }
 
+    @Override
     public void writeToFile(String data) {
         try {
             FileOutputStream outputStream = openFileOutput(FILE_NAME, Context.MODE_APPEND);
@@ -115,4 +123,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d(TAG, "openFile: " + e.getMessage());
         }
     }
+
 }
