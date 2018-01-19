@@ -15,21 +15,31 @@ import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.WaterInfo;
 
 import java.util.List;
 
+//TODO: Null-Object Pattern
 public class UiModelMapper {
     public static CurrencyInfo convertCurrency(Currency currency) {
         CurrencyInfo currencyInfo = new CurrencyInfo();
-        currencyInfo.setName(currency.getName());
-        currencyInfo.setRate(currency.getRate());
 
+        if (currency.getName() != null) {
+            currencyInfo.setName(currency.getName());
+        }
+        if (currency.getRate() != null) {
+            currencyInfo.setRate(currency.getRate());
+        }
         return currencyInfo;
     }
 
     public static ElectricityInfo convertElectricity(Electricity electricity) {
         ElectricityInfo electricityInfo = new ElectricityInfo();
-        electricityInfo.setVoltage(electricity.getVoltage());
-        electricityInfo.setFrequency(electricity.getFrequency());
-        electricityInfo.setPlugs(electricity.getPlugs());
-
+        if (electricity.getVoltage() != null) {
+            electricityInfo.setVoltage(electricity.getVoltage());
+        }
+        if (electricity.getFrequency() != null) {
+            electricityInfo.setFrequency(electricity.getFrequency());
+        }
+        if (electricity.getPlugs() != null) {
+            electricityInfo.setPlugs(electricity.getPlugs());
+        }
         return electricityInfo;
     }
 
@@ -49,7 +59,9 @@ public class UiModelMapper {
 
     public static DangerInfo convertAdvise(Advise advise) {
         DangerInfo dangerInfo = new DangerInfo();
-        dangerInfo.setLevel(DangerLevelMapper.convertLevel(advise.getAdvise()));
+        if (advise != null) {
+            dangerInfo.setLevel(DangerLevelMapper.convertLevel(advise.getAdvise()));
+        }
         return dangerInfo;
     }
 
