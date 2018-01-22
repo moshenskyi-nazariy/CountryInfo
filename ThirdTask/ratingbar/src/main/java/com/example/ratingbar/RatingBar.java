@@ -81,12 +81,12 @@ public class RatingBar extends View {
         float length = getLength(sectionMiddle, 1);
         float height = getHeight(length);
 
-        canvas.drawCircle(middleX , middleY, this.height / 20, lines);
+        canvas.drawCircle(middleX, middleY, this.height / 10, lines);
         canvas.drawLine(middleX, middleY, middleX - length, middleY - height, lines);
     }
 
     private void drawArc(Canvas canvas) {
-        paint.setShader(new LinearGradient(0, 0, getWidth(), 0, Color.GREEN, Color.RED, Shader.TileMode.MIRROR));
+        paint.setShader(new LinearGradient(0, 0, width, 100, Color.GREEN, Color.RED, Shader.TileMode.MIRROR));
         canvas.drawArc(rect, ANGLE, ANGLE, true, paint);
     }
 
@@ -121,22 +121,19 @@ public class RatingBar extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        int heightSize = getMeasuredHeight();
-        int widthSize = getMeasuredWidth();
+        height = getMeasuredHeight();
+        width = getMeasuredWidth();
 
-        if (widthSize > heightSize) {
-            padding = widthSize - heightSize;
-            width = height = heightSize;
-        } else {
-            height = width = widthSize;
-        }
+        middleX = width / 2;
 
-        middleX = (width + padding) / 2;
-        middleY = (height + padding) / 2;
+        int endY = height + height / 2;
+        int startY = height / 10;
+        middleY = (startY + endY) / 2;
 
+        padding = width / 4;
+        rect.set(padding, startY, width - padding, endY);
 
-        radius = (width - padding)/2;
-        rect.set(padding,  padding, width, height);
+        radius = (endY - startY) / 2;
     }
 
     public void setLevel(int level) {

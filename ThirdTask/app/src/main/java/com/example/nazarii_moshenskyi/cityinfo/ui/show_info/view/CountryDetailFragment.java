@@ -18,6 +18,7 @@ import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
 import com.example.nazarii_moshenskyi.cityinfo.ui.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.ui.base.BaseFragment;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.AnalyticsInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.InfoAdapter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.presenter.CountryInfoMvpPresenter;
@@ -131,20 +132,12 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
         }
     }
 
-    public void setTitleInfo(CountryAnalytics analytics, String continent) {
-        Integer analyticsPopulation;
-        if ((analyticsPopulation = analytics.getPopulation()) != null) {
-            population.setText(String.valueOf(analyticsPopulation));
-        }
+    public void setTitleInfo(AnalyticsInfo analytics, String continent) {
+        population.setText(analytics.getPopulation());
+        area.setText(analytics.getArea());
 
-        Integer analyticsArea;
-        if ((analyticsArea = analytics.getArea()) != null) {
-            area.setText(String.valueOf(analyticsArea));
-        }
+        this.continent.setText(continent);
 
-        if (continent != null) {
-            this.continent.setText(continent);
-        }
     }
 
 }

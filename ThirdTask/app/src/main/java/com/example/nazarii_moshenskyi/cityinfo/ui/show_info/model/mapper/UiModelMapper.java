@@ -7,12 +7,14 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Electricity;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Names;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Timezone;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Water;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.AnalyticsInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.CurrencyInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.DangerInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.ElectricityInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.TimezoneInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.WaterInfo;
 
+import java.util.Collections;
 import java.util.List;
 
 //TODO: Null-Object Pattern
@@ -20,12 +22,11 @@ public class UiModelMapper {
     public static CurrencyInfo convertCurrency(Currency currency) {
         CurrencyInfo currencyInfo = new CurrencyInfo();
 
-        if (currency.getName() != null) {
+        if (currency.getName() != null && currency.getRate() != null) {
             currencyInfo.setName(currency.getName());
-        }
-        if (currency.getRate() != null) {
             currencyInfo.setRate(currency.getRate());
         }
+
         return currencyInfo;
     }
 
@@ -33,27 +34,39 @@ public class UiModelMapper {
         ElectricityInfo electricityInfo = new ElectricityInfo();
         if (electricity.getVoltage() != null) {
             electricityInfo.setVoltage(electricity.getVoltage());
+        } else {
+            electricityInfo.setVoltage("-");
         }
+
         if (electricity.getFrequency() != null) {
             electricityInfo.setFrequency(electricity.getFrequency());
+        } else {
+            electricityInfo.setFrequency("-");
         }
+
         if (electricity.getPlugs() != null) {
             electricityInfo.setPlugs(electricity.getPlugs());
+        } else {
+            electricityInfo.setPlugs(Collections.emptyList());
         }
         return electricityInfo;
     }
 
     public static WaterInfo convertWater(Water water) {
         WaterInfo waterInfo = new WaterInfo();
-        waterInfo.setShortInfo(water.getShort());
 
+        if (water != null) {
+            waterInfo.setShortInfo(water.getShort());
+        }
         return waterInfo;
     }
 
     public static TimezoneInfo convertTimezone(Timezone timezone) {
         TimezoneInfo timezoneInfo = new TimezoneInfo();
-        timezoneInfo.setName(timezone.getName());
 
+        if (timezone != null) {
+            timezoneInfo.setName(timezone.getName());
+        }
         return timezoneInfo;
     }
 
@@ -66,14 +79,34 @@ public class UiModelMapper {
     }
 
     public static String convertContinent(Names names) {
-        return names.getContinent();
+        if(names != null && names.getContinent() != null) {
+            return names.getContinent();
+        } else {
+            return "-";
+        }
     }
 
-    public static CountryAnalytics convertCountryAnalytics(List<CountryAnalytics> analytics) {
+    public static AnalyticsInfo convertCountryAnalytics(List<CountryAnalytics> analytics) {
         if (!analytics.isEmpty()) {
-            return analytics.get(0);
+            CountryAnalytics countryAnalytics = analytics.get(0);
+
+            AnalyticsInfo info = new AnalyticsInfo();
+            info.setArea(convertAnalyticsItem(countryAnalytics.getArea()));
+            info.setPopulation(convertAnalyticsItem(countryAnalytics.getPopulation()));
+            info.setFlag(countryAnalytics.getFlag());
+            return info;
         }
 
-        return null;
+        AnalyticsInfo info = new AnalyticsInfo();
+        info.setArea("-");
+        info.setPopulation("-");
+        return info;
+    }
+
+    static String convertAnalyticsItem(Integer item) {
+        if (item != null) {
+            return String.valueOf(item);
+        }
+        return "-";
     }
 }

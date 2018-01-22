@@ -33,8 +33,6 @@ public class RxBasePresenter<T extends BaseMvpView> extends BasePresenter<T> {
             Log.d(TAG, "handleError: Non-2XX exception(" + throwable.getClass() + "):" + throwable.getMessage());
         } else if (throwable instanceof IOException) {
             Log.d(TAG, "handleError: Network error(" + throwable.getClass() + "):" + throwable.getMessage());
-        } else {
-            Log.d(TAG, "handleError: " + throwable.getClass() + "):" + throwable.getMessage());
         }
     }
 }

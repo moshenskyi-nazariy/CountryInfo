@@ -59,7 +59,7 @@ public class ViewHolderFactory {
             if (voltage != null && !voltage.isEmpty()) {
                 this.voltage.setText(voltage);
             } else {
-                this.voltage.setText(R.string.no_info_text);
+                this.voltage.setText(R.string.no_info_short_form);
             }
         }
 
@@ -67,7 +67,7 @@ public class ViewHolderFactory {
             if (frequency != null && !frequency.isEmpty()) {
                 this.frequency.setText(frequency);
             } else {
-                this.frequency.setText(R.string.no_info_text);
+                this.frequency.setText(R.string.no_info_short_form);
             }
         }
 
@@ -75,7 +75,7 @@ public class ViewHolderFactory {
             if (plugs != null && !plugs.isEmpty()) {
                 this.plugs.setText(plugs);
             } else {
-                this.plugs.setText(R.string.no_info_text);
+                this.plugs.setText(R.string.no_info_short_form);
             }
         }
     }

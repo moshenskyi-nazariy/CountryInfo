@@ -17,6 +17,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/electricity_title"
+                style="@style/TitleText"
+                android:text="@string/electricity_title"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+
         <android.support.constraint.Guideline
             android:id="@+id/population_end"
             android:layout_width="wrap_content"
@@ -26,19 +40,17 @@
 
         <TextView
             android:id="@+id/voltage_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:text="@string/voltage_title"
-            android:textSize="18sp"
+            android:textAlignment="center"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/card_middle"
             app:layout_constraintEnd_toEndOf="@id/population_end"
             app:layout_constraintEnd_toStartOf="@+id/frequency_title"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:textSize="18sp" />
+            app:layout_constraintTop_toBottomOf="@id/title_layout" />
 
         <android.support.constraint.Guideline
             android:id="@+id/card_middle"
@@ -49,12 +61,14 @@
 
         <TextView
             android:id="@+id/voltage"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/frequency"
             app:layout_constraintHorizontal_bias="0.5"
@@ -64,19 +78,17 @@
 
         <TextView
             android:id="@+id/frequency_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:text="@string/frequency_title"
             android:textAlignment="center"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/card_middle"
             app:layout_constraintEnd_toStartOf="@+id/plugs_title"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/voltage_title"
             app:layout_constraintStart_toStartOf="@+id/population_end"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/title_layout" />
 
         <android.support.constraint.Guideline
             android:id="@+id/area_end"
@@ -87,12 +99,11 @@
 
         <TextView
             android:id="@+id/frequency"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_margin="8dp"
+            android:textAlignment="center"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/plugs"
             app:layout_constraintHorizontal_bias="0.5"
@@ -103,35 +114,32 @@
 
         <TextView
             android:id="@+id/plugs_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:text="@string/plugs_title"
-            android:textSize="18sp"
+            android:textAlignment="center"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/card_middle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/frequency_title"
             app:layout_constraintStart_toStartOf="@+id/area_end"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/title_layout" />
 
         <TextView
             android:id="@+id/plugs"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_margin="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/frequency"
             app:layout_constraintStart_toStartOf="@+id/area_end"
             app:layout_constraintTop_toBottomOf="@+id/plugs_title"
-            tools:text="EU" />
+            tools:text="A,B,C" />
 
     </android.support.constraint.ConstraintLayout>
 

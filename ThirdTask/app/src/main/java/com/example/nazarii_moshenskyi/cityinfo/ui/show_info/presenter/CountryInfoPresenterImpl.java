@@ -9,6 +9,7 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.Timezone;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Water;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.DataManager;
 import com.example.nazarii_moshenskyi.cityinfo.ui.base.RxBasePresenter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.AnalyticsInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.DangerInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.mapper.UiModelMapper;
@@ -63,7 +64,7 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
                     model.add(UiModelMapper.convertAdvise(advise));
 
                     //Analytics is an array with only one item
-                    CountryAnalytics countryAnalytics = UiModelMapper.convertCountryAnalytics(infoModel.getAnalytics());
+                    AnalyticsInfo countryAnalytics = UiModelMapper.convertCountryAnalytics(infoModel.getAnalytics());
                     if (countryAnalytics != null) {
                         getView().setBackground(countryAnalytics.getFlag());
                         getView().setTitleInfo(countryAnalytics, UiModelMapper.convertContinent(countryInfo.getNames()));

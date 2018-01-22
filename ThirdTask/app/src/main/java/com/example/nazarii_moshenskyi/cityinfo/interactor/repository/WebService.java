@@ -7,6 +7,7 @@ import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.Response;
 
 public interface WebService {
 

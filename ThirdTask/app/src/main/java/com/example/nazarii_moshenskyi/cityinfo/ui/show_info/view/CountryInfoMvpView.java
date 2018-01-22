@@ -2,6 +2,7 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.view;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
 import com.example.nazarii_moshenskyi.cityinfo.ui.base.BaseMvpView;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.AnalyticsInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.DangerInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
 
@@ -13,6 +14,6 @@ public interface CountryInfoMvpView extends BaseMvpView {
 
     void setBackground(String flagUrl);
 
-    void setTitleInfo(CountryAnalytics analytics, String continent);
+    void setTitleInfo(AnalyticsInfo analytics, String continent);
 
 }

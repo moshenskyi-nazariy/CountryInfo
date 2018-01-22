@@ -3,6 +3,8 @@ package com.example.nazarii_moshenskyi.cityinfo.interactor.repository;
 import android.util.Log;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.InfoModel;
 
 import java.util.List;
@@ -24,13 +26,8 @@ public class DataManager {
                 webService.getAnalytics(countryName),
                 (countryInfo, analytics) -> {
                     Log.d(TAG, "apply:" + countryName + " == null is " + (countryInfo == null));
-                    if (analytics != null) {
-                        infoModel.setAnalytics(analytics);
-                    }
-
-                    if (countryInfo != null) {
-                        infoModel.setCountryInfo(countryInfo);
-                    }
+                    infoModel.setAnalytics(analytics);
+                    infoModel.setCountryInfo(countryInfo);
                     return infoModel;
                 });
     }
