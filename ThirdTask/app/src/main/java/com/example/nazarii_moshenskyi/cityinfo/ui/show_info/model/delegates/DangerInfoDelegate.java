@@ -31,7 +31,6 @@ public class DangerInfoDelegate extends AdapterDelegate<List<RowType>> {
         DangerInfo infoItem = (DangerInfo) items.get(position);
 
         int level = infoItem.getLevel();
-
         dangerViewHolder.setLevel(String.valueOf(level));
     }
 }

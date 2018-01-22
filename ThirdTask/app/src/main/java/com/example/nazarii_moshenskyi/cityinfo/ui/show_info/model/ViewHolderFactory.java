@@ -89,7 +89,7 @@ public class ViewHolderFactory {
         }
 
         public void setLevel(String level) {
-            ratingBar.setLevel(DangerLevelMapper.convertLevel(level));
+            ratingBar.setLevel(Integer.parseInt(level));
         }
     }
 
