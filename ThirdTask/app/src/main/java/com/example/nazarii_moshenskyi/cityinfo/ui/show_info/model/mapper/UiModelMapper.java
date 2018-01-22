@@ -14,17 +14,23 @@ import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.ElectricityInf
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.TimezoneInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.WaterInfo;
 
-import java.util.Collections;
 import java.util.List;
 
-//TODO: Null-Object Pattern
+//TODO: Divide into different classes mapping its own type
 public class UiModelMapper {
     public static CurrencyInfo convertCurrency(Currency currency) {
         CurrencyInfo currencyInfo = new CurrencyInfo();
 
         if (currency.getName() != null && currency.getRate() != null) {
             currencyInfo.setName(currency.getName());
-            currencyInfo.setRate(currency.getRate());
+            String rate = currency.getRate();
+
+            double rateNumber = Double.valueOf(rate) * 100;
+            rateNumber = Math.round(rateNumber);
+            rateNumber = rateNumber / 100;
+
+            rate = String.valueOf(rateNumber);
+            currencyInfo.setRate(rate);
         }
 
         return currencyInfo;
@@ -34,20 +40,14 @@ public class UiModelMapper {
         ElectricityInfo electricityInfo = new ElectricityInfo();
         if (electricity.getVoltage() != null) {
             electricityInfo.setVoltage(electricity.getVoltage());
-        } else {
-            electricityInfo.setVoltage("-");
         }
 
         if (electricity.getFrequency() != null) {
             electricityInfo.setFrequency(electricity.getFrequency());
-        } else {
-            electricityInfo.setFrequency("-");
         }
 
         if (electricity.getPlugs() != null) {
             electricityInfo.setPlugs(electricity.getPlugs());
-        } else {
-            electricityInfo.setPlugs(Collections.emptyList());
         }
         return electricityInfo;
     }
@@ -103,7 +103,7 @@ public class UiModelMapper {
         return info;
     }
 
-    static String convertAnalyticsItem(Integer item) {
+    private static String convertAnalyticsItem(Integer item) {
         if (item != null) {
             return String.valueOf(item);
         }
