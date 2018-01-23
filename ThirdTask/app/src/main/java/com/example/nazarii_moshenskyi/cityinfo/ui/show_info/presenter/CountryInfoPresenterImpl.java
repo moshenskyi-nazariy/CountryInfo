@@ -46,6 +46,7 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
     }
 
     public void getInfo(String countryName) {
+        getView().showProgressDialog();
         getCompositeDisposable().add(manager.getInfo(countryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -1,6 +1,7 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.view;
 
 import android.app.Application;
+import android.app.ProgressDialog;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +16,6 @@ import android.widget.TextView;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.nazarii_moshenskyi.cityinfo.R;
-import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
 import com.example.nazarii_moshenskyi.cityinfo.ui.CountryInfoApplication;
 import com.example.nazarii_moshenskyi.cityinfo.ui.base.BaseFragment;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.AnalyticsInfo;
@@ -48,6 +48,7 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
 
     private String countryName;
     private RequestBuilder<PictureDrawable> requestBuilder;
+    private ProgressDialog progressDialog;
 
     public CountryDetailFragment() {
         // Required empty public constructor
@@ -125,6 +126,7 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
 
     @Override
     public void onLoad(List<RowType> infoModel) {
+        progressDialog.hide();
         infoAdapter.update(infoModel);
     }
 
@@ -139,6 +141,18 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
 
         this.continent.setText(continent);
 
+    }
+
+    @Override
+    public void showProgressDialog() {
+        progressDialog = ProgressDialog.show(getContext(), "",
+                "Loading. Please wait...", true);
+
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        progressDialog.hide();
     }
 
 }
