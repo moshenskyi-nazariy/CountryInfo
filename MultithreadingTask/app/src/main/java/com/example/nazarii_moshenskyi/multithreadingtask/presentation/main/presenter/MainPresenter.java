@@ -5,6 +5,12 @@ import com.example.nazarii_moshenskyi.multithreadingtask.presentation.threads.As
 import com.example.nazarii_moshenskyi.multithreadingtask.presentation.threads.FileHandlerThread;
 
 public class MainPresenter implements MainMvpPresenter {
+    private static final String NAME = "name: ";
+    private static final String PHONE = "phone: ";
+    private static final String EMAIL = "email: ";
+    private static final String NEW_LINE = "\n";
+    private static final String FILE_HANDLER_THREAD_NAME = "FileHandlerThread";
+
     private MainMvpView view;
 
     @Override
@@ -22,7 +28,7 @@ public class MainPresenter implements MainMvpPresenter {
     @Override
     public void runHandlerThread(final String[] data) {
         if (isValid(data)) {
-            final FileHandlerThread handlerThread = new FileHandlerThread("FileHandlerThread");
+            final FileHandlerThread handlerThread = new FileHandlerThread(FILE_HANDLER_THREAD_NAME);
             handlerThread.start();
             handlerThread.prepareHandler();
             handlerThread.postTask(new Runnable() {
@@ -49,9 +55,9 @@ public class MainPresenter implements MainMvpPresenter {
     }
 
     private String transformData(String[] data) {
-        return new StringBuilder().append("name: ").append(data[0]).append("\n")
-                .append("phone: ").append(data[1]).append("\n")
-                .append("email: ").append(data[2]).append("\n").toString();
+        return new StringBuilder().append(NAME).append(data[0]).append(NEW_LINE)
+                .append(PHONE).append(data[1]).append(NEW_LINE)
+                .append(EMAIL).append(data[2]).append(NEW_LINE).toString();
     }
 
     private boolean isValid(String[] data) {
