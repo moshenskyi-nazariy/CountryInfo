@@ -10,8 +10,10 @@ public class MainPresenter implements MainMvpPresenter {
     private static final String EMAIL = "email: ";
     private static final String NEW_LINE = "\n";
     private static final String FILE_HANDLER_THREAD_NAME = "FileHandlerThread";
+    private FileHandlerThread handlerThread;
 
     private MainMvpView view;
+    private AsyncTaskDataLoader loader;
 
     @Override
     public void attachView(MainMvpView view) {
@@ -23,12 +25,16 @@ public class MainPresenter implements MainMvpPresenter {
         if (view != null) {
             view = null;
         }
+
+        if (!loader.isCancelled()) {
+            loader.cancel(true);
+        }
     }
 
     @Override
     public void runHandlerThread(final String[] data) {
         if (isValid(data)) {
-            final FileHandlerThread handlerThread = new FileHandlerThread(FILE_HANDLER_THREAD_NAME);
+            handlerThread = new FileHandlerThread(FILE_HANDLER_THREAD_NAME);
             handlerThread.start();
             handlerThread.prepareHandler();
             handlerThread.postTask(new Runnable() {
@@ -47,7 +53,7 @@ public class MainPresenter implements MainMvpPresenter {
     @Override
     public void runAsyncTask(String[] data) {
         if (isValid(data)) {
-            AsyncTaskDataLoader loader = new AsyncTaskDataLoader(view);
+            loader = new AsyncTaskDataLoader(view);
             loader.execute(transformData(data));
         } else {
             view.noDataFound();
