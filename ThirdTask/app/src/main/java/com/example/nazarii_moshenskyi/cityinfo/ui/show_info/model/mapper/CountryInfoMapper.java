@@ -1,23 +1,18 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.mapper;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Advise;
-import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Currency;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Electricity;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Names;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Timezone;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Water;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.AnalyticsInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.CurrencyInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.DangerInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.ElectricityInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.TimezoneInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.WaterInfo;
 
-import java.util.List;
-
-//TODO: Divide into different classes mapping its own type
-public class UiModelMapper {
+public class CountryInfoMapper {
     public static CurrencyInfo convertCurrency(Currency currency) {
         CurrencyInfo currencyInfo = new CurrencyInfo();
 
@@ -79,34 +74,10 @@ public class UiModelMapper {
     }
 
     public static String convertContinent(Names names) {
-        if(names != null && names.getContinent() != null) {
+        if (names != null && names.getContinent() != null) {
             return names.getContinent();
         } else {
             return "-";
         }
-    }
-
-    public static AnalyticsInfo convertCountryAnalytics(List<CountryAnalytics> analytics) {
-        if (!analytics.isEmpty()) {
-            CountryAnalytics countryAnalytics = analytics.get(0);
-
-            AnalyticsInfo info = new AnalyticsInfo();
-            info.setArea(convertAnalyticsItem(countryAnalytics.getArea()));
-            info.setPopulation(convertAnalyticsItem(countryAnalytics.getPopulation()));
-            info.setFlag(countryAnalytics.getFlag());
-            return info;
-        }
-
-        AnalyticsInfo info = new AnalyticsInfo();
-        info.setArea("-");
-        info.setPopulation("-");
-        return info;
-    }
-
-    private static String convertAnalyticsItem(Integer item) {
-        if (item != null) {
-            return String.valueOf(item);
-        }
-        return "-";
     }
 }

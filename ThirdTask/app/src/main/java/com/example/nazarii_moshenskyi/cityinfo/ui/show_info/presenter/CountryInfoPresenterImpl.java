@@ -1,18 +1,19 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.presenter;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Advise;
-import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryAnalytics;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Currency;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Electricity;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Timezone;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Water;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Weather;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.DataManager;
 import com.example.nazarii_moshenskyi.cityinfo.ui.base.RxBasePresenter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.AnalyticsInfo;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.DangerInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.mapper.UiModelMapper;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.WeatherInfo;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.mapper.CountryAnalyticsMapper;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.mapper.CountryInfoMapper;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.view.CountryInfoMvpView;
 
 import java.util.ArrayList;
@@ -55,19 +56,20 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
                     Water water = countryInfo.getWater();
                     Timezone timezone = countryInfo.getTimezone();
                     Advise advise = countryInfo.getAdvise();
+                    Weather weather = countryInfo.getWeather();
 
-                    model.add(UiModelMapper.convertCurrency(currency));
-                    model.add(UiModelMapper.convertElectricity(electricity));
-                    model.add(UiModelMapper.convertWater(water));
-                    model.add(UiModelMapper.convertTimezone(timezone));
-
-                    model.add(UiModelMapper.convertAdvise(advise));
+                    model.add(CountryInfoMapper.convertCurrency(currency));
+                    model.add(CountryInfoMapper.convertElectricity(electricity));
+                    model.add(CountryInfoMapper.convertWater(water));
+                    model.add(CountryInfoMapper.convertTimezone(timezone));
+                    model.add(CountryInfoMapper.convertAdvise(advise));
+                    model.add(new WeatherInfo(weather));
 
                     //Analytics is an array with only one item
-                    AnalyticsInfo countryAnalytics = UiModelMapper.convertCountryAnalytics(infoModel.getAnalytics());
+                    AnalyticsInfo countryAnalytics = CountryAnalyticsMapper.convertCountryAnalytics(infoModel.getAnalytics());
                     if (countryAnalytics != null) {
                         getView().setBackground(countryAnalytics.getFlag());
-                        getView().setTitleInfo(countryAnalytics, UiModelMapper.convertContinent(countryInfo.getNames()));
+                        getView().setTitleInfo(countryAnalytics, CountryInfoMapper.convertContinent(countryInfo.getNames()));
                     }
                     getView().onLoad(model);
                 }, this::handleError));

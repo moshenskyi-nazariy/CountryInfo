@@ -8,6 +8,7 @@ import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.Dang
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.ElectricityInfoDelegate;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.TimezoneInfoDelegate;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.WaterInfoDelegate;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.WeatherInfoDelegate;
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class InfoAdapter extends RecyclerView.Adapter {
         delegatesManager.addDelegate(new TimezoneInfoDelegate());
         delegatesManager.addDelegate(new WaterInfoDelegate());
         delegatesManager.addDelegate(new DangerInfoDelegate());
+        delegatesManager.addDelegate(new WeatherInfoDelegate());
     }
 
     public void update(List<RowType> dataSet) {

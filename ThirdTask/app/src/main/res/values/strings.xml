@@ -29,4 +29,5 @@
     <string name="danger_level_title">Danger level</string>
     <string name="danger_level">Danger level</string>
     <string name="electricity_title">Electricity</string>
+    <string name="weather_title">Weather analytics</string>
 </resources>

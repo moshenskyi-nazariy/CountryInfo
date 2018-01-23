@@ -1,5 +1,6 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,8 +8,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.nazarii_moshenskyi.cityinfo.R;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Month;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.mapper.DangerLevelMapper;
 import com.example.ratingbar.RatingBar;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ViewHolderFactory {
     public static class TextViewHolder extends RecyclerView.ViewHolder {
@@ -80,6 +93,65 @@ public class ViewHolderFactory {
         }
     }
 
+    public static class WeatherViewHolder extends RecyclerView.ViewHolder {
+        private LineChart chart;
+
+        WeatherViewHolder(View itemView) {
+            super(itemView);
+            chart = itemView.findViewById(R.id.weather_chart);
+        }
+
+        public void setWeather(WeatherInfo annualData) {
+            List<Month> weather = annualData.getWeather();
+            List<ILineDataSet> data = new ArrayList<>(0);
+            List<Entry> minEntries = new ArrayList<>(0);
+            List<Entry> avgEntries = new ArrayList<>(0);
+            List<Entry> maxEntries = new ArrayList<>(0);
+
+            setEntries(weather, minEntries, avgEntries, maxEntries);
+
+            makeLines(data, minEntries, avgEntries, maxEntries);
+
+            XAxis xAxis = chart.getXAxis();
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+            LineData lineData = new LineData(data);
+            chart.setData(lineData);
+            Description desc = new Description();
+            desc.setText("Month num / \u2103");
+            chart.setDescription(desc);
+            chart.setScaleEnabled(true);
+            chart.setDragEnabled(true);
+            chart.invalidate();
+        }
+
+        private void makeLines(List<ILineDataSet> data, List<Entry> minEntries, List<Entry> avgEntries, List<Entry> maxEntries) {
+            LineDataSet min = new LineDataSet(minEntries, "min");
+            min.setColor(Color.CYAN);
+            min.setCircleColor(Color.CYAN);
+            data.add(min);
+
+            LineDataSet avg = new LineDataSet(avgEntries, "avg");
+            avg.setColor(Color.GREEN);
+            avg.setCircleColor(Color.GREEN);
+            data.add(avg);
+
+            LineDataSet max = new LineDataSet(maxEntries, "max");
+            max.setColor(Color.RED);
+            max.setCircleColor(Color.RED);
+            data.add(max);
+        }
+
+        private void setEntries(List<Month> weather, List<Entry> minEntries, List<Entry> avgEntries, List<Entry> maxEntries) {
+            for (int i = 0; i < weather.size(); i++) {
+                Month currentMonth = weather.get(i);
+                maxEntries.add(new Entry((float) i + 1, Float.parseFloat(currentMonth.gettMin())));
+                avgEntries.add(new Entry((float) i + 1, Float.parseFloat(currentMonth.gettAvg())));
+                minEntries.add(new Entry((float) i + 1, Float.parseFloat(currentMonth.gettMax())));
+            }
+        }
+    }
+
     public static class DangerViewHolder extends RecyclerView.ViewHolder {
         private RatingBar ratingBar;
 
@@ -106,6 +178,11 @@ public class ViewHolderFactory {
     public static RecyclerView.ViewHolder createDangerViewHolder(ViewGroup parent) {
         View dangerTypeView = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_item_danger_type, parent, false);
         return new ViewHolderFactory.DangerViewHolder(dangerTypeView);
+    }
+
+    public static RecyclerView.ViewHolder createWeatherViewHolder(ViewGroup parent) {
+        View weatherViewHolder = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_item_weather_type, parent, false);
+        return new ViewHolderFactory.WeatherViewHolder(weatherViewHolder);
     }
 
 }
