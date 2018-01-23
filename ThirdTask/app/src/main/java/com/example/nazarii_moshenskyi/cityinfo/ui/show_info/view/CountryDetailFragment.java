@@ -109,8 +109,11 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
         requestBuilder = GlideApp.with(this)
                 .as(PictureDrawable.class)
                 .apply(new RequestOptions().override(flagImage.getWidth(), flagImage.getHeight()))
+                .placeholder(R.drawable.no_image_placeholder)
+                .error(R.drawable.no_image_placeholder)
                 .transition(withCrossFade())
                 .listener(new SvgSoftwareLayerSetter());
+
         return view;
     }
 
@@ -127,9 +130,7 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
 
     @Override
     public void setBackground(String flagUrl) {
-        if (flagUrl != null) {
-            requestBuilder.load(flagUrl).into(flagImage);
-        }
+        requestBuilder.load(flagUrl).into(flagImage);
     }
 
     public void setTitleInfo(AnalyticsInfo analytics, String continent) {
