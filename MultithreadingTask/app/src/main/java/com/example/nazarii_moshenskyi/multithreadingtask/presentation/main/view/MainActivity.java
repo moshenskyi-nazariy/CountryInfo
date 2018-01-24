@@ -1,6 +1,5 @@
 package com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.view;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,8 +16,11 @@ import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.prese
 import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.presenter.MainPresenter;
 import com.example.nazarii_moshenskyi.multithreadingtask.presentation.util.FileUtils;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainMvpView {
     private MainMvpPresenter presenter;
@@ -99,6 +101,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    public void readData() {
+        try {
+            FileInputStream outputStream = openFileInput(FILE_NAME);
+            FileUtils.readFromFile(this, outputStream);
+        } catch (FileNotFoundException e) {
+            Log.d(TAG, "readData: file not found");
+        } catch (IOException e) {
+            Log.d(TAG, "readData: " + e.getMessage());
+        }
+    }
+
+    public void fillFields(String[] storedData) {
+        name.setText(storedData[0]);
+        phone.setText(storedData[1]);
+        email.setText(storedData[2]);
+
+    }
+
     private String[] prepareData() {
         return new String[]{getName()
                 , getPhone()
@@ -124,11 +145,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void writeToFile(String data) {
+        FileOutputStream outputStream;
         try {
-            FileOutputStream outputStream = openFileOutput(FILE_NAME, Context.MODE_APPEND);
-            FileUtils.writeToFile(data, outputStream);
-            outputStream.close();
-        } catch (IOException e) {
+            outputStream = openFileOutput(FILE_NAME, Context.MODE_APPEND);
+            try {
+                FileUtils.writeToFile(data, outputStream);
+            } catch (IOException e) {
+                Log.d(TAG, "openFile: " + e.getMessage());
+            } finally {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    Log.d(TAG, "writeToFile: can't perform close operation");
+                }
+            }
+        } catch (FileNotFoundException e) {
             Log.d(TAG, "openFile: " + e.getMessage());
         }
     }

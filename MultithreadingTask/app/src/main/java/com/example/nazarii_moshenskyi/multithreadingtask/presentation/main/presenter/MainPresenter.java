@@ -18,6 +18,22 @@ public class MainPresenter implements MainMvpPresenter {
     @Override
     public void attachView(MainMvpView view) {
         this.view = view;
+        loadData();
+    }
+
+    private void loadData() {
+        view.showLoading();
+        handlerThread = new FileHandlerThread(FILE_HANDLER_THREAD_NAME);
+        handlerThread.start();
+        handlerThread.prepareHandler();
+        handlerThread.postTask(new Runnable() {
+            @Override
+            public void run() {
+                view.readData();
+                handlerThread.quit();
+            }
+        });
+        view.hideLoading();
     }
 
     @Override
