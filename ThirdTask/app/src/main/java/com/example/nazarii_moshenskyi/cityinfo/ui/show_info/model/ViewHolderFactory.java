@@ -1,20 +1,24 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model;
 
 import android.graphics.Color;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
+import android.transition.AutoTransition;
+import android.transition.Fade;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Month;
-import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.mapper.DangerLevelMapper;
 import com.example.ratingbar.RatingBar;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -24,13 +28,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewHolderFactory {
+
     public static class TextViewHolder extends RecyclerView.ViewHolder {
+        private LinearLayout titleLayout;
+        private LinearLayout descriptionLayout;
         private TextView titleText;
         private TextView descriptionText;
+        private boolean isExpanded;
 
         TextViewHolder(View itemView) {
             super(itemView);
             titleText = itemView.findViewById(R.id.title_text);
+
+            titleLayout = itemView.findViewById(R.id.title_layout);
+            descriptionLayout = itemView.findViewById(R.id.description_layout);
+
+            titleLayout.setActivated(isExpanded);
+            titleLayout.setOnClickListener(v -> {
+                descriptionLayout.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
+                isExpanded = !isExpanded;
+                TransitionManager.beginDelayedTransition((ViewGroup) itemView.getRootView(), new Fade());
+            });
+
             descriptionText = itemView.findViewById(R.id.description);
         }
 
@@ -60,9 +79,26 @@ public class ViewHolderFactory {
         private TextView voltage;
         private TextView frequency;
         private TextView plugs;
+        private ImageButton icon;
+
+        private LinearLayout titleLayout;
+        private ConstraintLayout descriptionLayout;
+
+        private boolean isExpanded;
 
         ElectricityViewHolder(View itemView) {
             super(itemView);
+            descriptionLayout = itemView.findViewById(R.id.description_layout);
+            titleLayout = itemView.findViewById(R.id.title_layout);
+            icon = itemView.findViewById(R.id.imageButton);
+
+            titleLayout.setActivated(isExpanded);
+            titleLayout.setOnClickListener(v -> {
+                descriptionLayout.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
+                isExpanded = !isExpanded;
+                TransitionManager.beginDelayedTransition((ViewGroup) itemView.getRootView(), new Fade());
+            });
+
             voltage = itemView.findViewById(R.id.voltage);
             frequency = itemView.findViewById(R.id.frequency);
             plugs = itemView.findViewById(R.id.plugs);
@@ -95,10 +131,20 @@ public class ViewHolderFactory {
 
     public static class WeatherViewHolder extends RecyclerView.ViewHolder {
         private LineChart chart;
+        private LinearLayout titleLayout;
+        private boolean isExpanded = true;
 
         WeatherViewHolder(View itemView) {
             super(itemView);
             chart = itemView.findViewById(R.id.weather_chart);
+
+            titleLayout = itemView.findViewById(R.id.title_layout);
+            titleLayout.setActivated(true);
+            titleLayout.setOnClickListener(v -> {
+                chart.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
+                isExpanded = !isExpanded;
+                TransitionManager.beginDelayedTransition((ViewGroup) itemView.getRootView(), new AutoTransition());
+            });
         }
 
         public void setWeather(WeatherInfo annualData) {
@@ -153,11 +199,19 @@ public class ViewHolderFactory {
     }
 
     public static class DangerViewHolder extends RecyclerView.ViewHolder {
+        private TextView title;
         private RatingBar ratingBar;
+        private boolean isExpanded;
 
-        public DangerViewHolder(View itemView) {
+        DangerViewHolder(View itemView) {
             super(itemView);
             ratingBar = itemView.findViewById(R.id.danger_rating);
+            title = itemView.findViewById(R.id.danger_title);
+            title.setOnClickListener(v -> {
+                ratingBar.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
+                isExpanded = !isExpanded;
+                TransitionManager.beginDelayedTransition((ViewGroup) itemView.getRootView(), new Fade());
+            });
         }
 
         public void setLevel(String level) {

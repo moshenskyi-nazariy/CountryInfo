@@ -59,12 +59,12 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
                     Advise advise = countryInfo.getAdvise();
                     Weather weather = countryInfo.getWeather();
 
+                    model.add(new WeatherInfo(weather));
                     model.add(CountryInfoMapper.convertCurrency(currency));
                     model.add(CountryInfoMapper.convertElectricity(electricity));
                     model.add(CountryInfoMapper.convertWater(water));
                     model.add(CountryInfoMapper.convertTimezone(timezone));
                     model.add(CountryInfoMapper.convertAdvise(advise));
-                    model.add(new WeatherInfo(weather));
 
                     //Analytics is an array with only one item
                     AnalyticsInfo countryAnalytics = CountryAnalyticsMapper.convertCountryAnalytics(infoModel.getAnalytics());

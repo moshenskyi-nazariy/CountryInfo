@@ -21,126 +21,155 @@
             android:id="@+id/title_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:orientation="vertical">
+            android:background="@color/colorTitle">
 
             <TextView
                 android:id="@+id/electricity_title"
                 style="@style/TitleText"
-                android:text="@string/electricity_title"
-                android:textColor="@color/colorWhite" />
+                android:layout_width="0dp"
+                android:layout_weight="9"
+                android:text="@string/electricity_title" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_expand_more" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.79" />
         </LinearLayout>
 
-        <android.support.constraint.Guideline
-            android:id="@+id/population_end"
-            android:layout_width="wrap_content"
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.33" />
-
-        <TextView
-            android:id="@+id/voltage_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/voltage_title"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@id/card_middle"
-            app:layout_constraintEnd_toEndOf="@id/population_end"
-            app:layout_constraintEnd_toStartOf="@+id/frequency_title"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_layout" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/card_middle"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.6" />
-
-        <TextView
-            android:id="@+id/voltage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/frequency"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/voltage_title"
-            tools:text="33454" />
-
-        <TextView
-            android:id="@+id/frequency_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/frequency_title"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/card_middle"
-            app:layout_constraintEnd_toStartOf="@+id/plugs_title"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/voltage_title"
-            app:layout_constraintStart_toStartOf="@+id/population_end"
-            app:layout_constraintTop_toBottomOf="@id/title_layout" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/area_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.68" />
-
-        <TextView
-            android:id="@+id/frequency"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/plugs"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/voltage"
-            app:layout_constraintStart_toStartOf="@+id/population_end"
-            app:layout_constraintTop_toBottomOf="@+id/frequency_title"
-            tools:text="354454543" />
-
-        <TextView
-            android:id="@+id/plugs_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/plugs_title"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/card_middle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/frequency_title"
-            app:layout_constraintStart_toStartOf="@+id/area_end"
-            app:layout_constraintTop_toBottomOf="@id/title_layout" />
-
-        <TextView
-            android:id="@+id/plugs"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_marginStart="8dp"
-            android:textAlignment="center"
+            android:id="@+id/description_layout"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/frequency"
-            app:layout_constraintStart_toStartOf="@+id/area_end"
-            app:layout_constraintTop_toBottomOf="@+id/plugs_title"
-            tools:text="A,B,C" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_layout">
 
+            <android.support.constraint.Guideline
+                android:id="@+id/population_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.33" />
+
+            <TextView
+                android:id="@+id/voltage_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/voltage_title"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/card_middle"
+                app:layout_constraintEnd_toEndOf="@id/population_end"
+                app:layout_constraintEnd_toStartOf="@+id/frequency_title"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/card_middle"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.6" />
+
+            <TextView
+                android:id="@+id/voltage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/frequency"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/voltage_title"
+                tools:text="33454" />
+
+            <TextView
+                android:id="@+id/frequency_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/frequency_title"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/card_middle"
+                app:layout_constraintEnd_toStartOf="@+id/plugs_title"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/voltage_title"
+                app:layout_constraintStart_toStartOf="@+id/population_end"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/area_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.68" />
+
+            <TextView
+                android:id="@+id/frequency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/plugs"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/voltage"
+                app:layout_constraintStart_toStartOf="@+id/population_end"
+                app:layout_constraintTop_toBottomOf="@+id/frequency_title"
+                tools:text="354454543" />
+
+            <TextView
+                android:id="@+id/plugs_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/plugs_title"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/card_middle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/frequency_title"
+                app:layout_constraintStart_toStartOf="@+id/area_end"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/plugs"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginStart="8dp"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/frequency"
+                app:layout_constraintStart_toStartOf="@+id/area_end"
+                app:layout_constraintTop_toBottomOf="@+id/plugs_title"
+                tools:text="A,B,C" />
+        </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>
