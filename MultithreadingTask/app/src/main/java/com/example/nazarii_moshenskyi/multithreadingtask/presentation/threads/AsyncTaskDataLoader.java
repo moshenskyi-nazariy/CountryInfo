@@ -7,6 +7,7 @@ import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.view.
 
 public class AsyncTaskDataLoader extends AsyncTask<String, Integer, String> {
     private final MainMvpView readyListener;
+    private static final int DELAY = 3000;
 
     public AsyncTaskDataLoader(MainMvpView readyListener) {
         this.readyListener = readyListener;
@@ -14,8 +15,14 @@ public class AsyncTaskDataLoader extends AsyncTask<String, Integer, String> {
 
     @Override
     protected String doInBackground(String... strings) {
-        readyListener.writeToFile(strings[0]);
+        if (readyListener != null) {
+            readyListener.writeToFile(strings[0]);
+        }
         return strings[0];
     }
 
+    @Override
+    protected void onPostExecute(String s) {
+        readyListener.hideLoading();
+    }
 }

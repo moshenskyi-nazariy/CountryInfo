@@ -2,7 +2,6 @@ package com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.view
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +19,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainMvpView {
     private MainMvpPresenter presenter;
@@ -92,12 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void hideLoading() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                loadingBar.setVisibility(View.GONE);
-            }
-        }, 3000);
+        loadingBar.setVisibility(View.GONE);
 
     }
 
