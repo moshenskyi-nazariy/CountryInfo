@@ -2,7 +2,6 @@ package com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.view
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -13,15 +12,13 @@ import android.widget.Toast;
 import com.example.nazarii_moshenskyi.multithreadingtask.R;
 import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.presenter.MainMvpPresenter;
 import com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.presenter.MainPresenter;
-import com.example.nazarii_moshenskyi.multithreadingtask.presentation.services.FileManager;
-import com.example.nazarii_moshenskyi.multithreadingtask.presentation.threads.FileHandlerThread;
+import com.example.nazarii_moshenskyi.multithreadingtask.presentation.util.FileUtils;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainMvpView, FileManager.OnDataLoadedListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainMvpView {
     private MainMvpPresenter presenter;
-    private FileManager manager;
 
     private EditText name;
     private EditText phone;
@@ -34,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        manager = new FileManager(this);
 
         initViews();
 
@@ -104,20 +100,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onComplete() {
-        Log.d(TAG, "onComplete: Data loaded");
-    }
-
-    @Override
-    public void onError(String exception) {
-        Log.d(TAG, "onError: " + exception);
-    }
-
-    @Override
     public void writeToFile(String data) {
         try {
             FileOutputStream outputStream = openFileOutput(FILE_NAME, Context.MODE_APPEND);
-            manager.writeToFile(data, outputStream);
+            FileUtils.writeToFile(data, outputStream);
             outputStream.close();
         } catch (IOException e) {
             Log.d(TAG, "openFile: " + e.getMessage());
