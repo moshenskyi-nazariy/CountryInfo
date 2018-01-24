@@ -66,10 +66,9 @@ public class ViewHolderFactory {
             titleLayout = itemView.findViewById(R.id.title_layout);
             descriptionLayout = itemView.findViewById(R.id.description_layout);
             icon = itemView.findViewById(R.id.text_type_icon);
+            descriptionText = itemView.findViewById(R.id.description);
 
             setListener(icon, titleLayout, descriptionLayout);
-
-            descriptionText = itemView.findViewById(R.id.description);
         }
 
         public void setTitleText(int titleTextId) {
