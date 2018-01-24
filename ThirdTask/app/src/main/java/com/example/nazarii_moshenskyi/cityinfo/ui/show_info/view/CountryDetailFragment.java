@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.RequestBuilder;
@@ -48,7 +49,7 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
 
     private String countryName;
     private RequestBuilder<PictureDrawable> requestBuilder;
-    private ProgressDialog progressDialog;
+    private ProgressBar progressBar;
 
     public CountryDetailFragment() {
         // Required empty public constructor
@@ -102,6 +103,7 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
         infoRecyclerView.setLayoutManager(linearLayoutManager);
 
         flagImage = view.findViewById(R.id.flag_placeholder);
+        progressBar = view.findViewById(R.id.progressBar);
 
         population = view.findViewById(R.id.population);
         area = view.findViewById(R.id.area);
@@ -126,7 +128,6 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
 
     @Override
     public void onLoad(List<RowType> infoModel) {
-        progressDialog.hide();
         infoAdapter.update(infoModel);
     }
 
@@ -144,15 +145,13 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
     }
 
     @Override
-    public void showProgressDialog() {
-        progressDialog = ProgressDialog.show(getContext(), "",
-                "Loading. Please wait...", true);
-
+    public void showLoadingDialog() {
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideProgressDialog() {
-        progressDialog.hide();
+    public void hideLoadingDialog() {
+        progressBar.setVisibility(View.GONE);
     }
 
 }

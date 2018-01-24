@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
@@ -34,6 +35,8 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMv
     @Inject
     public CountryMvpPresenter presenter;
     private List<Country> items;
+
+    private ProgressBar loadingBar;
 
     public CountryFragment() {
         // Required empty public constructor
@@ -75,6 +78,7 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMv
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_country, container, false);
         initList(rootView);
+        loadingBar = rootView.findViewById(R.id.progressBar);
         return rootView;
     }
 
@@ -108,6 +112,16 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMv
     @Override
     public List<Country> getItems() {
         return items;
+    }
+
+    @Override
+    public void showLoadingBar() {
+        loadingBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoadingBar() {
+        loadingBar.setVisibility(View.GONE);
     }
 
     @Override

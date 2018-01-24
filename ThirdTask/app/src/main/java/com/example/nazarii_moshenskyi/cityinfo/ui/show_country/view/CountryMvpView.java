@@ -12,4 +12,8 @@ public interface CountryMvpView extends BaseMvpView {
     void onTextChanged(String text);
 
     List<Country> getItems();
+
+    void showLoadingBar();
+
+    void hideLoadingBar();
 }

@@ -46,7 +46,8 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
     }
 
     public void getInfo(String countryName) {
-        getView().showProgressDialog();
+        getView().showLoadingDialog();
+        getView().showLoadingDialog();
         getCompositeDisposable().add(manager.getInfo(countryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -73,6 +74,7 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
                         getView().setTitleInfo(countryAnalytics, CountryInfoMapper.convertContinent(countryInfo.getNames()));
                     }
                     getView().onLoad(model);
+                    getView().hideLoadingDialog();
                 }, this::handleError));
     }
 }

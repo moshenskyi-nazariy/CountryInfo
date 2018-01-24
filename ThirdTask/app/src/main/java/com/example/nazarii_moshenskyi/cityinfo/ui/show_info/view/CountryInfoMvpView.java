@@ -14,8 +14,8 @@ public interface CountryInfoMvpView extends BaseMvpView {
 
     void setTitleInfo(AnalyticsInfo analytics, String continent);
 
-    void showProgressDialog();
+    void showLoadingDialog();
 
-    void hideProgressDialog();
+    void hideLoadingDialog();
 
 }

@@ -23,10 +23,13 @@ public class CountryPresenterImpl extends RxBasePresenter<CountryMvpView> implem
     }
 
     public void getCountries() {
+        getView().showLoadingBar();
         getCompositeDisposable().add(manager.getCountries().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(countries -> getView().onLoad(countries)
-                        , this::handleError));
+                .subscribe(countries -> {
+                    getView().onLoad(countries);
+                    getView().hideLoadingBar();
+                }, this::handleError));
     }
 
     @Override

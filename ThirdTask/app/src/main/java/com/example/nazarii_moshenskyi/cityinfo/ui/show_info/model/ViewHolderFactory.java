@@ -32,6 +32,8 @@ public class ViewHolderFactory {
     public static class TextViewHolder extends RecyclerView.ViewHolder {
         private LinearLayout titleLayout;
         private LinearLayout descriptionLayout;
+        private ImageButton icon;
+
         private TextView titleText;
         private TextView descriptionText;
         private boolean isExpanded;
@@ -39,14 +41,15 @@ public class ViewHolderFactory {
         TextViewHolder(View itemView) {
             super(itemView);
             titleText = itemView.findViewById(R.id.title_text);
-
             titleLayout = itemView.findViewById(R.id.title_layout);
             descriptionLayout = itemView.findViewById(R.id.description_layout);
+            icon = itemView.findViewById(R.id.text_type_icon);
 
-            titleLayout.setActivated(isExpanded);
+            icon.setActivated(isExpanded);
             titleLayout.setOnClickListener(v -> {
                 descriptionLayout.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
                 isExpanded = !isExpanded;
+                icon.setActivated(isExpanded);
                 TransitionManager.beginDelayedTransition((ViewGroup) itemView.getRootView(), new Fade());
             });
 
@@ -90,12 +93,13 @@ public class ViewHolderFactory {
             super(itemView);
             descriptionLayout = itemView.findViewById(R.id.description_layout);
             titleLayout = itemView.findViewById(R.id.title_layout);
-            icon = itemView.findViewById(R.id.imageButton);
+            icon = itemView.findViewById(R.id.electricity_type_icon);
 
-            titleLayout.setActivated(isExpanded);
+            icon.setActivated(isExpanded);
             titleLayout.setOnClickListener(v -> {
                 descriptionLayout.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
                 isExpanded = !isExpanded;
+                icon.setActivated(isExpanded);
                 TransitionManager.beginDelayedTransition((ViewGroup) itemView.getRootView(), new Fade());
             });
 
@@ -132,17 +136,21 @@ public class ViewHolderFactory {
     public static class WeatherViewHolder extends RecyclerView.ViewHolder {
         private LineChart chart;
         private LinearLayout titleLayout;
+        private ImageButton icon;
+
         private boolean isExpanded = true;
 
         WeatherViewHolder(View itemView) {
             super(itemView);
             chart = itemView.findViewById(R.id.weather_chart);
-
             titleLayout = itemView.findViewById(R.id.title_layout);
-            titleLayout.setActivated(true);
+            icon = itemView.findViewById(R.id.imageButton);
+
+            icon.setActivated(true);
             titleLayout.setOnClickListener(v -> {
                 chart.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
                 isExpanded = !isExpanded;
+                icon.setActivated(isExpanded);
                 TransitionManager.beginDelayedTransition((ViewGroup) itemView.getRootView(), new AutoTransition());
             });
         }
@@ -201,15 +209,20 @@ public class ViewHolderFactory {
     public static class DangerViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
         private RatingBar ratingBar;
+        private ImageButton icon;
+
         private boolean isExpanded;
 
         DangerViewHolder(View itemView) {
             super(itemView);
             ratingBar = itemView.findViewById(R.id.danger_rating);
             title = itemView.findViewById(R.id.danger_title);
+            icon = itemView.findViewById(R.id.imageButton);
+
             title.setOnClickListener(v -> {
                 ratingBar.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
                 isExpanded = !isExpanded;
+                icon.setActivated(isExpanded);
                 TransitionManager.beginDelayedTransition((ViewGroup) itemView.getRootView(), new Fade());
             });
         }
