@@ -1,12 +1,15 @@
 package com.example.nazarii_moshenskyi.multithreadingtask.presentation.main.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.nazarii_moshenskyi.multithreadingtask.R;
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText name;
     private EditText phone;
     private EditText email;
+    private ProgressBar loadingBar;
 
     private static final String FILE_NAME = "multithreading_task";
     private static final String TAG = "MainActivity";
@@ -45,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         name = findViewById(R.id.name);
         phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
+
+        loadingBar = findViewById(R.id.loadingBar);
+        loadingBar.setIndeterminate(true);
 
         Button btnHandlerThread = findViewById(R.id.handler_thread);
         btnHandlerThread.setOnClickListener(this);
@@ -74,6 +81,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void noDataFound() {
         Log.d(TAG, "noDataFound");
         Toast.makeText(this, "Please, fill all the fields.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showLoading() {
+        loadingBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadingBar.setVisibility(View.GONE);
+            }
+        }, 3000);
+
     }
 
     private String[] prepareData() {

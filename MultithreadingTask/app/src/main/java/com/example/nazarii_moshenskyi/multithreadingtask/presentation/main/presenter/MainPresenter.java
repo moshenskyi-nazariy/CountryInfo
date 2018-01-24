@@ -26,7 +26,7 @@ public class MainPresenter implements MainMvpPresenter {
             view = null;
         }
 
-        if (!loader.isCancelled()) {
+        if (loader != null && !loader.isCancelled()) {
             loader.cancel(true);
         }
     }
@@ -35,6 +35,7 @@ public class MainPresenter implements MainMvpPresenter {
     public void runHandlerThread(final String[] data) {
         if (view != null) {
             if (isValid(data)) {
+                view.showLoading();
                 handlerThread = new FileHandlerThread(FILE_HANDLER_THREAD_NAME);
                 handlerThread.start();
                 handlerThread.prepareHandler();
@@ -45,7 +46,7 @@ public class MainPresenter implements MainMvpPresenter {
                         handlerThread.quit();
                     }
                 });
-
+                view.hideLoading();
             } else {
                 view.noDataFound();
             }
@@ -56,8 +57,10 @@ public class MainPresenter implements MainMvpPresenter {
     public void runAsyncTask(String[] data) {
         if (view != null) {
             if (isValid(data)) {
+                view.showLoading();
                 loader = new AsyncTaskDataLoader(view);
                 loader.execute(transformData(data));
+                view.hideLoading();
             } else {
                 view.noDataFound();
             }

@@ -8,4 +8,8 @@ public interface MainMvpView extends BaseMvpView {
 
     void noDataFound();
 
+    void showLoading();
+
+    void hideLoading();
+
 }
