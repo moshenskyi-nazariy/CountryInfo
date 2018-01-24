@@ -33,30 +33,34 @@ public class MainPresenter implements MainMvpPresenter {
 
     @Override
     public void runHandlerThread(final String[] data) {
-        if (isValid(data)) {
-            handlerThread = new FileHandlerThread(FILE_HANDLER_THREAD_NAME);
-            handlerThread.start();
-            handlerThread.prepareHandler();
-            handlerThread.postTask(new Runnable() {
-                @Override
-                public void run() {
-                    view.writeToFile(transformData(data));
-                    handlerThread.quit();
-                }
-            });
+        if (view != null) {
+            if (isValid(data)) {
+                handlerThread = new FileHandlerThread(FILE_HANDLER_THREAD_NAME);
+                handlerThread.start();
+                handlerThread.prepareHandler();
+                handlerThread.postTask(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.writeToFile(transformData(data));
+                        handlerThread.quit();
+                    }
+                });
 
-        } else {
-            view.noDataFound();
+            } else {
+                view.noDataFound();
+            }
         }
     }
 
     @Override
     public void runAsyncTask(String[] data) {
-        if (isValid(data)) {
-            loader = new AsyncTaskDataLoader(view);
-            loader.execute(transformData(data));
-        } else {
-            view.noDataFound();
+        if (view != null) {
+            if (isValid(data)) {
+                loader = new AsyncTaskDataLoader(view);
+                loader.execute(transformData(data));
+            } else {
+                view.noDataFound();
+            }
         }
     }
 
