@@ -15,7 +15,7 @@ public class RxBasePresenter<T extends BaseMvpView> extends BasePresenter<T> {
     @Override
     public void detachView() {
         super.detachView();
-        compositeDisposable.dispose();
+        compositeDisposable.clear();
     }
 
     protected CompositeDisposable getCompositeDisposable() {

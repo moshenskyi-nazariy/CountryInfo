@@ -1,8 +1,5 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.base;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,9 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import io.reactivex.Observable;
+
 public abstract class BaseFragment<T extends BaseMvpPresenter<E>, E extends BaseMvpView> extends Fragment implements BaseMvpView {
     protected T presenter;
-
     protected abstract T createPresenter();
 
     @Override
@@ -36,22 +34,10 @@ public abstract class BaseFragment<T extends BaseMvpPresenter<E>, E extends Base
 
     }
 
-/*    protected boolean isConnected() {
-        Context context = getActivity();
-        if (context != null) {
-
-            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-            return activeNetwork.isConnectedOrConnecting();
-        }
-
-        return false;
-    }*/
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
         if (presenter != null) {
             presenter.detachView();
         }

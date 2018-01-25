@@ -1,13 +1,17 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.presenter;
 
+import android.support.annotation.NonNull;
+
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Advise;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.CountryInfo;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Currency;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Electricity;
+import com.example.nazarii_moshenskyi.cityinfo.data.model.InfoModel;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Timezone;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Water;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Weather;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.DataManager;
+import com.example.nazarii_moshenskyi.cityinfo.ui.InternetManager;
 import com.example.nazarii_moshenskyi.cityinfo.ui.base.RxBasePresenter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.AnalyticsInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.RowType;
@@ -23,16 +27,17 @@ import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView> implements CountryInfoMvpPresenter {
     private final DataManager manager;
+    private final InternetManager internetManager;
     private List<RowType> model;
 
     @Inject
-    public CountryInfoPresenterImpl(DataManager manager, CompositeDisposable disposable) {
+    public CountryInfoPresenterImpl(InternetManager internetManager, DataManager manager, CompositeDisposable disposable) {
         super(disposable);
         this.manager = manager;
+        this.internetManager = internetManager;
         model = new ArrayList<>();
     }
 
@@ -46,26 +51,17 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
     }
 
     public void getInfo(String countryName) {
-        getView().showLoadingDialog();
-        getView().showLoadingDialog();
-        getCompositeDisposable().add(manager.getInfo(countryName)
-                .subscribeOn(Schedulers.io())
+        getCompositeDisposable().add(internetManager.getConnectionObservable()
+                .filter(hasConnection -> {
+                    if (!hasConnection) {
+                        getView().showError();
+                    }
+                    return hasConnection;
+                })
+                .flatMap(hasConnection -> manager.getInfo(countryName))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(infoModel -> {
-                    CountryInfo countryInfo = infoModel.getCountryInfo();
-                    Electricity electricity = countryInfo.getElectricity();
-                    Currency currency = countryInfo.getCurrency();
-                    Water water = countryInfo.getWater();
-                    Timezone timezone = countryInfo.getTimezone();
-                    Advise advise = countryInfo.getAdvise();
-                    Weather weather = countryInfo.getWeather();
-
-                    model.add(new WeatherInfo(weather));
-                    model.add(CountryInfoMapper.convertCurrency(currency));
-                    model.add(CountryInfoMapper.convertElectricity(electricity));
-                    model.add(CountryInfoMapper.convertWater(water));
-                    model.add(CountryInfoMapper.convertTimezone(timezone));
-                    model.add(CountryInfoMapper.convertAdvise(advise));
+                    CountryInfo countryInfo = instantiateModels(infoModel);
 
                     //Analytics is an array with only one item
                     AnalyticsInfo countryAnalytics = CountryAnalyticsMapper.convertCountryAnalytics(infoModel.getAnalytics());
@@ -76,5 +72,25 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
                     getView().onLoad(model);
                     getView().hideLoadingDialog();
                 }, this::handleError));
+
+    }
+
+    @NonNull
+    private CountryInfo instantiateModels(InfoModel infoModel) {
+        CountryInfo countryInfo = infoModel.getCountryInfo();
+        Electricity electricity = countryInfo.getElectricity();
+        Currency currency = countryInfo.getCurrency();
+        Water water = countryInfo.getWater();
+        Timezone timezone = countryInfo.getTimezone();
+        Advise advise = countryInfo.getAdvise();
+        Weather weather = countryInfo.getWeather();
+
+        model.add(new WeatherInfo(weather));
+        model.add(CountryInfoMapper.convertCurrency(currency));
+        model.add(CountryInfoMapper.convertElectricity(electricity));
+        model.add(CountryInfoMapper.convertWater(water));
+        model.add(CountryInfoMapper.convertTimezone(timezone));
+        model.add(CountryInfoMapper.convertAdvise(advise));
+        return countryInfo;
     }
 }

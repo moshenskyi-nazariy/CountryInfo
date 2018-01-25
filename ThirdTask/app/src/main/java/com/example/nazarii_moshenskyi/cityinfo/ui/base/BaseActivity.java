@@ -18,7 +18,6 @@ public abstract class BaseActivity<T extends  BaseMvpPresenter<E>, E extends Bas
                 throw new NullPointerException("Presenter shouldn't be null");
             }
         }
-
         presenter.attachView((E) this);
     }
 

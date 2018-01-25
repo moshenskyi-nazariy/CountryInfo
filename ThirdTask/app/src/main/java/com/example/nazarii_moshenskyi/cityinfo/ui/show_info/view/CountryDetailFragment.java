@@ -2,6 +2,7 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.view;
 
 import android.app.Application;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
@@ -98,16 +100,7 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
 
         linearLayoutManager = new LinearLayoutManager(view.getContext());
 
-        infoRecyclerView = view.findViewById(R.id.info_recycler_view);
-        infoRecyclerView.setAdapter(infoAdapter);
-        infoRecyclerView.setLayoutManager(linearLayoutManager);
-
-        flagImage = view.findViewById(R.id.flag_placeholder);
-        progressBar = view.findViewById(R.id.progressBar);
-
-        population = view.findViewById(R.id.population);
-        area = view.findViewById(R.id.area);
-        continent = view.findViewById(R.id.continent);
+        initViews(view);
 
         requestBuilder = GlideApp.with(this)
                 .as(PictureDrawable.class)
@@ -118,6 +111,19 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
                 .listener(new SvgSoftwareLayerSetter());
 
         return view;
+    }
+
+    private void initViews(View rootView) {
+        infoRecyclerView = rootView.findViewById(R.id.info_recycler_view);
+        infoRecyclerView.setAdapter(infoAdapter);
+        infoRecyclerView.setLayoutManager(linearLayoutManager);
+
+        flagImage = rootView.findViewById(R.id.flag_placeholder);
+        progressBar = rootView.findViewById(R.id.progressBar);
+
+        population = rootView.findViewById(R.id.population);
+        area = rootView.findViewById(R.id.area);
+        continent = rootView.findViewById(R.id.continent);
     }
 
     @Override
@@ -141,7 +147,6 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
         area.setText(analytics.getArea());
 
         this.continent.setText(continent);
-
     }
 
     @Override
@@ -154,4 +159,8 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
         progressBar.setVisibility(View.GONE);
     }
 
+    @Override
+    public void showError() {
+        Toast.makeText(getActivity(), "No internet.", Toast.LENGTH_LONG).show();
+    }
 }

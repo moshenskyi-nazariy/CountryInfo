@@ -16,4 +16,5 @@ public interface CountryMvpView extends BaseMvpView {
     void showLoadingBar();
 
     void hideLoadingBar();
+
 }

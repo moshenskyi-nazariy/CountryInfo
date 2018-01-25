@@ -79,7 +79,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter, MainMvpView> im
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.country_name_container, masterFragment, COUNTRY_FRAGMENT)
-                .addToBackStack(COUNTRY_FRAGMENT)
                 .commit();
 
     }
@@ -177,4 +176,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter, MainMvpView> im
         };
     }
 
+    @Override
+    public void showError() {
+
+    }
 }
