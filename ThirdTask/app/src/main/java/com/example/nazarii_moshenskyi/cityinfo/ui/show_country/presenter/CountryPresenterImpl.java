@@ -26,12 +26,8 @@ public class CountryPresenterImpl extends RxBasePresenter<CountryMvpView> implem
 
     public void getCountries() {
         getCompositeDisposable().add(internetManager.getConnectionObservable()
-                .filter(hasConnection -> {
-                    if (!hasConnection) {
-                        getView().showError();
-                    }
-                    return hasConnection;
-                })
+                .filter(hasConnection -> hasConnection)
+                .doOnNext(ready -> getView().showLoadingBar())
                 .flatMap(hasConnection -> manager.getCountries())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(countries -> {

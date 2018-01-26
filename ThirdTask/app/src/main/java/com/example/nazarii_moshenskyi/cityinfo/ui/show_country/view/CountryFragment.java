@@ -130,7 +130,7 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMv
         loadingBar.setVisibility(View.GONE);
     }
 
-    @Override
+/*    @Override
     public void showError() {
 //        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayout),
 //                R.string.email_archived, Snackbar.LENGTH_SHORT);
@@ -138,7 +138,7 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMv
 //        mySnackbar.show();
         Intent settingsIntent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
         startActivityForResult(settingsIntent, 0);
-    }
+    }*/
 
     @Override
     public void onLoad(List<Country> items) {

@@ -150,17 +150,17 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
     }
 
     @Override
-    public void showLoadingDialog() {
+    public void showLoadingBar() {
         progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideLoadingDialog() {
+    public void hideLoadingBar() {
         progressBar.setVisibility(View.GONE);
     }
 
-    @Override
+   /* @Override
     public void showError() {
         Toast.makeText(getActivity(), "No internet.", Toast.LENGTH_LONG).show();
-    }
+    }*/
 }

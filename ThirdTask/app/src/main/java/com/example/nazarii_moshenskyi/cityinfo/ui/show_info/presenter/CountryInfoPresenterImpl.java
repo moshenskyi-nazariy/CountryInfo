@@ -52,12 +52,8 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
 
     public void getInfo(String countryName) {
         getCompositeDisposable().add(internetManager.getConnectionObservable()
-                .filter(hasConnection -> {
-                    if (!hasConnection) {
-                        getView().showError();
-                    }
-                    return hasConnection;
-                })
+                .filter(hasConnection -> hasConnection)
+                .doOnNext(ready -> getView().showLoadingBar())
                 .flatMap(hasConnection -> manager.getInfo(countryName))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(infoModel -> {
@@ -70,7 +66,7 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
                         getView().setTitleInfo(countryAnalytics, CountryInfoMapper.convertContinent(countryInfo.getNames()));
                     }
                     getView().onLoad(model);
-                    getView().hideLoadingDialog();
+                    getView().hideLoadingBar();
                 }, this::handleError));
 
     }

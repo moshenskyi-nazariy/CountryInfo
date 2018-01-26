@@ -175,9 +175,4 @@ public class MainActivity extends BaseActivity<MainMvpPresenter, MainMvpView> im
             return false;
         };
     }
-
-    @Override
-    public void showError() {
-
-    }
 }
