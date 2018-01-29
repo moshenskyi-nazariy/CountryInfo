@@ -27,23 +27,13 @@ public class WebServiceImpl implements WebService {
     public Observable<CountryInfo> getInfo(String countryName) {
         return countryInfoService.getInfo(countryName)
                 .subscribeOn(Schedulers.io())
-                .onErrorResumeNext(throwable -> {
-                    return Observable.create(emitter -> {
-                        emitter.onNext(new CountryInfo());
-                        emitter.onComplete();
-                    });
-                });
+                .onErrorReturn(throwable -> new CountryInfo());
     }
 
     public Observable<List<CountryAnalytics>> getAnalytics(String countryName) {
         return countryAnalyticsService.getAnalytics(countryName)
                 .subscribeOn(Schedulers.io())
-                .onErrorResumeNext(throwable -> {
-                    return Observable.create(emitter -> {
-                        emitter.onNext(Collections.emptyList());
-                        emitter.onComplete();
-                    });
-                });
+                .onErrorReturn(throwable -> Collections.emptyList());
     }
 
     @Override
