@@ -29,6 +29,7 @@ public class CountryPresenterImpl extends RxBasePresenter<CountryMvpView, List<C
 
     public void getCountries() {
         getCompositeDisposable().add(internetManager.getConnectionObservable()
+                .filter(hasConnection -> hasConnection)
                 .flatMap(hasConnection -> manager.getCountries())
                 .compose(getProgressTransformer())
                 .compose(RxUtils.applySchedulersObservable())
