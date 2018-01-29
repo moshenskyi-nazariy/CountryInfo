@@ -23,8 +23,7 @@ public class InternetManager {
 
     public InternetManager(Context context) {
         registerReceiver(context);
-        connection = BehaviorSubject.create();
-        connection.onNext(isConnected);
+        connection = BehaviorSubject.createDefault(isConnected);
     }
 
     private void registerReceiver(Context context) {
@@ -36,6 +35,7 @@ public class InternetManager {
                 if (manager != null) {
                     NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
                     isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+                    Log.d(TAG, "onReceive: " + isConnected);
                     connection.onNext(isConnected);
                 }
             }
