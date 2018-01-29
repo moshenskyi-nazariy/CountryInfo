@@ -19,16 +19,16 @@ import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.WeatherInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.mapper.CountryAnalyticsMapper;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.mapper.CountryInfoMapper;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.view.CountryInfoMvpView;
+import com.example.nazarii_moshenskyi.cityinfo.ui.util.RxUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 
-public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView> implements CountryInfoMvpPresenter {
+public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView, InfoModel> implements CountryInfoMvpPresenter {
     private final DataManager manager;
     private final InternetManager internetManager;
     private List<RowType> model;
@@ -52,10 +52,9 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
 
     public void getInfo(String countryName) {
         getCompositeDisposable().add(internetManager.getConnectionObservable()
-                .filter(hasConnection -> hasConnection)
-                .doOnNext(ready -> getView().showLoadingBar())
                 .flatMap(hasConnection -> manager.getInfo(countryName))
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(getProgressTransformer())
+                .compose(RxUtils.applySchedulersObservable())
                 .subscribe(infoModel -> {
                     CountryInfo countryInfo = instantiateModels(infoModel);
 

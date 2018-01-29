@@ -1,18 +1,21 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_country.presenter;
 
+import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 import com.example.nazarii_moshenskyi.cityinfo.interactor.repository.DataManager;
 import com.example.nazarii_moshenskyi.cityinfo.ui.InternetManager;
 import com.example.nazarii_moshenskyi.cityinfo.ui.base.RxBasePresenter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.CountryMvpView;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view.recycler.CountryAdapter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.util.RxUtils;
 import com.example.nazarii_moshenskyi.cityinfo.util.Filter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 
-public class CountryPresenterImpl extends RxBasePresenter<CountryMvpView> implements CountryMvpPresenter {
+public class CountryPresenterImpl extends RxBasePresenter<CountryMvpView, List<Country>> implements CountryMvpPresenter {
     private final DataManager manager;
     private final InternetManager internetManager;
     private Filter itemFilter;
@@ -26,13 +29,9 @@ public class CountryPresenterImpl extends RxBasePresenter<CountryMvpView> implem
 
     public void getCountries() {
         getCompositeDisposable().add(internetManager.getConnectionObservable()
-                .filter(hasConnection -> {
-                    if (hasConnection)
-                        getView().showLoadingBar();
-                    return hasConnection;
-                })
                 .flatMap(hasConnection -> manager.getCountries())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(getProgressTransformer())
+                .compose(RxUtils.applySchedulersObservable())
                 .subscribe(countries -> {
                     getView().onLoad(countries);
                     getView().hideLoadingBar();

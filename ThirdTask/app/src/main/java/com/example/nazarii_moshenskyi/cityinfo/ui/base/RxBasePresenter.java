@@ -1,11 +1,14 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.base;
 
 import com.example.nazarii_moshenskyi.cityinfo.ui.InternetManager;
+import com.example.nazarii_moshenskyi.cityinfo.ui.util.RxUtils;
 
 import javax.inject.Inject;
+
+import io.reactivex.ObservableTransformer;
 import io.reactivex.disposables.CompositeDisposable;
 
-public class RxBasePresenter<T extends BaseRxMvpView> extends BasePresenter<T> {
+public class RxBasePresenter<T extends BaseRxMvpView, V> extends BasePresenter<T> {
     private final CompositeDisposable compositeDisposable;
     private static final String TAG = "RxBasePresenter";
 
@@ -26,6 +29,18 @@ public class RxBasePresenter<T extends BaseRxMvpView> extends BasePresenter<T> {
     }
 
     protected void handleError(Throwable throwable) {
-        getView().hideLoadingBar();
+        //getView().hideLoadingBar();
+    }
+
+    protected ObservableTransformer<V, V> getProgressTransformer() {
+        return RxUtils.applyProgressOnservable(disposable -> {
+            if (getView() != null) {
+                getView().showLoadingBar();
+            }
+        }, () -> {
+            if (getView() != null) {
+                getView().showLoadingBar();
+            }
+        });
     }
 }
