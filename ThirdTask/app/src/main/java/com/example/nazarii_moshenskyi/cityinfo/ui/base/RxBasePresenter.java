@@ -5,7 +5,7 @@ import com.example.nazarii_moshenskyi.cityinfo.ui.InternetManager;
 import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 
-public class RxBasePresenter<T extends BaseMvpView> extends BasePresenter<T> {
+public class RxBasePresenter<T extends BaseRxMvpView> extends BasePresenter<T> {
     private final CompositeDisposable compositeDisposable;
     private static final String TAG = "RxBasePresenter";
 
@@ -26,6 +26,6 @@ public class RxBasePresenter<T extends BaseMvpView> extends BasePresenter<T> {
     }
 
     protected void handleError(Throwable throwable) {
-        //TODO: catch exception
+        getView().hideLoadingBar();
     }
 }
