@@ -2,17 +2,18 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.main.presenter;
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
 import com.example.nazarii_moshenskyi.cityinfo.ui.InternetManager;
-import com.example.nazarii_moshenskyi.cityinfo.ui.base.BasePresenter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.base.BaseActivityPresenter;
 import com.example.nazarii_moshenskyi.cityinfo.ui.main.view.MainMvpView;
 
 import javax.inject.Inject;
 
-public class MainPresenterImpl extends BasePresenter<MainMvpView> implements MainMvpPresenter {
+public class MainPresenterImpl extends BaseActivityPresenter<MainMvpView> implements MainMvpPresenter {
     private final InternetManager internetManager;
     private boolean isTwoPane;
 
     @Inject
     public MainPresenterImpl(InternetManager internetManager) {
+        super(internetManager);
         this.internetManager = internetManager;
     }
 
@@ -22,6 +23,11 @@ public class MainPresenterImpl extends BasePresenter<MainMvpView> implements Mai
         if (isTwoPane) {
             view.setDetailFragment();
         }
+    }
+
+    @Override
+    public void onStop() {
+        getView().unregisterReceiver(internetManager);
     }
 
     @Override

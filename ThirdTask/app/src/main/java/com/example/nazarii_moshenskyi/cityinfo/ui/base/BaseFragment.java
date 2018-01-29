@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import io.reactivex.Observable;
+import com.example.nazarii_moshenskyi.cityinfo.ui.InternetManager;
 
 public abstract class BaseFragment<T extends BaseMvpPresenter<E>, E extends BaseMvpView> extends Fragment implements BaseMvpView {
     protected T presenter;
@@ -21,6 +21,14 @@ public abstract class BaseFragment<T extends BaseMvpPresenter<E>, E extends Base
             throw new NullPointerException("Presenter shouldn't be null");
         }
         presenter.attachView((E) this);
+    }
+
+    public void registerReceiver(InternetManager manager) {
+        manager.registerReceiver(getActivity());
+    }
+
+    public void unregisterReceiver(InternetManager manager) {
+        manager.unregisterReceiver(getActivity());
     }
 
     public T getPresenter() {

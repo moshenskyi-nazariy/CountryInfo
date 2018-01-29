@@ -19,7 +19,7 @@ public class CountryPresenterImpl extends RxBasePresenter<CountryMvpView> implem
 
     @Inject
     public CountryPresenterImpl(InternetManager internetManager, DataManager manager, CompositeDisposable disposable) {
-        super(disposable);
+        super(disposable, internetManager);
         this.manager = manager;
         this.internetManager = internetManager;
     }

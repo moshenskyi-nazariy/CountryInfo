@@ -35,7 +35,7 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
 
     @Inject
     public CountryInfoPresenterImpl(InternetManager internetManager, DataManager manager, CompositeDisposable disposable) {
-        super(disposable);
+        super(disposable, internetManager);
         this.manager = manager;
         this.internetManager = internetManager;
         model = new ArrayList<>();

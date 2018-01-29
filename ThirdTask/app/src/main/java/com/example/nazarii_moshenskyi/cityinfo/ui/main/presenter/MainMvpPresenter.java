@@ -10,4 +10,6 @@ public interface MainMvpPresenter extends BaseMvpPresenter<MainMvpView> {
 
     void defineLayout();
 
+    void onStop();
+
 }

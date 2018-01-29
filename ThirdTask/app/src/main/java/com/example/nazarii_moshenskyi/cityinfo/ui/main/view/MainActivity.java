@@ -175,4 +175,5 @@ public class MainActivity extends BaseActivity<MainMvpPresenter, MainMvpView> im
             return false;
         };
     }
+
 }

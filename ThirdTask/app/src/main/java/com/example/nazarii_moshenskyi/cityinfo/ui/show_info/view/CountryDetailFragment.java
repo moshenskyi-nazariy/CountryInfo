@@ -1,8 +1,6 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.view;
 
 import android.app.Application;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,12 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.ui.CountryInfoApplication;
+import com.example.nazarii_moshenskyi.cityinfo.ui.InternetManager;
 import com.example.nazarii_moshenskyi.cityinfo.ui.base.BaseFragment;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.AnalyticsInfo;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.InfoAdapter;

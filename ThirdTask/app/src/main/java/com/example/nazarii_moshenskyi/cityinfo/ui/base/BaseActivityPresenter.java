@@ -2,29 +2,27 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.base;
 
 import com.example.nazarii_moshenskyi.cityinfo.ui.InternetManager;
 
-public abstract class BasePresenter<T extends BaseMvpView> implements BaseMvpPresenter<T> {
+public abstract class BaseActivityPresenter <T extends BaseMvpActivityView> extends BasePresenter<T> implements BaseMvpPresenter<T> {
     private T view;
-    private static final String TAG = "BasePresenter";
     private InternetManager manager;
 
-    public BasePresenter(InternetManager manager) {
+    public BaseActivityPresenter(InternetManager manager) {
+        super(manager);
         this.manager = manager;
     }
 
     @Override
     public void attachView(T view) {
-        this.view = view;
+        super.attachView(view);
+        view.registerReceiver(manager);
     }
 
     @Override
     public void detachView() {
         if (view != null) {
+            view.unregisterReceiver(manager);
             view = null;
         }
-    }
-
-    protected T getView() {
-        return view;
     }
 
 }

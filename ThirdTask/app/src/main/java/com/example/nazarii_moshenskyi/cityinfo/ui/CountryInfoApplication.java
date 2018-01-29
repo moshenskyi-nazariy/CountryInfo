@@ -20,7 +20,7 @@ public class CountryInfoApplication extends Application {
         super.onCreate();
         countryComponent = DaggerCountryComponent.builder()
                 .rxModule(new RxModule())
-                .utilsModule(new UtilsModule(getApplicationContext()))
+                .utilsModule(new UtilsModule())
                 .presentersModule(new PresentersModule())
                 .apiModule(new ApiModule())
                 .netModule(new NetModule())
