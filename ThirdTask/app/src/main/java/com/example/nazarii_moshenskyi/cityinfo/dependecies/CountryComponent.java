@@ -9,7 +9,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {PresentersModule.class, NetModule.class, ApiModule.class, RxModule.class})
+@Component(modules = {PresentersModule.class, NetModule.class, ApiModule.class, RxModule.class, UtilsModule.class})
 public interface CountryComponent {
 
     void inject(CountryFragment countryFragment);
