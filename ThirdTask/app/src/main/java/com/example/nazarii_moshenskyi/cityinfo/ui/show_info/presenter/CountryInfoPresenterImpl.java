@@ -53,8 +53,8 @@ public class CountryInfoPresenterImpl extends RxBasePresenter<CountryInfoMvpView
     public void getInfo(String countryName) {
         getCompositeDisposable().add(internetManager.getConnectionObservable()
                 .flatMap(hasConnection -> manager.getInfo(countryName))
-                .compose(getProgressTransformer())
                 .compose(RxUtils.applySchedulersObservable())
+                .compose(getProgressTransformer())
                 .subscribe(infoModel -> {
                     CountryInfo countryInfo = instantiateModels(infoModel);
 
