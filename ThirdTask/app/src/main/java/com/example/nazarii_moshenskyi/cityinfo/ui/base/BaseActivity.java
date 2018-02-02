@@ -3,7 +3,9 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.base;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public abstract class BaseActivity<T extends  BaseMvpPresenter<E>, E extends BaseMvpView> extends AppCompatActivity implements BaseMvpView {
+import com.example.nazarii_moshenskyi.cityinfo.ui.InternetManager;
+
+public abstract class BaseActivity<T extends  BaseMvpPresenter<E>, E extends BaseMvpActivityView> extends AppCompatActivity implements BaseMvpActivityView {
     protected T presenter;
 
     protected abstract T createPresenter();
@@ -17,8 +19,15 @@ public abstract class BaseActivity<T extends  BaseMvpPresenter<E>, E extends Bas
                 throw new NullPointerException("Presenter shouldn't be null");
             }
         }
-
         presenter.attachView((E) this);
+    }
+
+    public void registerReceiver(InternetManager manager) {
+        manager.registerReceiver(this);
+    }
+
+    public void unregisterReceiver(InternetManager manager) {
+        manager.unregisterReceiver(this);
     }
 
     public T getPresenter() {

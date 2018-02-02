@@ -1,8 +1,8 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.mapper;
 
-class DangerLevelMapper {
+public class DangerLevelMapper {
 
-    static int convertLevel(String advise) {
+    public static int convertLevel(String advise) {
         switch (advise) {
             case "Exercise normal safety precautions":
                 return 1;

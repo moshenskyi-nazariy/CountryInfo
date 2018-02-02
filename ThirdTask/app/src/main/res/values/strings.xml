@@ -15,6 +15,7 @@
     <string name="continent">Continent</string>
     <string name="flag_content_description">flag</string>
     <string name="no_info_text">No information</string>
+    <string name="no_info_short_form">-</string>
     <string name="timezone_title_text">Timezone</string>
     <string name="water_title_text">Water state</string>
     <string name="currency_description">1 USD = %1$s %2$s</string>
@@ -26,4 +27,7 @@
     <string name="frequency_title">Frequency</string>
     <string name="voltage_title">Voltage</string>
     <string name="danger_level_title">Danger level</string>
+    <string name="danger_level">Danger level</string>
+    <string name="electricity_title">Electricity</string>
+    <string name="weather_title">Weather analytics</string>
 </resources>

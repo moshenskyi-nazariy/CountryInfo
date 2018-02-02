@@ -4,9 +4,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.CurrencyInfoDelegate;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.DangerInfoDelegate;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.ElectricityInfoDelegate;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.TimezoneInfoDelegate;
 import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.WaterInfoDelegate;
+import com.example.nazarii_moshenskyi.cityinfo.ui.show_info.model.delegates.WeatherInfoDelegate;
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager;
 
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ public class InfoAdapter extends RecyclerView.Adapter {
         delegatesManager.addDelegate(new ElectricityInfoDelegate());
         delegatesManager.addDelegate(new TimezoneInfoDelegate());
         delegatesManager.addDelegate(new WaterInfoDelegate());
+        delegatesManager.addDelegate(new DangerInfoDelegate());
+        delegatesManager.addDelegate(new WeatherInfoDelegate());
     }
 
     public void update(List<RowType> dataSet) {

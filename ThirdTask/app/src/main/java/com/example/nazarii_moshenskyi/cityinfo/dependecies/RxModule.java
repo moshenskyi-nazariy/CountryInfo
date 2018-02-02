@@ -11,4 +11,5 @@ public class RxModule {
     public CompositeDisposable providesDisposable() {
         return new CompositeDisposable();
     }
+
 }

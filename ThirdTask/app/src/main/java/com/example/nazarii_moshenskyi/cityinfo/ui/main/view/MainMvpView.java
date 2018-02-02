@@ -2,9 +2,9 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.main.view;
 
 
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
-import com.example.nazarii_moshenskyi.cityinfo.ui.base.BaseMvpView;
+import com.example.nazarii_moshenskyi.cityinfo.ui.base.BaseMvpActivityView;
 
-public interface MainMvpView extends BaseMvpView {
+public interface MainMvpView extends BaseMvpActivityView {
 
     boolean isTablet();
 

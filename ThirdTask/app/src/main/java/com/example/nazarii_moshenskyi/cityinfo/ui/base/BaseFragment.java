@@ -7,9 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public abstract class BaseFragment<T extends  BaseMvpPresenter<E>, E extends BaseMvpView> extends Fragment implements BaseMvpView {
-    protected T presenter;
+import com.example.nazarii_moshenskyi.cityinfo.ui.InternetManager;
 
+public abstract class BaseFragment<T extends BaseMvpPresenter<E>, E extends BaseMvpView> extends Fragment implements BaseMvpView {
+    protected T presenter;
     protected abstract T createPresenter();
 
     @Override
@@ -20,6 +21,14 @@ public abstract class BaseFragment<T extends  BaseMvpPresenter<E>, E extends Bas
             throw new NullPointerException("Presenter shouldn't be null");
         }
         presenter.attachView((E) this);
+    }
+
+    public void registerReceiver(InternetManager manager) {
+        manager.registerReceiver(getActivity());
+    }
+
+    public void unregisterReceiver(InternetManager manager) {
+        manager.unregisterReceiver(getActivity());
     }
 
     public T getPresenter() {
@@ -36,6 +45,7 @@ public abstract class BaseFragment<T extends  BaseMvpPresenter<E>, E extends Bas
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
         if (presenter != null) {
             presenter.detachView();
         }

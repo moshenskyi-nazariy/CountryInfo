@@ -7,6 +7,8 @@ import com.example.nazarii_moshenskyi.cityinfo.dependecies.CountryComponent;
 import com.example.nazarii_moshenskyi.cityinfo.dependecies.DaggerCountryComponent;
 import com.example.nazarii_moshenskyi.cityinfo.dependecies.NetModule;
 import com.example.nazarii_moshenskyi.cityinfo.dependecies.PresentersModule;
+import com.example.nazarii_moshenskyi.cityinfo.dependecies.RxModule;
+import com.example.nazarii_moshenskyi.cityinfo.dependecies.UtilsModule;
 import com.squareup.leakcanary.LeakCanary;
 
 public class CountryInfoApplication extends Application {
@@ -17,6 +19,8 @@ public class CountryInfoApplication extends Application {
     public void onCreate() {
         super.onCreate();
         countryComponent = DaggerCountryComponent.builder()
+                .rxModule(new RxModule())
+                .utilsModule(new UtilsModule())
                 .presentersModule(new PresentersModule())
                 .apiModule(new ApiModule())
                 .netModule(new NetModule())

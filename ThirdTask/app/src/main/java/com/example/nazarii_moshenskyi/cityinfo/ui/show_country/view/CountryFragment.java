@@ -2,16 +2,21 @@ package com.example.nazarii_moshenskyi.cityinfo.ui.show_country.view;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.nazarii_moshenskyi.cityinfo.R;
 import com.example.nazarii_moshenskyi.cityinfo.data.model.Country;
@@ -25,16 +30,19 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+
 public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMvpView> implements CountryMvpView, AdapterOnClickListener {
     private OnFragmentInteractionListener listener;
 
     private CountryAdapter countryAdapter;
     private LinearLayoutManager layoutManager;
-    private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener;
 
     @Inject
     public CountryMvpPresenter presenter;
     private List<Country> items;
+
+    private ProgressBar loadingBar;
 
     public CountryFragment() {
         // Required empty public constructor
@@ -57,13 +65,9 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMv
         super.onCreate(savedInstanceState);
 
         layoutManager = new LinearLayoutManager(getContext());
-        onNavigationItemSelectedListener = getOnNavigationItemSelectedListener();
     }
 
     private void initList(View rootView) {
-        BottomNavigationView bottomNavigationView = rootView.findViewById(R.id.navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
-
         RecyclerView countryList = rootView.findViewById(R.id.country_list);
         countryList.setItemAnimator(new DefaultItemAnimator());
         countryList.addItemDecoration(new CountryItemDecorator((int) getResources().
@@ -80,6 +84,7 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMv
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_country, container, false);
         initList(rootView);
+        loadingBar = rootView.findViewById(R.id.progressBar);
         return rootView;
     }
 
@@ -116,10 +121,34 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMv
     }
 
     @Override
+    public void showLoadingBar() {
+        loadingBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoadingBar() {
+        loadingBar.setVisibility(View.GONE);
+    }
+
+/*    @Override
+    public void showError() {
+//        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayout),
+//                R.string.email_archived, Snackbar.LENGTH_SHORT);
+//        mySnackbar.setAction(R.string.undo_string, new MyUndoListener());
+//        mySnackbar.show();
+        Intent settingsIntent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+        startActivityForResult(settingsIntent, 0);
+    }*/
+
+    @Override
     public void onLoad(List<Country> items) {
         this.items = items;
         countryAdapter.update(items);
         listener.onCountriesLoaded(items);
+    }
+
+    public void refreshLayout() {
+        layoutManager.scrollToPosition(0);
     }
 
     @Override
@@ -127,27 +156,12 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMv
         listener.onCountryClicked(country);
     }
 
+
     public interface OnFragmentInteractionListener {
 
         void onCountryClicked(Country country);
 
         void onCountriesLoaded(List<Country> list);
 
-    }
-
-    @NonNull
-    private BottomNavigationView.OnNavigationItemSelectedListener getOnNavigationItemSelectedListener() {
-        return item -> {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    layoutManager.scrollToPosition(0);
-                    return true;
-                case R.id.navigation_dashboard:
-                    return true;
-                case R.id.navigation_notifications:
-                    return true;
-            }
-            return false;
-        };
     }
 }

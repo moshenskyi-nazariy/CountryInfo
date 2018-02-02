@@ -15,8 +15,7 @@
         app:layout_constraintBottom_toTopOf="@+id/image_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@color/colorPrimary" />
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
     <android.support.constraint.Guideline
         android:id="@+id/image_bottom"
@@ -44,22 +43,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.96" />
 
     <android.support.constraint.Guideline
         android:id="@+id/card_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1015625" />
+        app:layout_constraintGuide_percent="0.04" />
 
     <android.support.v7.widget.CardView
+        style="@style/MyCardView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@id/recycler_top"
-        app:layout_constraintEnd_toStartOf="@id/card_end"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/card_start"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card_bottom"
         app:layout_constraintVertical_bias="1.0">
 
@@ -76,7 +79,7 @@
 
             <TextView
                 android:id="@+id/population_title"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
@@ -84,6 +87,8 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@id/card_middle"
                 app:layout_constraintEnd_toEndOf="@id/population_end"
+                app:layout_constraintEnd_toStartOf="@+id/area_title"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:textSize="18sp" />
@@ -104,14 +109,15 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/population_end"
+                app:layout_constraintEnd_toStartOf="@+id/area"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/card_middle"
                 tools:text="33454" />
 
             <TextView
                 android:id="@+id/area_title"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
@@ -119,7 +125,9 @@
                 android:textAlignment="center"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/card_middle"
-                app:layout_constraintEnd_toStartOf="@id/area_end"
+                app:layout_constraintEnd_toStartOf="@+id/continent_title"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/population_title"
                 app:layout_constraintStart_toStartOf="@+id/population_end"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -139,14 +147,16 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/area_end"
+                app:layout_constraintEnd_toStartOf="@+id/continent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/population"
                 app:layout_constraintStart_toStartOf="@+id/population_end"
                 app:layout_constraintTop_toBottomOf="@+id/area_title"
                 tools:text="354454543" />
 
             <TextView
                 android:id="@+id/continent_title"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
@@ -155,6 +165,8 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/card_middle"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/area_title"
                 app:layout_constraintStart_toStartOf="@+id/area_end"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -166,6 +178,8 @@
                 android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="@id/card_middle"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/area"
                 app:layout_constraintStart_toStartOf="@+id/area_end"
                 app:layout_constraintTop_toBottomOf="parent"
                 tools:text="EU" />
@@ -174,34 +188,6 @@
 
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/info_recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/title_bottom"
-        app:layout_constraintEnd_toStartOf="@+id/recycler_end"
-        app:layout_constraintStart_toStartOf="@+id/recycler_start"
-        app:layout_constraintTop_toTopOf="@+id/recycler_top" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/recycler_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.16145833" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/recycler_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.84" />
-
     <android.support.constraint.Guideline
         android:id="@+id/recycler_top"
         android:layout_width="wrap_content"
@@ -209,38 +195,32 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.3580247" />
 
-    <TextView
-        android:id="@+id/danger_title"
-        android:layout_width="match_parent"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/info_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/recycler_top"
+        app:layout_constraintVertical_bias="0.0"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/danger_level_title"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/title_bottom"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.example.ratingbar.RatingBar
-        android:id="@+id/danger_rating"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/danger_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/title_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
 
 </android.support.constraint.ConstraintLayout>

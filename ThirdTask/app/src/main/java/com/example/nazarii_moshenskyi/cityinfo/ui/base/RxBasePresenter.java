@@ -1,27 +1,27 @@
 package com.example.nazarii_moshenskyi.cityinfo.ui.base;
 
-import android.util.Log;
-
-import java.io.IOException;
+import com.example.nazarii_moshenskyi.cityinfo.ui.InternetManager;
+import com.example.nazarii_moshenskyi.cityinfo.ui.util.RxUtils;
 
 import javax.inject.Inject;
 
+import io.reactivex.ObservableTransformer;
 import io.reactivex.disposables.CompositeDisposable;
-import retrofit2.HttpException;
 
-public class RxBasePresenter<T extends BaseMvpView> extends BasePresenter<T> {
+public class RxBasePresenter<T extends BaseRxMvpView, V> extends BasePresenter<T> {
     private final CompositeDisposable compositeDisposable;
     private static final String TAG = "RxBasePresenter";
 
     @Inject
-    public RxBasePresenter(CompositeDisposable compositeDisposable) {
+    public RxBasePresenter(CompositeDisposable compositeDisposable, InternetManager manager) {
+        super(manager);
         this.compositeDisposable = compositeDisposable;
     }
 
     @Override
     public void detachView() {
         super.detachView();
-        compositeDisposable.dispose();
+        compositeDisposable.clear();
     }
 
     protected CompositeDisposable getCompositeDisposable() {
@@ -29,12 +29,18 @@ public class RxBasePresenter<T extends BaseMvpView> extends BasePresenter<T> {
     }
 
     protected void handleError(Throwable throwable) {
-        if (throwable instanceof HttpException) {
-            Log.d(TAG, "handleError: Non-2XX exception(" + throwable.getClass() + "):" + throwable.getMessage());
-        } else if (throwable instanceof IOException) {
-            Log.d(TAG, "handleError: Network error(" + throwable.getClass() + "):" + throwable.getMessage());
-        } else {
-            Log.d(TAG, "handleError: " + throwable.getClass() + "):" + throwable.getMessage());
-        }
+        //getView().hideLoadingBar();
+    }
+
+    protected ObservableTransformer<V, V> getProgressTransformer() {
+        return RxUtils.applyProgressOnservable(disposable -> {
+            if (getView() != null) {
+                getView().showLoadingBar();
+            }
+        }, () -> {
+            if (getView() != null) {
+                getView().showLoadingBar();
+            }
+        });
     }
 }
