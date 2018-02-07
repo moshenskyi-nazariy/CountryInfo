@@ -5,14 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Maps {
 
-    @SerializedName("lat")
-    @Expose
     private String lat;
     @SerializedName("long")
-    @Expose
     private String _long;
-    @SerializedName("zoom")
-    @Expose
     private String zoom;
 
     public String getLat() {

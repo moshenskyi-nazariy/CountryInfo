@@ -1,24 +1,12 @@
 package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 public class Names {
 
-    @SerializedName("name")
-    @Expose
     private String name;
-    @SerializedName("full")
-    @Expose
     private String full;
-    @SerializedName("iso2")
-    @Expose
     private String iso2;
-    @SerializedName("iso3")
-    @Expose
     private String iso3;
-    @SerializedName("continent")
-    @Expose
     private String continent;
 
     public String getName() {

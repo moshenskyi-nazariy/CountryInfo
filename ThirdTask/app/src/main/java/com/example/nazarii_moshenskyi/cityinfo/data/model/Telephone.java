@@ -8,14 +8,8 @@ public class Telephone {
     @SerializedName("calling_code")
     @Expose
     private String callingCode;
-    @SerializedName("police")
-    @Expose
     private String police;
-    @SerializedName("ambulance")
-    @Expose
     private String ambulance;
-    @SerializedName("fire")
-    @Expose
     private String fire;
 
     public String getCallingCode() {

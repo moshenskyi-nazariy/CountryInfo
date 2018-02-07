@@ -1,46 +1,19 @@
 package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class CountryInfo {
-    @SerializedName("names")
-    @Expose
     private Names names;
-    @SerializedName("maps")
-    @Expose
     private Maps maps;
-    @SerializedName("timezone")
-    @Expose
     private Timezone timezone;
-    @SerializedName("language")
-    @Expose
     private List<Language> language = null;
-    @SerializedName("electricity")
-    @Expose
     private Electricity electricity;
-    @SerializedName("telephone")
-    @Expose
     private Telephone telephone;
-    @SerializedName("water")
-    @Expose
     private Water water;
-    @SerializedName("vaccinations")
-    @Expose
     private List<Vaccine> vaccinations = null;
-    @SerializedName("currency")
-    @Expose
     private Currency currency;
-    @SerializedName("weather")
-    @Expose
     private Weather weather;
-    @SerializedName("advise")
-    @Expose
     private Advise advise;
-    @SerializedName("neighbors")
-    @Expose
     private List<Neighbor> neighbors;
 
     public Names getNames() {

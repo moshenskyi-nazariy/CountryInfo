@@ -12,7 +12,7 @@ public class UtilsModule {
 
     @Provides
     @Singleton
-    public InternetManager providesInternetManager() {
+    InternetManager providesInternetManager() {
         return new InternetManager();
     }
 

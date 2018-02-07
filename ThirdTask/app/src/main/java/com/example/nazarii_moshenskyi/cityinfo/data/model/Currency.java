@@ -1,25 +1,12 @@
 package com.example.nazarii_moshenskyi.cityinfo.data.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class Currency {
-    @SerializedName("name")
-    @Expose
     private String name;
-    @SerializedName("code")
-    @Expose
     private String code;
-    @SerializedName("symbol")
-    @Expose
     private String symbol;
-    @SerializedName("rate")
-    @Expose
     private String rate;
-    @SerializedName("compare")
-    @Expose
     private List<Compare> compare = null;
 
     public String getName() {
