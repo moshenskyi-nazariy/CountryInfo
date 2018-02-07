@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">CountryInfo</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sockets_title">Sockets</string>
+    <string name="sockets_placeholder">%1$s uses %2$d V, %3$d Hz with sockets and plugs Type %4$s and Type %5$s</string>
+    <string name="languages_title">Languages</string>
+    <string name="vaccinations_title">Vaccinations</string>
+    <string name="advises_title">Advises</string>
+    <string name="currency_title">Currency</string>
+    <string name="city_fragment_stub">Please, select country.</string>
+    <string name="search_title">Search</string>
+    <string name="population">Population</string>
+    <string name="area">Area(sq.m.)</string>
+    <string name="continent">Continent</string>
+    <string name="flag_content_description">flag</string>
+    <string name="no_info_text">No information</string>
+    <string name="no_info_short_form">-</string>
+    <string name="timezone_title_text">Timezone</string>
+    <string name="water_title_text">Water state</string>
+    <string name="currency_description">1 USD = %1$s %2$s</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_history">Recents</string>
+    <string name="plugs_title">Plugs</string>
+    <string name="frequency_title">Frequency</string>
+    <string name="voltage_title">Voltage</string>
+    <string name="danger_level_title">Danger level</string>
+    <string name="danger_level">Danger level</string>
+    <string name="electricity_title">Electricity</string>
+    <string name="weather_title">Weather analytics</string>
+</resources>
