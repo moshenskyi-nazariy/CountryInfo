@@ -10,4 +10,4 @@ This project is for obtaining information about countries. You can pick a desire
 * Danger level according to Department of Foreign Affairs and Trade
 * Population, area and continent
 
-[Demo](https://drive.google.com/file/d/1kDVS9xuUgid6NToMkFEVQZJoULigBzr6/view?usp=sharing)
+[Demo](https://drive.google.com/open?id=1fFf5Dn3_iCEi7ukUhzbO7FUWAzOYM23r)
