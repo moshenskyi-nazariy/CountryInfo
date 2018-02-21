@@ -45,4 +45,8 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="tablet_horizontal_margin">24dp</dimen>
+    <dimen name="tablet_detail_horizontal_margin">32dp</dimen>
+    <dimen name="tablet_item_height">64dp</dimen>
+    <dimen name="item_header">48dp</dimen>
 </resources>

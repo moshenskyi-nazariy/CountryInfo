@@ -16,7 +16,6 @@
             android:id="@+id/title_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -26,7 +25,7 @@
                 style="@style/TitleText"
                 android:layout_width="0dp"
                 android:layout_weight="9"
-                android:background="@color/colorTitle"
+                android:textColor="@color/colorPrimaryText"
                 android:text="@string/danger_level" />
 
             <ImageButton
@@ -48,7 +47,6 @@
         <com.example.ratingbar.RatingBar
             android:id="@+id/danger_rating"
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="150dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
