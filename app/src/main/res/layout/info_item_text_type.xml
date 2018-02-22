@@ -15,8 +15,7 @@
         <LinearLayout
             android:id="@+id/title_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorTitle">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/title_text"
@@ -28,6 +27,7 @@
             <ImageButton
                 android:id="@+id/text_type_icon"
                 style="@style/ExpandableButton"
+                android:layout_gravity="center_vertical"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline3"
                 app:layout_constraintTop_toTopOf="parent"
@@ -46,17 +46,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/title_layout">
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="16dp"
+                android:paddingBottom="16dp"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp"
+                android:paddingTop="16dp"
                 android:textAlignment="textStart"
                 android:textSize="@dimen/description_item_size"
                 tools:text="TextView" />

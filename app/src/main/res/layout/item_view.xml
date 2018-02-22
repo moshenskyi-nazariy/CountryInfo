@@ -3,26 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/item_layout_shape"
+    android:layout_height="@dimen/item_header"
     android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/item_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margins"
-        android:layout_marginTop="@dimen/margins"
+        android:layout_gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/ic_list_icon" />
 
     <TextView
         android:id="@+id/country_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margins"
-        android:layout_weight="5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:gravity="center_vertical"
         android:textColor="@color/colorPrimaryText"
-        android:textSize="@dimen/country_name_size" />
+        android:textSize="16sp" />
 
 </LinearLayout>

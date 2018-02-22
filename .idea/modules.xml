@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/CountryInfo.iml" filepath="$PROJECT_DIR$/CountryInfo.iml" />
       <module fileurl="file://$PROJECT_DIR$/CountryInfoGit.iml" filepath="$PROJECT_DIR$/CountryInfoGit.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-country-data.iml" filepath="$PROJECT_DIR$/android-country-data.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />

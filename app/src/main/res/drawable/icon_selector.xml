@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_activated="true" android:drawable="@drawable/ic_expand_less"/>
-    <item android:drawable="@drawable/ic_expand_more"/>
+    <item android:state_activated="true" android:drawable="@drawable/ic_less_accent_24dp"/>
+    <item android:drawable="@drawable/ic_more_accent_24dp"/>
 </selector>
