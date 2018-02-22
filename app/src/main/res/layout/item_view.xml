@@ -10,17 +10,20 @@
         android:id="@+id/item_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/ic_list_icon" />
 
     <TextView
         android:id="@+id/country_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:gravity="center_vertical"
         android:textColor="@color/colorPrimaryText"
-        android:textSize="@dimen/country_name_size" />
+        android:textSize="16sp" />
 
 </LinearLayout>

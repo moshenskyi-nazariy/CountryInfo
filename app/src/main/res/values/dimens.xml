@@ -40,7 +40,7 @@
     <dimen name="large_item_text_size">24sp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
     <dimen name="title_item_size">18sp</dimen>
-    <dimen name="description_item_size">16sp</dimen>
+    <dimen name="description_item_size">14sp</dimen>
     <dimen name="card_text_padding">8dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
@@ -49,4 +49,5 @@
     <dimen name="tablet_detail_horizontal_margin">32dp</dimen>
     <dimen name="tablet_item_height">64dp</dimen>
     <dimen name="item_header">48dp</dimen>
+    <dimen name="card_title_height">48dp</dimen>
 </resources>
