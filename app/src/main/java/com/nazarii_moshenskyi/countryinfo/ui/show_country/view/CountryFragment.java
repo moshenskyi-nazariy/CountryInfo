@@ -3,8 +3,9 @@ package com.nazarii_moshenskyi.countryinfo.ui.show_country.view;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,7 +19,6 @@ import com.nazarii_moshenskyi.countryinfo.ui.CountryInfoApplication;
 import com.nazarii_moshenskyi.countryinfo.ui.base.BaseFragment;
 import com.nazarii_moshenskyi.countryinfo.ui.show_country.presenter.CountryMvpPresenter;
 import com.nazarii_moshenskyi.countryinfo.ui.show_country.view.recycler.CountryAdapter;
-import com.nazarii_moshenskyi.countryinfo.ui.show_country.view.recycler.CountryItemDecorator;
 
 import java.util.List;
 
@@ -61,13 +61,13 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMv
 
     private void initList(View rootView) {
         RecyclerView countryList = rootView.findViewById(R.id.country_list);
-        countryList.setItemAnimator(new DefaultItemAnimator());
-        countryList.addItemDecoration(new CountryItemDecorator((int) getResources().
-                getDimension(R.dimen.margins)));
 
         countryAdapter = new CountryAdapter(this);
         countryList.setAdapter(countryAdapter);
         countryList.setLayoutManager(layoutManager);
+
+        countryList.addItemDecoration(new DividerItemDecoration(rootView.getContext(),
+                                            layoutManager.getOrientation()));
     }
 
     @Override
@@ -81,7 +81,7 @@ public class CountryFragment extends BaseFragment<CountryMvpPresenter, CountryMv
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter.getCountries();
     }

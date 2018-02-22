@@ -1,4 +1,4 @@
-package com.nazarii_moshenskyi.countryinfo.ui.show_country.view.recycler;
+package com.nazarii_moshenskyi.countryinfo.ui.util;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,6 @@ public class CountryItemDecorator extends RecyclerView.ItemDecoration {
     private static final int HORIZONTAL = 0;
     private static final int VERTICAL = 1;
     private final int spacing;
-    private int displayMode;
 
     public CountryItemDecorator(int spacing) {
         this.spacing = spacing;

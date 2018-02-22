@@ -3,6 +3,7 @@ package com.nazarii_moshenskyi.countryinfo.ui.show_info.view;
 import android.app.Application;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,7 @@ import com.nazarii_moshenskyi.countryinfo.ui.show_info.model.AnalyticsInfo;
 import com.nazarii_moshenskyi.countryinfo.ui.show_info.model.InfoAdapter;
 import com.nazarii_moshenskyi.countryinfo.ui.show_info.model.RowType;
 import com.nazarii_moshenskyi.countryinfo.ui.show_info.presenter.CountryInfoMvpPresenter;
+import com.nazarii_moshenskyi.countryinfo.ui.util.CountryItemDecorator;
 import com.nazarii_moshenskyi.countryinfo.util.glide_svg.GlideApp;
 import com.nazarii_moshenskyi.countryinfo.util.glide_svg.SvgSoftwareLayerSetter;
 
@@ -114,6 +116,7 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
         infoRecyclerView = rootView.findViewById(R.id.info_recycler_view);
         infoRecyclerView.setAdapter(infoAdapter);
         infoRecyclerView.setLayoutManager(linearLayoutManager);
+        infoRecyclerView.addItemDecoration(new CountryItemDecorator(32));
 
         flagImage = rootView.findViewById(R.id.flag_placeholder);
         progressBar = rootView.findViewById(R.id.progressBar);
@@ -124,7 +127,7 @@ public class CountryDetailFragment extends BaseFragment<CountryInfoMvpPresenter,
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getPresenter().getInfo(countryName);
     }
