@@ -22,7 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.nazarii_moshenskyi.countryinfo.ui.show_info.view.CountryDetailActivity"/>
+        <activity android:name="com.nazarii_moshenskyi.countryinfo.ui.show_info.view.CountryDetailActivity"
+            android:parentActivityName=".ui.main.view.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nazarii_moshenskyi.countryinfo.ui.main.view.MainActivity" />
+
+        </activity>
 
     </application>
 

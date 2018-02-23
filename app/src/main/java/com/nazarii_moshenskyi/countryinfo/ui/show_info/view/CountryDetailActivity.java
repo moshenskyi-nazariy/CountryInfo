@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -35,8 +36,10 @@ public class CountryDetailActivity extends AppCompatActivity {
 
         setToolbar();
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(countries.get(countryPosition));
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) {
+            supportActionBar.setTitle(countries.get(countryPosition));
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
         }
         setPager();
     }
