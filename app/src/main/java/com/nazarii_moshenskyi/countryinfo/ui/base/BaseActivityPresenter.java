@@ -20,6 +20,7 @@ public abstract class BaseActivityPresenter <T extends BaseMvpActivityView> exte
     @Override
     public void detachView() {
         if (view != null) {
+            // TODO: 2/23/18 Isn't reached after closing DetailsActivity.
             view.unregisterReceiver(manager);
             view = null;
         }

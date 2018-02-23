@@ -18,6 +18,7 @@ public abstract class BasePresenter<T extends BaseMvpView> implements BaseMvpPre
 
     @Override
     public void detachView() {
+        // TODO: 2/23/18 unregisterReceiver()
         if (view != null) {
             view = null;
         }
