@@ -8,7 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e6e03872-2f9e-48b3-950f-ac51b3b30bdb" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/.gitignore" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nazarii_moshenskyi/countryinfo/ui/show_info/view/CountryDetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nazarii_moshenskyi/countryinfo/ui/show_info/view/CountryDetailActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_country_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_country_detail.xml" />
     </list>
@@ -3314,7 +3313,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520390772755" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520390859661" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -3362,7 +3361,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520390772755" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520390859661" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -3545,7 +3544,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520390772756" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520390859662" />
       </method>
     </configuration>
     <list size="1">
@@ -3644,7 +3643,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520390718026</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Left 1 general gitignore and removed ignored file.">
+      <created>1520390849781</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1520390849781</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3738,7 +3744,8 @@
     <MESSAGE value="Changed text style, added paddings" />
     <MESSAGE value="Added item decorators(divider for countries and spacing for details)" />
     <MESSAGE value="Updated accentColor." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated accentColor." />
+    <MESSAGE value="Left 1 general gitignore and removed ignored file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Left 1 general gitignore and removed ignored file." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
