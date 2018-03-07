@@ -3313,7 +3313,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520390878256" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520390922683" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -3361,7 +3361,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520390878256" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520390922683" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -3544,7 +3544,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520390878273" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520390922684" />
       </method>
     </configuration>
     <list size="1">
@@ -3657,7 +3657,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520390868672</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Removed ignored file.">
+      <created>1520390889321</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1520390889321</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3752,7 +3759,8 @@
     <MESSAGE value="Added item decorators(divider for countries and spacing for details)" />
     <MESSAGE value="Updated accentColor." />
     <MESSAGE value="Left 1 general gitignore and removed ignored file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Left 1 general gitignore and removed ignored file." />
+    <MESSAGE value="Removed ignored file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed ignored file." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
