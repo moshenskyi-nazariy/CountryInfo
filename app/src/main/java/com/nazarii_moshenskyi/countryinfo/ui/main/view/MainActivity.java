@@ -68,7 +68,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter, MainMvpView> im
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
         getPresenter().defineLayout();
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             setMasterFragment();
         }
 
