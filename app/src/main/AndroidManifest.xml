@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.nazarii_moshenskyi.countryinfo.ui.main.view.MainActivity">
+        <activity android:name="com.nazarii_moshenskyi.countryinfo.ui.main.view.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
@@ -23,7 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.nazarii_moshenskyi.countryinfo.ui.show_info.view.CountryDetailActivity"
-            android:parentActivityName=".ui.main.view.MainActivity">
+            android:parentActivityName=".ui.main.view.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nazarii_moshenskyi.countryinfo.ui.main.view.MainActivity" />
